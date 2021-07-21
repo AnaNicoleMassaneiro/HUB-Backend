@@ -51,17 +51,17 @@ create table User
 
 ```json
  {
-     "username": "ana",
-     "password": "teste",
-     "confirmpassword": "este"
+     "usuario": "ana",
+     "senha": "teste",
+     "confirmacaoSenha": "teste"
 }
 ```
 
 11) Teste o login com o usuário criado no endpoint **/api/user**, com a seguinte solicitação
 ```json
 {
-  "username": "ana",
-  "password": "teste"
+  "usuario": "ananicole",
+  "senha": "teset"
 }
 ```
 12) Você deve receber um ReponseBody como este:
