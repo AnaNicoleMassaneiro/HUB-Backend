@@ -21,21 +21,20 @@ Modifique usando seus valores.
 ```sql
 create table User
 (
-	Id int auto_increment,
-	Name VARCHAR(50) null,
-	Surname VARCHAR(50) null,
-	Email VARCHAR(50) null,
-	Phone VARCHAR(20) null,
-	LastLogon DATETIME(6) null,
-	CreatedOn datetime(6) null,
-	ActivationCode int null,
-	Login VARCHAR(50) null,
-	Passaword VARCHAR(50) null,
-	GRR varchar(50) null,
-	TypeUser varchar(50) null,
-	NoteApp VARCHAR(50) null,
-	constraint User
-		primary key (Id)
+    Id             int auto_increment
+        primary key,
+    Name           varchar(50) null,
+    Surname        varchar(50) null,
+    Email          varchar(50) null,
+    Phone          varchar(20) null,
+    LastLogon      datetime(6) null,
+    CreatedOn      datetime(6) null,
+    ActivationCode int         null,
+    Login          varchar(50) null,
+    Password       varchar(50) null,
+    GRR            varchar(50) null,
+    TypeUser       varchar(50) null,
+    NoteApp        varchar(50) null
 );
 
 ```
