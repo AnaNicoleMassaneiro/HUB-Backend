@@ -43,9 +43,9 @@ create table User
 
 7) Depois de executar o projeto, na barra de endereço você terá algo como: http://localhost:5000/ (a porta pode mudar) adicione swagger ao endereço, por exemplo: http://localhost:5000/swagger, um A página Swagger deve ser exibida.
 
-8) Você notará 2 endpoints, ** api/user** e ** api/user/ create **, o primeiro é para fazer o login e o segundo para criar um novo usuário para gerar o token para a autenticação JWT.
+8) Você notará 2 endpoints, **api/user** e ** api/user/create **, o primeiro é para fazer o login e o segundo para criar um novo usuário para gerar o token para a autenticação JWT.
 
-9) Acesse o endpoind **/api/user/ create ** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
+9) Acesse o endpoind **/api/user/create** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
 
 10) Crie um usuario com  (ainda em desenvolvimento)
 
