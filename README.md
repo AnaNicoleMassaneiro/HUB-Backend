@@ -19,18 +19,22 @@ Modifique usando seus valores.
 5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
 
 ```sql
-CREATE TABLE User (
-    `Id`             INT            AUTO_INCREMENT  NOT NULL,
-    `Name`           VARCHAR (50)   NULL,
-    `Surname`        VARCHAR (50)   NULL,
-    `Email`          VARCHAR (50)   NULL,
-    `Phone`          NCHAR (10)     NULL,
-    `LastLogon`      DATETIME (6)  NULL,
-    `CreatedOn`      DATETIME (6)  NULL,
-    `ActivationCode` INT            NULL,
-    `Login`          VARCHAR (50)   NOT NULL,
-    `Password`       VARCHAR (50)   NOT NULL,
-    CONSTRAINT `PK_User` PRIMARY KEY (`Id` ASC)
+create table User
+(
+    Id             int auto_increment
+        primary key,
+    Name           varchar(50) null,
+    Surname        varchar(50) null,
+    Email          varchar(50) null,
+    Phone          varchar(20) null,
+    LastLogon      datetime(6) null,
+    CreatedOn      datetime(6) null,
+    ActivationCode int         null,
+    Login          varchar(50) null,
+    Password       varchar(50) null,
+    GRR            varchar(50) null,
+    TypeUser       varchar(50) null,
+    NoteApp        varchar(50) null
 );
 
 ```
@@ -63,17 +67,20 @@ CREATE TABLE User (
 12) Você deve receber um ReponseBody como este:
 ```json
 {
-  "Id": 2,
-  "Name": null,
-  "Surname": null,
-  "Email": null,
-  "Phone": null,
-  "LastLogon": "2017-09-29T23:00:56.3166667",
-  "CreatedOn": "2017-09-29T23:00:56.3166667",
-  "ActivationCode": null,
-  "Login": null,
-  "Password": null,
-  "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRlIiwibmJmIjoxNTA2NzE4ODk0LCJleHAiOjE1MDY3MjAwOTQsImlhdCI6MTUwNjcxODg5NH0.L5LEVLclhj8MSx4stFO44HYRkkdVwb3Pk_ILejRtqVA"
+    "id": 1,
+    "name": "Ana",
+    "surname": "Nicole",
+    "email": "ananicole@ufpr.br",
+    "phone": "123123213",
+    "lastLogon": "2021-07-21T10:50:58",
+    "createdOn": "2021-07-21T10:51:02",
+    "activationCode": "1",
+    "login": null,
+    "password": null,
+    "token": null,
+    "grr": "grr20175437",
+    "typeUser": "Vendedor",
+    "noteApp": "10"
 }
 ```
 
