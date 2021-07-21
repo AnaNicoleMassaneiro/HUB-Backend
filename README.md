@@ -77,7 +77,10 @@ create table User
     "activationCode": "1",
     "login": null,
     "password": null,
-    "token": null
+    "token": null,
+    "grr": "grr20175437",
+    "typeUser": "Vendedor",
+    "noteApp": "10"
 }
 ```
 
