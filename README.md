@@ -2,7 +2,7 @@
 
 ## Instalação / Configuração:
 
-1) Clone the repository
+1) Clone o repositório 
 git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 
 2) Abra o arquivo do projeto (Visual Studio 2019)
