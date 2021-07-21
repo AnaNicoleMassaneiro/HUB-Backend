@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj": {}
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj": {}
   },
   "projects": {
-    "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj",
+        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj",
         "projectName": "HubUfpr.Utils",
-        "projectPath": "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj",
+        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj",
         "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/HUB-Backend/Utils/obj/",
+        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/an20184783/.config/NuGet/NuGet.Config"

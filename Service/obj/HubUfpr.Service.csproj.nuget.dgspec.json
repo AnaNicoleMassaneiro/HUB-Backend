@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj": {}
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj": {}
   },
   "projects": {
-    "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj": {
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj",
+        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj",
         "projectName": "HubUfpr.Data",
-        "projectPath": "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj",
+        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj",
         "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/HUB-Backend/Data/obj/",
+        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/an20184783/.config/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj": {
-                "projectPath": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj"
+              "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj": {
+                "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj": {
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj",
+        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj",
         "projectName": "HubUfpr.Model",
-        "projectPath": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj",
+        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj",
         "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/HUB-Backend/Model/obj/",
+        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/an20184783/.config/NuGet/NuGet.Config"
@@ -134,14 +134,14 @@
         }
       }
     },
-    "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj": {
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj",
+        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj",
         "projectName": "HubUfpr.Service",
-        "projectPath": "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj",
+        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj",
         "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/HUB-Backend/Service/obj/",
+        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/an20184783/.config/NuGet/NuGet.Config"
@@ -156,14 +156,14 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj": {
-                "projectPath": "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj"
+              "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj": {
+                "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj"
               },
-              "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj": {
-                "projectPath": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj"
+              "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj": {
+                "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj"
               },
-              "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
-                "projectPath": "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj"
+              "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
+                "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj"
               }
             }
           }
@@ -202,14 +202,14 @@
         }
       }
     },
-    "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
+    "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj",
+        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj",
         "projectName": "HubUfpr.Utils",
-        "projectPath": "/Users/an20184783/Documents/HUB-Backend/Utils/HubUfpr.Utils.csproj",
+        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/HubUfpr.Utils.csproj",
         "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/HUB-Backend/Utils/obj/",
+        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/an20184783/.config/NuGet/NuGet.Config"

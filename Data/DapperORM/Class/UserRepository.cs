@@ -11,7 +11,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public User ValidateUser(string username, string password)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"select Id, Name, Surname, Email, Phone, LastLogon, CreatedOn, ActivationCode
+            const string sql = @"select Id, Name, Surname, Email, Phone, LastLogon, CreatedOn, ActivationCode, GRR, TypeUser, NoteApp, Login
                 from User U
                 where Login = @Login and Password = @Password";
 

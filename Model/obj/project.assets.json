@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj",
+      "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj",
       "projectName": "HubUfpr.Model",
-      "projectPath": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj",
+      "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj",
       "packagesPath": "/Users/an20184783/.nuget/packages/",
-      "outputPath": "/Users/an20184783/Documents/HUB-Backend/Model/obj/",
+      "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/an20184783/.config/NuGet/NuGet.Config"

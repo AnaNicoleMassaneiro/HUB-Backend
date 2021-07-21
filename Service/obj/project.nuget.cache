@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xxmTdT6+8k1KD5P6MZe1eOK4NwKLLCf/qxPwCdGnvickmB4HAwy1VJiQCcmdC2tW+PEdzj48NK3255XVuASB1A==",
+  "dgSpecHash": "t8p9k3yygQIjPNxyz5zcx9aEUd4+Dynn+5gm6HGvDSAkkE1aYXCGGC/UgA85TuojV0aVR5+xIesqhgs2CKnqNw==",
   "success": true,
-  "projectFilePath": "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj",
+  "projectFilePath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj",
   "expectedPackageFiles": [
     "/Users/an20184783/.nuget/packages/bouncycastle.netcore/1.8.3/bouncycastle.netcore.1.8.3.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/dapper/2.0.30/dapper.2.0.30.nupkg.sha512",

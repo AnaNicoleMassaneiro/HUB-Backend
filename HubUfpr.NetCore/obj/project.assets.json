@@ -8923,11 +8923,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/HubUfpr.API.csproj",
+      "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/HubUfpr.API.csproj",
       "projectName": "HubUfpr.API",
-      "projectPath": "/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/HubUfpr.API.csproj",
+      "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/HubUfpr.API.csproj",
       "packagesPath": "/Users/an20184783/.nuget/packages/",
-      "outputPath": "/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/obj/",
+      "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/an20184783/.config/NuGet/NuGet.Config"
@@ -8942,14 +8942,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj": {
-              "projectPath": "/Users/an20184783/Documents/HUB-Backend/Data/HubUfpr.Data.csproj"
+            "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj": {
+              "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/HubUfpr.Data.csproj"
             },
-            "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj": {
-              "projectPath": "/Users/an20184783/Documents/HUB-Backend/Model/HubUfpr.Model.csproj"
+            "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj": {
+              "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj"
             },
-            "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj": {
-              "projectPath": "/Users/an20184783/Documents/HUB-Backend/Service/HubUfpr.Service.csproj"
+            "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj": {
+              "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj"
             }
           }
         }

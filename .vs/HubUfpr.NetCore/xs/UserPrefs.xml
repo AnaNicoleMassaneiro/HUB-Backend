@@ -1,14 +1,11 @@
 ﻿<Properties StartupConfiguration="{33A4C66E-6332-451E-9624-8D6D58A6E51F}|HubUfpr.NetCore">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Service/Class/UserService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DapperORM/Class/UserRepository.cs">
     <Files>
-      <File FileName="Data/DapperORM/Class/BaseRepository.cs" Line="28" Column="1" />
-      <File FileName="HubUfpr.NetCore/appsettings.json" Line="15" Column="101" />
-      <File FileName="HubUfpr.NetCore/Program.cs" Line="10" Column="1" />
-      <File FileName="Utils/HashUtil.cs" Line="11" Column="1" />
-      <File FileName="HubUfpr.NetCore/Controllers/TokenController.cs" Line="1" Column="1" />
-      <File FileName="HubUfpr.NetCore/Controllers/UserController.cs" Line="25" Column="36" />
-      <File FileName="Service/Interface/IUserService.cs" Line="10" Column="22" />
-      <File FileName="Service/Class/UserService.cs" Line="25" Column="29" />
+      <File FileName="Service/Class/UserService.cs" Line="27" Column="1" />
+      <File FileName="../../../Library/Caches/VisualStudio/8.0/Symbols/StackExchange/Dapper/247e498f0e52c88d0c58c6f1fa50457bb6ab5888/Dapper/SqlMapper.cs" Line="1051" Column="1" />
+      <File FileName="Service/Interface/IUserService.cs" Line="1" Column="1" />
+      <File FileName="Data/DapperORM/Class/UserRepository.cs" Line="14" Column="134" />
+      <File FileName="Model/User.cs" Line="15" Column="28" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,13 +14,20 @@
             <Node name="HubUfpr.API" expanded="True">
               <Node name="Controllers" expanded="True" />
             </Node>
-            <Node name="HubUfpr.Service" expanded="True">
-              <Node name="Class" expanded="True">
-                <Node name="UserService.cs" selected="True" />
+            <Node name="HubUfpr.Data" expanded="True">
+              <Node name="DapperORM" expanded="True">
+                <Node name="Class" expanded="True">
+                  <Node name="UserRepository.cs" selected="True" />
+                </Node>
               </Node>
+            </Node>
+            <Node name="HubUfpr.Model" expanded="True" />
+            <Node name="HubUfpr.Service" expanded="True">
               <Node name="Interface" expanded="True" />
             </Node>
-            <Node name="HubUfpr.Utils" expanded="True" />
+            <Node name="HubUfpr.Utils" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -33,14 +37,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="22" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="25" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="27" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="19" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="20" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/HUB-Backend/Service/Class/UserService.cs" relfile="Service/Class/UserService.cs" line="23" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
