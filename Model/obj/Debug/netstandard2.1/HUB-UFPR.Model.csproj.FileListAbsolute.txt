@@ -1,0 +1,9 @@
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/bin/Debug/netstandard2.1/HUB-UFPR.Model.deps.json
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/bin/Debug/netstandard2.1/HUB-UFPR.Model.dll
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/bin/Debug/netstandard2.1/HUB-UFPR.Model.pdb
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.csproj.AssemblyReference.cache
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.AssemblyInfoInputs.cache
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.AssemblyInfo.cs
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.csproj.CoreCompileInputs.cache
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.dll
+/Users/an20184783/Documents/HubUfpr.NetCore/Model/obj/Debug/netstandard2.1/HUB-UFPR.Model.pdb

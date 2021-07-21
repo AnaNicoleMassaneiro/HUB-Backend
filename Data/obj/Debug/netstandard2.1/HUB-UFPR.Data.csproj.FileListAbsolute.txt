@@ -1,0 +1,4 @@
+/Users/an20184783/Documents/HubUfpr.NetCore/Data/obj/Debug/netstandard2.1/HUB-UFPR.Data.csproj.AssemblyReference.cache
+/Users/an20184783/Documents/HubUfpr.NetCore/Data/obj/Debug/netstandard2.1/HUB-UFPR.Data.AssemblyInfoInputs.cache
+/Users/an20184783/Documents/HubUfpr.NetCore/Data/obj/Debug/netstandard2.1/HUB-UFPR.Data.AssemblyInfo.cs
+/Users/an20184783/Documents/HubUfpr.NetCore/Data/obj/Debug/netstandard2.1/HUB-UFPR.Data.csproj.CoreCompileInputs.cache

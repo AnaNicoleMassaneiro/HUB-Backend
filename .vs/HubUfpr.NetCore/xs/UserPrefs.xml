@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{33A4C66E-6332-451E-9624-8D6D58A6E51F}|HubUfpr.NetCore">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DapperORM/Class/BaseRepository.cs">
+    <Files>
+      <File FileName="Data/DapperORM/Class/BaseRepository.cs" Line="28" Column="1" />
+      <File FileName="HubUfpr.NetCore/appsettings.json" Line="15" Column="101" />
+      <File FileName="HubUfpr.NetCore/Program.cs" Line="10" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HubUfpr.NetCore" expanded="True">
+            <Node name="HubUfpr.API" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="HubUfpr.Data" expanded="True">
+              <Node name="DapperORM" expanded="True">
+                <Node name="Class" expanded="True">
+                  <Node name="BaseRepository.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="HubUfpr.Model" expanded="True" />
+            <Node name="HubUfpr.Service" expanded="True">
+              <Node name="Class" expanded="True" />
+              <Node name="Interface" expanded="True" />
+            </Node>
+            <Node name="HubUfpr.Utils" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.HubUfpr.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

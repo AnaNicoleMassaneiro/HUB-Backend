@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{4E052C82-8C95-4452-AAE2-38E5BB987C73}|Default">
+  <MonoDevelop.Ide.ItemProperties.HUB-UFPR.Service FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.HUB-UFPR PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TokenController.cs">
+    <Files>
+      <File FileName="Controllers/TokenController.cs" Line="3" Column="30" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HUB-UFPR" expanded="True">
+            <Node name="HUB-UFPR" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="TokenController.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="HUB-UFPR.Utils" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.HUB-UFPR.Model FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.HUB-UFPR.Utils FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.HUB-UFPR.Data FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

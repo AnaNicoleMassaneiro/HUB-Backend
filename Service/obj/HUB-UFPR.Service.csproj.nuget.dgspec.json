@@ -1,0 +1,66 @@
+{
+  "format": 1,
+    "restore": {
+        "/Users/an20184783/Documents/HubUfpr.NetCore/Service/HUB-UFPR.Service.csproj": {}
+    },
+    "projects": {
+        "/Users/an20184783/Documents/HubUfpr.NetCore/Service/HUB-UFPR.Service.csproj": {
+            "version": "1.0.0",
+            "restore": {
+                "projectUniqueName": "/Users/an20184783/Documents/HubUfpr.NetCore/Service/HUB-UFPR.Service.csproj",
+                "projectName": "HUB-UFPR.Service",
+                "projectPath": "/Users/an20184783/Documents/HubUfpr.NetCore/Service/HUB-UFPR.Service.csproj",
+                "packagesPath": "/Users/an20184783/.nuget/packages/",
+                "outputPath": "/Users/an20184783/Documents/HubUfpr.NetCore/Service/obj/",
+                "projectStyle": "PackageReference",
+                "configFilePaths": [
+                    "/Users/an20184783/.config/NuGet/NuGet.Config"
+                ],
+                "originalTargetFrameworks": [
+                    "netstandard2.1"
+                ],
+                "sources": {
+                    "https://api.nuget.org/v3/index.json": {}
+                },
+                "frameworks": {
+                    "netstandard2.1": {
+                        "targetAlias": "netstandard2.1",
+                        "projectReferences": {}
+                    }
+                },
+                "warningProperties": {
+                    "warnAsError": [
+                        "NU1605"
+                    ]
+                }
+            },
+            "frameworks": {
+                "netstandard2.1": {
+                    "targetAlias": "netstandard2.1",
+                    "dependencies": {
+                        "Newtonsoft.Json": {
+                            "target": "Package",
+                            "version": "[12.0.3, )"
+                        }
+                    },
+                    "imports": [
+                        "net461",
+                        "net462",
+                        "net47",
+                        "net471",
+                        "net472",
+                        "net48"
+                    ],
+                    "assetTargetFallback": true,
+                    "warn": true,
+                    "frameworkReferences": {
+                        "NETStandard.Library": {
+                            "privateAssets": "all"
+                        }
+                    },
+                    "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.302/RuntimeIdentifierGraph.json"
+                }
+            }
+        }
+    }
+}
