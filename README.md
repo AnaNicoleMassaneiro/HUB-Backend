@@ -12,7 +12,7 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
    ```json
      "AppSettings": {
-    "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
+         "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
    ```
 Modifique usando seus valores.
 
