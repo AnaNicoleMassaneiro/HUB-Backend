@@ -7,18 +7,18 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 
 2) Abra o arquivo do projeto (Visual Studio 2019)
 
-3) Crie um banco de dados (qualquer nome desejado) no MySQL.
+3) Crie um banco de dados (hubUfprDb) no MySQL.
 
 4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
-   ```
+   ```json
      "AppSettings": {
-    "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
+         "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
    ```
 Modifique usando seus valores.
 
 5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
 
-```
+```sql
 CREATE TABLE User (
     `Id`             INT            AUTO_INCREMENT  NOT NULL,
     `Name`           VARCHAR (50)   NULL,
@@ -37,21 +37,31 @@ CREATE TABLE User (
 
 6) Execute o projeto.
 
-7) Depois de executar o projeto, na barra de endereço você terá algo como: http://localhost:52915/ (a porta pode mudar) adicione swagger ao endereço, por exemplo: http://localhost:52915/ swagger, um A página Swagger deve ser exibida.
+7) Depois de executar o projeto, na barra de endereço você terá algo como: http://localhost:5000/ (a porta pode mudar) adicione swagger ao endereço, por exemplo: http://localhost:5000/swagger, um A página Swagger deve ser exibida.
 
-8) Você notará 2 endpoints, ** api / user ** e ** api / user / create **, o primeiro é para fazer o login e o segundo para criar um novo usuário para gerar o token para a autenticação JWT.
+8) Você notará 2 endpoints, ** api/user** e ** api/user/ create **, o primeiro é para fazer o login e o segundo para criar um novo usuário para gerar o token para a autenticação JWT.
 
-9) Acesse o endpoind ** / api / user / create ** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
+9) Acesse o endpoind **/api/user/ create ** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
 
-10) Teste o login com o usuário criado no endpoint ** / api / user **, com a seguinte solicitação
-```
-{
-  "username": "UserNameHere",
-  "password": "PasswordHere"
+10) Crie um usuario com  (ainda em desenvolvimento)
+
+```json
+ {
+     "username": "ana",
+     "password": "teste",
+     "confirmpassword": "este"
 }
 ```
-11) Você deve receber um ReponseBody como este:
+
+11) Teste o login com o usuário criado no endpoint **/api/user**, com a seguinte solicitação
+```json
+{
+  "username": "ana",
+  "password": "teste"
+}
 ```
+12) Você deve receber um ReponseBody como este:
+```json
 {
   "Id": 2,
   "Name": null,
