@@ -43,14 +43,24 @@ CREATE TABLE User (
 
 9) Acesse o endpoind **/api/user/ create ** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
 
-10) Teste o login com o usuário criado no endpoint **/api/user**, com a seguinte solicitação
-```
-{
-  "username": "UserNameHere",
-  "password": "PasswordHere"
+10) Crie um usuario com  (ainda em desenvolvimento)
+
+```json
+ {
+     "username": "ana",
+     "password": "teste",
+     "confirmpassword": "este"
 }
 ```
-11) Você deve receber um ReponseBody como este:
+
+11) Teste o login com o usuário criado no endpoint **/api/user**, com a seguinte solicitação
+```
+{
+  "username": "ana",
+  "password": "teste"
+}
+```
+12) Você deve receber um ReponseBody como este:
 ```
 {
   "Id": 2,
