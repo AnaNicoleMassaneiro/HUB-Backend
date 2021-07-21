@@ -10,7 +10,7 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 3) Crie um banco de dados (hubUfprDb) no MySQL.
 
 4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
-   ```
+   ```json
      "AppSettings": {
     "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
    ```
@@ -18,7 +18,7 @@ Modifique usando seus valores.
 
 5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
 
-```
+```sql
 CREATE TABLE User (
     `Id`             INT            AUTO_INCREMENT  NOT NULL,
     `Name`           VARCHAR (50)   NULL,
@@ -54,14 +54,14 @@ CREATE TABLE User (
 ```
 
 11) Teste o login com o usuário criado no endpoint **/api/user**, com a seguinte solicitação
-```
+```json
 {
   "username": "ana",
   "password": "teste"
 }
 ```
 12) Você deve receber um ReponseBody como este:
-```
+```json
 {
   "Id": 2,
   "Name": null,
