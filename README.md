@@ -7,7 +7,7 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 
 2) Abra o arquivo do projeto (Visual Studio 2019)
 
-3) Crie um banco de dados (qualquer nome desejado) no MySQL.
+3) Crie um banco de dados (hubUfprDb) no MySQL.
 
 4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
    ```
