@@ -19,18 +19,23 @@ Modifique usando seus valores.
 5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
 
 ```sql
-CREATE TABLE User (
-    `Id`             INT            AUTO_INCREMENT  NOT NULL,
-    `Name`           VARCHAR (50)   NULL,
-    `Surname`        VARCHAR (50)   NULL,
-    `Email`          VARCHAR (50)   NULL,
-    `Phone`          NCHAR (10)     NULL,
-    `LastLogon`      DATETIME (6)  NULL,
-    `CreatedOn`      DATETIME (6)  NULL,
-    `ActivationCode` INT            NULL,
-    `Login`          VARCHAR (50)   NOT NULL,
-    `Password`       VARCHAR (50)   NOT NULL,
-    CONSTRAINT `PK_User` PRIMARY KEY (`Id` ASC)
+create table table_name
+(
+	Id int auto_increment,
+	Name VARCHAR(50) null,
+	Surname VARCHAR(50) null,
+	Email VARCHAR(50) null,
+	Phone VARCHAR(20) null,
+	LastLogon DATETIME(6) null,
+	CreatedOn datetime(6) null,
+	ActivationCode int null,
+	Login VARCHAR(50) null,
+	Passaword VARCHAR(50) null,
+	GRR varchar(50) null,
+	TypeUser varchar(50) null,
+	NoteApp VARCHAR(50) null,
+	constraint table_name_pk
+		primary key (Id)
 );
 
 ```
