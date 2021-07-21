@@ -34,7 +34,7 @@ create table User
 	GRR varchar(50) null,
 	TypeUser varchar(50) null,
 	NoteApp VARCHAR(50) null,
-	constraint table_name_pk
+	constraint User
 		primary key (Id)
 );
 
