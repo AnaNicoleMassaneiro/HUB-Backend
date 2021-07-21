@@ -7,8 +7,8 @@ namespace HubUfpr.Service.Interface
     {
         List<User> GetUserList();
 
-        User GetToken(string username, string password);
+        User GetToken(string usuario, string senha);
 
-        void InsertUser(string username, string password);
+        void InsertUser(string usuario, string senha);
     }
 }

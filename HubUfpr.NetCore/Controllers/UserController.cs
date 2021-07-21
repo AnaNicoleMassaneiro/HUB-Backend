@@ -21,25 +21,43 @@ namespace HubUfpr.API.Controllers
         [Route("")]
         public ActionResult ValidateUser([FromBody]UserLogin request)
         {
-            
-            var ret = _userService.GetToken(request.UserName, request.Password);
+            if (request.usuario == null || request.senha == "")
+            {
+                return Json("Por favor, informe a senha e nome de usuário");
+            }
+            else
+            {
+                var ret = _userService.GetToken(request.usuario, request.senha);
 
-            if (ret == null)
-                return StatusCode(401);
+                if (ret == null)
+                    return StatusCode(401);
 
-            return Json(ret);
+                return Json(ret);
+            }
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("create")]
-        public JsonResult InsertUser(string username, string password, string confirmpassword)
+        public JsonResult InsertUser(string usuario, string senha, string confirmacaoSenha)
         {
-            if (password == confirmpassword)
+            if (senha == null || usuario == null || confirmacaoSenha == null)
             {
-                _userService.InsertUser(username, password);
+                return Json("Por favor, informe a senha, nome de usuário e confirmação da senha");
             }
-            return Json("Usuário criado com sucesso! :)");
+            else
+            {
+                {
+                    _userService.InsertUser(usuario, senha);
+                }
+
+                if (senha == confirmacaoSenha)
+                {
+                    _userService.InsertUser(usuario, senha);
+                }
+                return Json("Usuário criado com sucesso! :)");
+            }
+           
         }
     }
 }

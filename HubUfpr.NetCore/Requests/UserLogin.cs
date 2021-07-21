@@ -4,10 +4,10 @@ namespace HubUfpr.API.Requests
 {
     public class UserLogin
     {
-        [JsonProperty(PropertyName = "username", NullValueHandling = NullValueHandling.Ignore)]
-        public string UserName { get; set; }
+        [JsonProperty(PropertyName = "usuario", NullValueHandling = NullValueHandling.Ignore)]
+        public string usuario { get; set; }
 
-        [JsonProperty(PropertyName = "password", NullValueHandling = NullValueHandling.Ignore)]
-        public string Password { get; set; }
+        [JsonProperty(PropertyName = "senha", NullValueHandling = NullValueHandling.Ignore)]
+        public string senha { get; set; }
     }
 }
