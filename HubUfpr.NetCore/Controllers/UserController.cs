@@ -21,6 +21,7 @@ namespace HubUfpr.API.Controllers
         [Route("")]
         public ActionResult ValidateUser([FromBody]UserLogin request)
         {
+            
             var ret = _userService.GetToken(request.UserName, request.Password);
 
             if (ret == null)
