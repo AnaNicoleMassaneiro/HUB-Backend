@@ -19,7 +19,7 @@ Modifique usando seus valores.
 5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
 
 ```sql
-create table table_name
+create table User
 (
 	Id int auto_increment,
 	Name VARCHAR(50) null,
