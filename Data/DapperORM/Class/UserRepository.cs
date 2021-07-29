@@ -18,12 +18,12 @@ namespace HubUfpr.Data.DapperORM.Class
             return db.Query<User>(sql, new { Login = usario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
         }
 
-        public void InsertUser(string usuario, string senha)
+        public void InsertUser(string usuario, string senha, string nome, string grr, string email)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into User (Login, Password, CreatedOn, LastLogon) values (@Login, @Password, NOW(), NOW())";
+            const string sql = @"insert into User (Login, Password, CreatedOn, LastLogon, Name, GRR, Email) values (@Login, @Password, NOW(), NOW(), @Name, @GRR, @Email)";
 
-            db.Execute(sql, new { Login = usuario, Password = senha }, commandType: CommandType.Text);
+            db.Execute(sql, new { Login = usuario, Password = senha, Name = nome, GRR = grr, Email = email }, commandType: CommandType.Text);
         }
     }
 }

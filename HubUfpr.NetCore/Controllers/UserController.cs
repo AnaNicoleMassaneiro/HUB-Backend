@@ -48,12 +48,12 @@ namespace HubUfpr.API.Controllers
             else
             {
                 {
-                    _userService.InsertUser(request.usuario, request.senha);
+                    _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
                 }
 
                 if (request.senha == request.confirmacaoSenha)
                 {
-                    _userService.InsertUser(request.usuario, request.senha);
+                    _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
                 }
                 return Json("Usuário criado com sucesso! :)");
             }

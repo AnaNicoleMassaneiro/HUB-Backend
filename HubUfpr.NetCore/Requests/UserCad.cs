@@ -5,6 +5,9 @@ namespace HubUfpr.API.Requests
 {
     public class UserCad
     {
+        [JsonProperty(PropertyName = "nome", NullValueHandling = NullValueHandling.Ignore)]
+        public string nome { get; set; }
+
         [JsonProperty(PropertyName = "usuario", NullValueHandling = NullValueHandling.Ignore)]
         public string usuario { get; set; }
 
@@ -13,5 +16,11 @@ namespace HubUfpr.API.Requests
 
         [JsonProperty(PropertyName = "confirmacaoSenha", NullValueHandling = NullValueHandling.Ignore)]
         public string confirmacaoSenha { get; set; }
+
+        [JsonProperty(PropertyName = "grr", NullValueHandling = NullValueHandling.Ignore)]
+        public string grr { get; set; }
+
+        [JsonProperty(PropertyName = "email", NullValueHandling = NullValueHandling.Ignore)]
+        public string email { get; set; }
     }
 }
