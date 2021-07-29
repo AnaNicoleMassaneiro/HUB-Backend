@@ -31,7 +31,7 @@ create table User
     CreatedOn      datetime(6) null,
     ActivationCode int         null,
     Login          varchar(50) null,
-    Password       varchar(50) null,
+    Password       varchar(500) null,
     GRR            varchar(50) null,
     TypeUser       varchar(50) null,
     NoteApp        varchar(50) null
