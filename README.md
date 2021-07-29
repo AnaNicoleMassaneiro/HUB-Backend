@@ -50,10 +50,13 @@ create table User
 10) Crie um usuario com  (ainda em desenvolvimento)
 
 ```json
- {
-     "usuario": "ana",
-     "senha": "teste",
-     "confirmacaoSenha": "teste"
+{
+  "nome": "matheus",
+  "usuario": "theus",
+  "senha": "123",
+  "confirmacaoSenha": "123",
+  "grr": "grr",
+  "email": "teste@teste.com"
 }
 ```
 
