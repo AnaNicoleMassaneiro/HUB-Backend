@@ -39,21 +39,21 @@ namespace HubUfpr.API.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("create")]
-        public JsonResult InsertUser(string usuario, string senha, string confirmacaoSenha)
+        public JsonResult InsertUser([FromBody] UserCad request)
         {
-            if (senha == null || usuario == null || confirmacaoSenha == null)
+            if (request.senha == null || request.usuario == null || request.confirmacaoSenha == null)
             {
                 return Json("Por favor, informe a senha, nome de usuário e confirmação da senha");
             }
             else
             {
                 {
-                    _userService.InsertUser(usuario, senha);
+                    _userService.InsertUser(request.usuario, request.senha);
                 }
 
-                if (senha == confirmacaoSenha)
+                if (request.senha == request.confirmacaoSenha)
                 {
-                    _userService.InsertUser(usuario, senha);
+                    _userService.InsertUser(request.usuario, request.senha);
                 }
                 return Json("Usuário criado com sucesso! :)");
             }
