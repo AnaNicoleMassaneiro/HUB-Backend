@@ -25,5 +25,19 @@ namespace HubUfpr.Data.DapperORM.Class
 
             db.Execute(sql, new { Login = usuario, Password = senha, Name = nome, GRR = grr, Email = email }, commandType: CommandType.Text);
         }
+
+        public bool IsEmailInUse(string email)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"select Email from User where Email = @Email";
+            return db.Query<string>(query, new { Email = email }, commandType: CommandType.Text).Any();
+        }
+
+        public bool IsGRRInUse(string grr)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"select GRR from User where GRR = @grr";
+            return db.Query<string>(query, new { GRR = grr }, commandType: CommandType.Text).Any();
+        }
     }
 }

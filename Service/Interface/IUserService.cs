@@ -10,5 +10,9 @@ namespace HubUfpr.Service.Interface
         User GetToken(string usuario, string senha);
 
         void InsertUser(string usuario, string senha, string nome, string grr, string email);
+
+        bool IsEmailInUse(string email);
+
+        bool IsGRRInUse(string grr);
     }
 }

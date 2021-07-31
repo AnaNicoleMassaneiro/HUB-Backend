@@ -18,7 +18,7 @@ namespace HubUfpr.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("")]
+        [Route("authenticate")]
         public ActionResult ValidateUser([FromBody]UserLogin request)
         {
             if (request.usuario == null || request.senha == "")
@@ -47,14 +47,17 @@ namespace HubUfpr.API.Controllers
             }
             else
             {
-                {
-                    _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
-                }
+                if (request.senha != request.confirmacaoSenha)
+                    return Json("Senhas não coincidem!");
 
-                if (request.senha == request.confirmacaoSenha)
-                {
-                    _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
-                }
+                if (_userService.IsEmailInUse(request.email))
+                    return Json("Este email já está em uso!");
+
+                if (_userService.IsGRRInUse(request.grr))
+                    return Json("Este GRR já está em uso!");
+
+                _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
+
                 return Json("Usuário criado com sucesso! :)");
             }
            

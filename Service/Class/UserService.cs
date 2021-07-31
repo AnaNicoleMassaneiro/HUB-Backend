@@ -22,9 +22,9 @@ namespace HubUfpr.Service.Class
 
         public User GetToken(string username, string password)
         {
-          //  var passwordHash = Utils.HashUtil.GetSha256FromString(password);
+            var passwordHash = Utils.HashUtil.GetSha256FromString(password);
 
-            var ret = _userRepository.ValidateUser(username, password);
+            var ret = _userRepository.ValidateUser(username, passwordHash);
 
             if (ret != null)
             {
@@ -38,6 +38,16 @@ namespace HubUfpr.Service.Class
             var passwordHash = Utils.HashUtil.GetSha256FromString(senha);
 
             _userRepository.InsertUser(usuario, passwordHash, nome, grr, email);
+        }
+
+        public bool IsEmailInUse(string email)
+        {
+            return _userRepository.IsEmailInUse(email);
+        }
+
+        public bool IsGRRInUse(string grr)
+        {
+            return _userRepository.IsGRRInUse(grr);
         }
     }
 }
