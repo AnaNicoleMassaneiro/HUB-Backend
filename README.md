@@ -91,4 +91,4 @@ create table User
 WebAPI (.NET Core 3.1) Base Project with JWT Auth, Dapper (ORM), MySQL, Swagger, DI
 
 ### Desenvolvido por:
-Ana Nicole Massaneiro, Dandi Teoa e Matheus Augusto Morais
+Ana Nicole Massaneiro, Dandi Teoa e Matheus Augusto de Moraes Ribeiro
