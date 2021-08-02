@@ -1,13 +1,14 @@
 ﻿<Properties StartupConfiguration="{33A4C66E-6332-451E-9624-8D6D58A6E51F}|HubUfpr.NetCore">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DapperORM/Class/UserRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DapperORM/Class/ProdutoRepository.cs">
     <Files>
-      <File FileName="HubUfpr.NetCore/Controllers/UserController.cs" Line="51" Column="39" />
-      <File FileName="Service/Class/UserService.cs" Line="37" Column="1" />
-      <File FileName="Service/Interface/IUserService.cs" Line="12" Column="14" />
-      <File FileName="Data/DapperORM/Interface/IUserRepository.cs" Line="9" Column="14" />
-      <File FileName="Data/DapperORM/Class/UserRepository.cs" Line="26" Column="50" />
-      <File FileName="../../../Library/Caches/VisualStudio/8.0/Symbols/StackExchange/Dapper/247e498f0e52c88d0c58c6f1fa50457bb6ab5888/Dapper/SqlMapper.cs" Line="2797" Column="1" />
-      <File FileName="HubUfpr.NetCore/Program.cs" Line="10" Column="1" />
+      <File FileName="Service/Interface/IUserService.cs" Line="6" Column="34" />
+      <File FileName="Service/Class/ProdutoService.cs" Line="24" Column="37" />
+      <File FileName="HubUfpr.NetCore/Controllers/CadastroController.cs" Line="28" Column="42" />
+      <File FileName="Service/Class/UserService.cs" Line="8" Column="18" />
+      <File FileName="Service/Interface/IProdutoService.cs" Line="8" Column="14" />
+      <File FileName="Data/DapperORM/Interface/IProdutoRepository.cs" Line="6" Column="14" />
+      <File FileName="Data/DapperORM/Interface/IUserRepository.cs" Line="1" Column="1" />
+      <File FileName="Data/DapperORM/Class/ProdutoRepository.cs" Line="15" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,15 +21,17 @@
             <Node name="HubUfpr.Data" expanded="True">
               <Node name="DapperORM" expanded="True">
                 <Node name="Class" expanded="True">
-                  <Node name="UserRepository.cs" selected="True" />
+                  <Node name="ProdutoRepository.cs" selected="True" />
                 </Node>
                 <Node name="Interface" expanded="True" />
               </Node>
             </Node>
             <Node name="HubUfpr.Service" expanded="True">
+              <Node name="Dependencies" expanded="True" />
               <Node name="Class" expanded="True" />
               <Node name="Interface" expanded="True" />
             </Node>
+            <Node name="HubUfpr.Utils" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -42,8 +45,9 @@
   </Debugger.DebugSourceFolders>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="46" column="1" />
-      <Breakpoint file="/Users/an20184783/Documents/tcc/HUB-Backend/Data/DapperORM/Class/UserRepository.cs" relfile="Data/DapperORM/Class/UserRepository.cs" line="22" column="1" />
+      <Breakpoint file="/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/Controllers/UserController.cs" relfile="HubUfpr.NetCore/Controllers/UserController.cs" line="43" column="1" />
+      <Breakpoint file="/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/Controllers/CadastroController.cs" relfile="HubUfpr.NetCore/Controllers/CadastroController.cs" line="24" column="1" />
+      <Breakpoint file="/Users/an20184783/Documents/tcc/HUB-Backend/Data/DapperORM/Class/ProdutoRepository.cs" relfile="Data/DapperORM/Class/ProdutoRepository.cs" line="15" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
