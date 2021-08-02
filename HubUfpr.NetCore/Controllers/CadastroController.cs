@@ -35,5 +35,23 @@ namespace HubUfpr.API.Controllers
             }
 
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("buscar")]
+        public JsonResult searchProduto([FromBody] Produto request)
+        {
+            try
+            {
+                var retorno = _produtoService.SearchProduto(request.nome);
+
+                return Json(retorno);
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao salvar produto", ex);
+            }
+
+        }
     }
 }

@@ -281,11 +281,6 @@
 /Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.dll
 /Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.pdb
 /Users/an20184783/Documents/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.genruntimeconfig.cache
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfoInputs.cache
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfo.cs
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.csproj.CoreCompileInputs.cache
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.MvcApplicationPartsAssemblyInfo.cs
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.MvcApplicationPartsAssemblyInfo.cache
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/appsettings.json
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/HubUfpr.API.deps.json
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/HubUfpr.API.runtimeconfig.json
@@ -411,6 +406,12 @@
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/HubUfpr.Model.pdb
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/HubUfpr.Service.pdb
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/HubUfpr.Utils.pdb
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.csproj.AssemblyReference.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfoInputs.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfo.cs
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.csproj.CoreCompileInputs.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.MvcApplicationPartsAssemblyInfo.cache
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/staticwebassets/HubUfpr.API.StaticWebAssets.Manifest.cache
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/staticwebassets/HubUfpr.API.StaticWebAssets.xml
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/scopedcss/bundle/HubUfpr.API.styles.css
@@ -419,4 +420,3 @@
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.dll
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.pdb
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.genruntimeconfig.cache
-/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.csproj.AssemblyReference.cache
