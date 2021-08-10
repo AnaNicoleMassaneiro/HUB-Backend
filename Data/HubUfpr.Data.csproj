@@ -12,6 +12,8 @@
     <PackageReference Include="MySql.Data" Version="8.0.19" />
   </ItemGroup>
 
+  
+
   <ItemGroup>
     <ProjectReference Include="..\Model\HubUfpr.Model.csproj" />
   </ItemGroup>

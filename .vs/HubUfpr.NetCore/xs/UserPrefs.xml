@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="HubUfpr.NetCore/Controllers/CadastroController.cs">
     <Files>
       <File FileName="HubUfpr.NetCore/Controllers/CadastroController.cs" Line="48" Column="38" />
-      <File FileName="Data/DapperORM/Class/BaseRepository.cs" Line="1" Column="1" />
-      <File FileName="HubUfpr.NetCore/Controllers/UserController.cs" Line="30" Column="44" />
-      <File FileName="Service/Interface/IUserService.cs" Line="10" Column="13" />
+      <File FileName="Data/DapperORM/Class/BaseRepository.cs" />
+      <File FileName="HubUfpr.NetCore/Controllers/UserController.cs" />
+      <File FileName="Service/Interface/IUserService.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
