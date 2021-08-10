@@ -14,7 +14,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.config/NuGet/NuGet.Config"
+          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -92,7 +92,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.config/NuGet/NuGet.Config"
+          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -144,7 +144,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.config/NuGet/NuGet.Config"
+          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -212,7 +212,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Utils/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.config/NuGet/NuGet.Config"
+          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
