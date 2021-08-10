@@ -8,6 +8,10 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.2" />
     <PackageReference Include="Microsoft.NETCore.Runtime.CoreCLR" Version="2.0.8" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Docker.DotNet" />
+  </ItemGroup>
 </Project>

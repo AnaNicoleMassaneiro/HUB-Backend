@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{33A4C66E-6332-451E-9624-8D6D58A6E51F}|HubUfpr.NetCore">
   <MonoDevelop.Ide.Workbench ActiveDocument="HubUfpr.NetCore/Controllers/CadastroController.cs">
     <Files>
-      <File FileName="HubUfpr.NetCore/Controllers/CadastroController.cs" Line="48" Column="38" />
+      <File FileName="HubUfpr.NetCore/Controllers/CadastroController.cs" Line="35" Column="14" />
       <File FileName="Data/DapperORM/Class/BaseRepository.cs" />
       <File FileName="HubUfpr.NetCore/Controllers/UserController.cs" />
       <File FileName="Service/Interface/IUserService.cs" />
@@ -9,27 +9,9 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="HubUfpr.NetCore" expanded="True">
+          <Node name="HubUfpr.NetCore" expanded="True" selected="True">
             <Node name="HubUfpr.API" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="CadastroController.cs" selected="True" />
-              </Node>
-              <Node name="Requests" expanded="True" />
-            </Node>
-            <Node name="HubUfpr.Data" expanded="True">
-              <Node name="DapperORM" expanded="True">
-                <Node name="Class" expanded="True" />
-                <Node name="Interface" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="HubUfpr.Model" expanded="True" />
-            <Node name="HubUfpr.Service" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="Class" expanded="True" />
-              <Node name="Interface" expanded="True" />
-            </Node>
-            <Node name="HubUfpr.Utils" expanded="True">
-              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True" />
             </Node>
           </Node>
         </State>

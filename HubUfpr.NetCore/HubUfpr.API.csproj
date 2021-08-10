@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,5 +25,8 @@
     <ProjectReference Include="..\Data\HubUfpr.Data.csproj" />
     <ProjectReference Include="..\Model\HubUfpr.Model.csproj" />
     <ProjectReference Include="..\Service\HubUfpr.Service.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Docker.DotNet" />
   </ItemGroup>
 </Project>

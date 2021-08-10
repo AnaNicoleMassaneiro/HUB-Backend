@@ -28,6 +28,19 @@
           "lib/netstandard2.0/Dapper.dll": {}
         }
       },
+      "Docker.DotNet/3.125.4": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Buffers": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Docker.DotNet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Docker.DotNet.dll": {}
+        }
+      },
       "EasyMemoryCache/1.0.8": {
         "type": "package",
         "dependencies": {
@@ -1445,7 +1458,7 @@
           "lib/netstandard1.6/System.AppContext.dll": {}
         }
       },
-      "System.Buffers/4.5.0": {
+      "System.Buffers/4.5.1": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -2859,6 +2872,7 @@
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Dapper": "2.0.30",
+          "Docker.DotNet": "3.125.4",
           "HubUfpr.Model": "1.0.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "3.1.2",
           "Microsoft.Extensions.Configuration.Json": "3.1.2",
@@ -2875,6 +2889,9 @@
       "HubUfpr.Model/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Docker.DotNet": "3.125.4"
+        },
         "compile": {
           "bin/placeholder/HubUfpr.Model.dll": {}
         },
@@ -2886,6 +2903,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
+          "Docker.DotNet": "3.125.4",
           "HubUfpr.Data": "1.0.0",
           "HubUfpr.Model": "1.0.0",
           "HubUfpr.Utils": "1.0.0",
@@ -2902,6 +2920,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
+          "Docker.DotNet": "3.125.4",
           "Microsoft.Extensions.Caching.Memory": "3.1.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "2.0.8",
           "System.IdentityModel.Tokens.Jwt": "5.6.0"
@@ -2956,6 +2975,21 @@
         "lib/net461/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "Docker.DotNet/3.125.4": {
+      "sha512": "qStC9eSTewp/ySdN484fWhe9ZJZxuQtLRCMHnBH4GLbSS94A46n5OZp7nmRbe65iXjL4pIgfC7jiHhrEziCg9A==",
+      "type": "package",
+      "path": "docker.dotnet/3.125.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "docker.dotnet.3.125.4.nupkg.sha512",
+        "docker.dotnet.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Docker.DotNet.dll",
+        "lib/netstandard2.0/Docker.DotNet.pdb"
       ]
     },
     "EasyMemoryCache/1.0.8": {
@@ -4990,15 +5024,17 @@
         "system.appcontext.nuspec"
       ]
     },
-    "System.Buffers/4.5.0": {
-      "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+    "System.Buffers/4.5.1": {
+      "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
       "type": "package",
-      "path": "system.buffers/4.5.0",
+      "path": "system.buffers/4.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Buffers.dll",
+        "lib/net461/System.Buffers.xml",
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.1/System.Buffers.dll",
         "lib/netstandard1.1/System.Buffers.xml",
@@ -5013,7 +5049,7 @@
         "ref/netstandard2.0/System.Buffers.dll",
         "ref/netstandard2.0/System.Buffers.xml",
         "ref/uap10.0.16299/_._",
-        "system.buffers.4.5.0.nupkg.sha512",
+        "system.buffers.4.5.1.nupkg.sha512",
         "system.buffers.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -8907,6 +8943,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Docker.DotNet >= 3.125.4",
       "EasyMemoryCache >= 1.0.8",
       "HubUfpr.Data >= 1.0.0",
       "HubUfpr.Model >= 1.0.0",
@@ -8930,7 +8967,7 @@
       "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/an20184783/.nuget/NuGet/NuGet.Config"
+        "/Users/an20184783/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -8964,6 +9001,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "Docker.DotNet": {
+            "target": "Package",
+            "version": "[3.125.4, )"
+          },
           "EasyMemoryCache": {
             "target": "Package",
             "version": "[1.0.8, )"

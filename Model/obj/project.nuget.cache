@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "80MzZtUdRg+w/mRKLFo6HZfeMtWYnaUSXumdbRc9b96OH8/nEDyo+8+4HxxrRikJ0guXLCV9ivlW7wtrVjGHfQ==",
+  "dgSpecHash": "PvfZCsBokouLCiH3zY9GCjRBnaQMAqGQ7bJ99BGvwMRNvmc6e7bNqLYsQqUNLZlQaOLCcz5QguYw2LsaQGULzQ==",
   "success": true,
   "projectFilePath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/HubUfpr.Model.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/an20184783/.nuget/packages/docker.dotnet/3.125.4/docker.dotnet.3.125.4.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }

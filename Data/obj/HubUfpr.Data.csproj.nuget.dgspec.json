@@ -14,7 +14,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
+          "/Users/an20184783/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -45,6 +45,10 @@
             "Dapper": {
               "target": "Package",
               "version": "[2.0.30, )"
+            },
+            "Docker.DotNet": {
+              "target": "Package",
+              "version": "[3.125.4, )"
             },
             "Microsoft.Extensions.Configuration.FileExtensions": {
               "target": "Package",
@@ -92,7 +96,7 @@
         "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
+          "/Users/an20184783/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -115,6 +119,12 @@
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Docker.DotNet": {
+              "target": "Package",
+              "version": "[3.125.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
