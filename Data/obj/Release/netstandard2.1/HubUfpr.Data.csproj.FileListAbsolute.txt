@@ -1,0 +1,12 @@
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/bin/Release/netstandard2.1/HubUfpr.Data.deps.json
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/bin/Release/netstandard2.1/HubUfpr.Data.dll
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/bin/Release/netstandard2.1/HubUfpr.Data.pdb
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/bin/Release/netstandard2.1/HubUfpr.Model.dll
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/bin/Release/netstandard2.1/HubUfpr.Model.pdb
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.csproj.AssemblyReference.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.AssemblyInfoInputs.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.AssemblyInfo.cs
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.csproj.CoreCompileInputs.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.csproj.CopyComplete
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.dll
+/Users/an20184783/Documents/tcc/HUB-Backend/Data/obj/Release/netstandard2.1/HubUfpr.Data.pdb

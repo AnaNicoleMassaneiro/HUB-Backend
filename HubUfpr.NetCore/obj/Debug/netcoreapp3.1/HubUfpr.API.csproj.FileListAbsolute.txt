@@ -420,3 +420,4 @@
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.dll
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.pdb
 /Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.genruntimeconfig.cache
+/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/bin/Debug/netcoreapp3.1/Docker.DotNet.dll

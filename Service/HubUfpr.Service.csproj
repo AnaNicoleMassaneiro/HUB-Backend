@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,4 +15,7 @@
     <ProjectReference Include="..\Utils\HubUfpr.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Docker.DotNet" />
+  </ItemGroup>
 </Project>

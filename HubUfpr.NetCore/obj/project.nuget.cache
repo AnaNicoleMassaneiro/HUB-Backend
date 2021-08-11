@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ov6KqZI9FLO/tJIjhgo/6h4REnrechT2lLGqnGG1mPTSa0ebJijiM7dk1UGmYdpAKaahP/ZTLghQ9/mPInIjAg==",
+  "dgSpecHash": "286hc0ssYnxWIPFt41ovdDIDggKKWyo4Lda2XgrW1Mb3jfwQTEcW0tDpkLAtsdmDP0HI7F38uHpjLzGvndK8EQ==",
   "success": true,
   "projectFilePath": "/Users/an20184783/Documents/tcc/HUB-Backend/HubUfpr.NetCore/HubUfpr.API.csproj",
   "expectedPackageFiles": [
     "/Users/an20184783/.nuget/packages/bouncycastle.netcore/1.8.3/bouncycastle.netcore.1.8.3.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/dapper/2.0.30/dapper.2.0.30.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/docker.dotnet/3.125.4/docker.dotnet.3.125.4.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/easymemorycache/1.0.8/easymemorycache.1.0.8.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/google.protobuf/3.6.1/google.protobuf.3.6.1.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
@@ -102,7 +103,7 @@
     "/Users/an20184783/.nuget/packages/swashbuckle.aspnetcore.swaggergen/5.0.0/swashbuckle.aspnetcore.swaggergen.5.0.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/swashbuckle.aspnetcore.swaggerui/5.0.0/swashbuckle.aspnetcore.swaggerui.5.0.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
-    "/Users/an20184783/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.collections.concurrent/4.3.0/system.collections.concurrent.4.3.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.collections.immutable/1.5.0/system.collections.immutable.1.5.0.nupkg.sha512",

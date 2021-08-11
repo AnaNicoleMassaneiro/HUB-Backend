@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "t8p9k3yygQIjPNxyz5zcx9aEUd4+Dynn+5gm6HGvDSAkkE1aYXCGGC/UgA85TuojV0aVR5+xIesqhgs2CKnqNw==",
+  "dgSpecHash": "Hy4JMf+eXBefCPQBuRa0q76MI0nnaQe+rL78A5Mf21UxPpkTA2UuihaUv6nrvw+X3ZGB+0tKZ8NRZhVyg5aJPA==",
   "success": true,
   "projectFilePath": "/Users/an20184783/Documents/tcc/HUB-Backend/Service/HubUfpr.Service.csproj",
   "expectedPackageFiles": [
     "/Users/an20184783/.nuget/packages/bouncycastle.netcore/1.8.3/bouncycastle.netcore.1.8.3.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/dapper/2.0.30/dapper.2.0.30.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/docker.dotnet/3.125.4/docker.dotnet.3.125.4.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/google.protobuf/3.6.1/google.protobuf.3.6.1.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.0/microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",
@@ -54,7 +55,7 @@
     "/Users/an20184783/.nuget/packages/ssh.net/2016.1.0/ssh.net.2016.1.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/sshnet.security.cryptography/1.2.0/sshnet.security.cryptography.1.2.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
-    "/Users/an20184783/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
+    "/Users/an20184783/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.collections.concurrent/4.3.0/system.collections.concurrent.4.3.0.nupkg.sha512",
     "/Users/an20184783/.nuget/packages/system.componentmodel.annotations/4.7.0/system.componentmodel.annotations.4.7.0.nupkg.sha512",

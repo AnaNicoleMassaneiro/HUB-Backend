@@ -1,0 +1,3 @@
+/Users/an20184783/Documents/tcc/HUB-Backend/out/HubUfpr.Model.dll
+/Users/an20184783/Documents/tcc/HUB-Backend/out/HubUfpr.Model.deps.json
+/Users/an20184783/Documents/tcc/HUB-Backend/out/HubUfpr.Model.pdb
