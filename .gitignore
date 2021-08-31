@@ -313,3 +313,8 @@ Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.csproj.FileListAbsolute.txt
 Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.GeneratedMSBuildEditorConfig.editorconfig
 Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.pdb
 Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.dll
+.vs/HubUfpr.NetCore/v16/.suo
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfo.cs
+Model/obj/Debug/netstandard2.1/HubUfpr.Model.AssemblyInfo.cs
+Service/obj/Debug/netstandard2.1/HubUfpr.Service.AssemblyInfo.cs
+Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.AssemblyInfo.cs
