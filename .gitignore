@@ -259,3 +259,57 @@ paket-files /
 # Ferramentas Python para Visual Studio (PTVS)
 __pycache__ /
 * .pyc
+
+# OUTROS ARQUIVOS REFERENTES AO AMBIENTE PESSOAL & NÃO NECESSÁRIOS NO VERSIONAMENTO
+Data/bin/*
+*.cache
+Data/obj/
+HubUfpr.NetCore/bin/Debug/netcoreapp3.1/*
+
+Data/obj/HubUfpr.Data.csproj.nuget.dgspec.json
+Data/obj/HubUfpr.Data.csproj.nuget.g.props
+Data/obj/project.assets.json
+Data/obj/Debug/netstandard2.1/HubUfpr.Data.csproj.FileListAbsolute.txt
+Data/obj/Debug/netstandard2.1/HubUfpr.Data.dll
+Data/obj/Debug/netstandard2.1/HubUfpr.Data.GeneratedMSBuildEditorConfig.editorconfig
+Data/obj/Debug/netstandard2.1/HubUfpr.Data.pdb
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.dgspec.json
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.g.props
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.g.targets
+HubUfpr.NetCore/obj/project.assets.json
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/apphost.exe
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.dgspec.json
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.g.props
+HubUfpr.NetCore/obj/HubUfpr.API.csproj.nuget.g.targets
+HubUfpr.NetCore/obj/project.assets.json
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.csproj.FileListAbsolute.txt
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.dll
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.GeneratedMSBuildEditorConfig.editorconfig
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.MvcApplicationPartsAssemblyInfo.cs
+HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.pdb
+Model/bin/Debug/netstandard2.1/HubUfpr.Model.dll
+Model/bin/Debug/netstandard2.1/HubUfpr.Model.pdb
+Model/obj/HubUfpr.Model.csproj.nuget.g.props
+Model/obj/project.assets.json
+Model/obj/HubUfpr.Model.csproj.nuget.dgspec.json
+Model/obj/Debug/netstandard2.1/HubUfpr.Model.csproj.FileListAbsolute.txt
+Model/obj/Debug/netstandard2.1/HubUfpr.Model.dll
+Model/obj/Debug/netstandard2.1/HubUfpr.Model.GeneratedMSBuildEditorConfig.editorconfig
+Model/obj/Debug/netstandard2.1/HubUfpr.Model.pdb
+Service/bin/Debug/netstandard2.1/*
+Service/obj/HubUfpr.Service.csproj.nuget.dgspec.json
+Service/obj/HubUfpr.Service.csproj.nuget.g.props
+Service/obj/project.assets.json
+Service/obj/Debug/netstandard2.1/HubUfpr.Service.csproj.FileListAbsolute.txt
+Service/obj/Debug/netstandard2.1/HubUfpr.Service.GeneratedMSBuildEditorConfig.editorconfig
+Service/obj/Debug/netstandard2.1/HubUfpr.Service.pdb
+Service/obj/Debug/netstandard2.1/HubUfpr.Service.dll
+Utils/bin/Debug/netstandard2.1/HubUfpr.Utils.dll
+Utils/bin/Debug/netstandard2.1/HubUfpr.Utils.pdb
+Utils/obj/HubUfpr.Utils.csproj.nuget.g.props
+Utils/obj/project.assets.json
+Utils/obj/HubUfpr.Utils.csproj.nuget.dgspec.json
+Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.csproj.FileListAbsolute.txt
+Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.GeneratedMSBuildEditorConfig.editorconfig
+Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.pdb
+Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.dll
