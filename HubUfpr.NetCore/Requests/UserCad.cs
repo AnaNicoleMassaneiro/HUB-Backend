@@ -8,7 +8,7 @@ namespace HubUfpr.API.Requests
         [JsonProperty(PropertyName = "nome", NullValueHandling = NullValueHandling.Ignore)]
         public string nome { get; set; }
 
-        [JsonProperty(PropertyName = "isVendedor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "isVendedor", NullValueHandling = NullValueHandling.Include)]
         public bool isVendedor { get; set; }
 
         [JsonProperty(PropertyName = "senha", NullValueHandling = NullValueHandling.Ignore)]
