@@ -41,24 +41,24 @@ namespace HubUfpr.API.Controllers
         [Route("create")]
         public JsonResult InsertUser([FromBody] UserCad request)
         {
-            if (request.senha == null || request.usuario == null || request.confirmacaoSenha == null)
+            if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null)
             {
                 return Json("Por favor, informe a senha, nome de usuário e confirmação da senha");
             }
             else
             {
                 if (request.senha != request.confirmacaoSenha)
-                    return Json("Senhas não coincidem!");
+                    return Json(new { msg = "Senhas não coincidem!" });
 
                 if (_userService.IsEmailInUse(request.email))
-                    return Json("Este email já está em uso!");
+                    return Json(new { msg = "Este email já está em uso!" });
 
                 if (_userService.IsGRRInUse(request.grr))
-                    return Json("Este GRR já está em uso!");
+                    return Json(new { msg = "Este GRR já está em uso!" });
 
-                _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
+                _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
 
-                return Json("Usuário criado com sucesso! :)");
+                return Json(new { msg = "Usuário criado com sucesso." });
             }
            
         }

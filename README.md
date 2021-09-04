@@ -8,6 +8,10 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 2) Abra o arquivo do projeto (Visual Studio 2019)
 
 3) Crie um banco de dados (hubUfprDb) no MySQL.
+```sql
+    create database hubUfprDb;
+    use hubUfprDb;
+```
 
 4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
    ```json
@@ -21,20 +25,19 @@ Modifique usando seus valores.
 ```sql
 create table User
 (
-    Id             int auto_increment
-        primary key,
-    Name           varchar(50) null,
-    Surname        varchar(50) null,
-    Email          varchar(50) null,
-    Phone          varchar(20) null,
-    LastLogon      datetime(6) null,
-    CreatedOn      datetime(6) null,
-    ActivationCode int         null,
-    Login          varchar(50) null,
-    Password       varchar(500) null,
-    GRR            varchar(50) null,
-    TypeUser       varchar(50) null,
-    NoteApp        varchar(50) null
+    Id              int auto_increment primary key,
+    Name            varchar(1000) not null,
+    Password        varchar(64) not null,
+    Latitude        float null,
+    Longitude       float null,
+    NoteApp         float null,
+    Email           varchar(100) unique not null,
+    GRR             varchar(8) unique not null,
+    LastLogon       datetime(6) null,
+    CreatedOn       datetime(6) null,
+    ActivationCode  int         null,
+    Token           varchar(64) null,
+    IsVendedor      boolean not null
 );
 
 ```
