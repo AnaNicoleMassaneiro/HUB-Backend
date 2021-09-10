@@ -14,6 +14,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 # Padrão de container ASP.NET
-# ENTRYPOINT ["dotnet", "HubUfpr.API.dll"]
+ENTRYPOINT ["dotnet", "HubUfpr.API.dll"]
 # Opção utilizada pelo Heroku
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet HubUfpr.API.dll
+# CMD ASPNETCORE_URLS=http://*:$PORT dotnet HubUfpr.API.dll
