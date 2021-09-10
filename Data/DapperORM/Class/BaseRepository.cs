@@ -25,7 +25,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ConvertZeroDateTime = convertZeroDatetime
             };
             var conn = new MySqlConnection(csb.ConnectionString);
-            if (open) conn.Open();
+                if (open) conn.Open();
             return conn;
         }
     }
