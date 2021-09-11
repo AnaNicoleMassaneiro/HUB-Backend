@@ -33,11 +33,11 @@ namespace HubUfpr.Service.Class
             return ret;
         }
 
-        public void InsertUser(string usuario, string senha, string nome, string grr, string email)
+        public void InsertUser(string name, string senha, string email, string grr, bool isVendedor)
         {
             var passwordHash = Utils.HashUtil.GetSha256FromString(senha);
 
-            _userRepository.InsertUser(usuario, passwordHash, nome, grr, email);
+            _userRepository.InsertUser(name, passwordHash, email, grr, isVendedor);
         }
 
         public bool IsEmailInUse(string email)

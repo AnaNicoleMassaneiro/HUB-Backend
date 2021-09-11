@@ -6,7 +6,7 @@ namespace HubUfpr.Data.DapperORM.Interface
     {
         User ValidateUser(string username, string password);
 
-        void InsertUser(string usuario, string senha, string nome, string grr, string email);
+        void InsertUser(string name, string senha, string email, string grr, bool isVendedor);
 
         bool IsEmailInUse(string email);
 

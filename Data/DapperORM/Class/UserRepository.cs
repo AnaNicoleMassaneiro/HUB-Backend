@@ -8,22 +8,22 @@ namespace HubUfpr.Data.DapperORM.Class
 {
     public class UserRepository : BaseRepository, IUserRepository
     {
-        public User ValidateUser(string usario, string senha)
+        public User ValidateUser(string usuario, string senha)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"select Id, Name, Surname, Email, Phone, LastLogon, CreatedOn, ActivationCode, GRR, TypeUser, NoteApp, Login
+            const string sql = @"select Id, Name, Password, Email, LastLogon, CreatedOn, ActivationCode, GRR, IsVendedor, NoteApp, Latitude, Longitude
                 from User U
-                where Login = @Login and Password = @Password";
+                where (U.GRR = @Login or U.Email = @Login) and U.Password = @Password";
 
-            return db.Query<User>(sql, new { Login = usario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
+            return db.Query<User>(sql, new { Login = usuario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
         }
 
-        public void InsertUser(string usuario, string senha, string nome, string grr, string email)
+        public void InsertUser(string name, string senha, string email, string grr, bool isVendedor)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into User (Login, Password, CreatedOn, LastLogon, Name, GRR, Email) values (@Login, @Password, NOW(), NOW(), @Name, @GRR, @Email)";
+            const string sql = @"insert into User (Name, Password, Email, GRR, CreatedOn, LastLogon, IsVendedor) values (@Name, @Password, @Email, @GRR, NOW(), NOW(), @IsVendedor)";
 
-            db.Execute(sql, new { Login = usuario, Password = senha, Name = nome, GRR = grr, Email = email }, commandType: CommandType.Text);
+            db.Execute(sql, new { Name = name, Password = senha, Email = email, GRR = grr, IsVendedor = isVendedor}, commandType: CommandType.Text);
         }
 
         public bool IsEmailInUse(string email)
