@@ -4,6 +4,7 @@ using HubUfpr.API.Requests;
 using HubUfpr.Service.Interface;
 using System.Text.RegularExpressions;
 using System;
+using HubUfpr.Service.Class;
 
 namespace HubUfpr.API.Controllers
 {
@@ -32,15 +33,19 @@ namespace HubUfpr.API.Controllers
                 return Json(new { msg = "Por favor, informe a senha e nome de usuário." });
             }
 
-            var ret = _userService.GetToken(request.usuario, request.senha);
+            var user = _userService.GetToken(request.usuario, request.senha);
 
-            if (ret == null) {
+            if (user == null) {
                 Response.StatusCode = 401;
                 return Json(new { msg = "Email/GRR e/ou senha incorretos." });
             }
 
+            string token = TokenService.GenerateToken(user);
+
+            _userService.UpdateLastLoginTime(user.Id);
+
             Response.StatusCode = 200;
-            return Json(ret);
+            return Json(new { token = token, user = user });
         }
 
         [AllowAnonymous]

@@ -14,5 +14,7 @@ namespace HubUfpr.Service.Interface
         bool IsEmailInUse(string email);
 
         bool IsGRRInUse(string grr);
+
+        void UpdateLastLoginTime(int id);
     }
 }

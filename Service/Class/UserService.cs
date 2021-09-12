@@ -26,10 +26,6 @@ namespace HubUfpr.Service.Class
 
             var ret = _userRepository.ValidateUser(username, passwordHash);
 
-            if (ret != null)
-            {
-                //ret.Token = Utils.JwtManager.GenerateToken(username).Value;
-            }
             return ret;
         }
 
@@ -48,6 +44,11 @@ namespace HubUfpr.Service.Class
         public bool IsGRRInUse(string grr)
         {
             return _userRepository.IsGRRInUse(grr);
+        }
+
+        public void UpdateLastLoginTime(int id)
+        {
+            _userRepository.UpdateLastLoginTime(id);
         }
     }
 }

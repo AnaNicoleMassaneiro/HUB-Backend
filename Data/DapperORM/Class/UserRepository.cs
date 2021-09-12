@@ -39,5 +39,12 @@ namespace HubUfpr.Data.DapperORM.Class
             const string query = @"select GRR from User where GRR = @grr";
             return db.Query<string>(query, new { GRR = grr }, commandType: CommandType.Text).Any();
         }
+
+        public void UpdateLastLoginTime(int id)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"update user u set u.LastLogon = CONVERT_TZ(NOW(), '+00:00', '-03:00') where u.Id = @ID;";
+            db.Execute(query, new { ID = id }, commandType: CommandType.Text);
+        }
     }
 }

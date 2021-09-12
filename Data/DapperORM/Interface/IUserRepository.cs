@@ -11,5 +11,7 @@ namespace HubUfpr.Data.DapperORM.Interface
         bool IsEmailInUse(string email);
 
         bool IsGRRInUse(string grr);
+
+        void UpdateLastLoginTime(int id);
     }
 }
