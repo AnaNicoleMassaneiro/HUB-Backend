@@ -318,3 +318,6 @@ HubUfpr.NetCore/obj/Debug/netcoreapp3.1/HubUfpr.API.AssemblyInfo.cs
 Model/obj/Debug/netstandard2.1/HubUfpr.Model.AssemblyInfo.cs
 Service/obj/Debug/netstandard2.1/HubUfpr.Service.AssemblyInfo.cs
 Utils/obj/Debug/netstandard2.1/HubUfpr.Utils.AssemblyInfo.cs
+HubUfpr.NetCore/Debug/netcoreapp3.1
+HubUfpr.NetCore/Release/netcoreapp3.1
+HubUfpr.NetCore/HubUfpr.API.csproj.user
