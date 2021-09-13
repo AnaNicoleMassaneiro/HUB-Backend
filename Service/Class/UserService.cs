@@ -26,18 +26,14 @@ namespace HubUfpr.Service.Class
 
             var ret = _userRepository.ValidateUser(username, passwordHash);
 
-            if (ret != null)
-            {
-                //ret.Token = Utils.JwtManager.GenerateToken(username).Value;
-            }
             return ret;
         }
 
-        public void InsertUser(string usuario, string senha, string nome, string grr, string email)
+        public void InsertUser(string name, string senha, string email, string grr, bool isVendedor)
         {
             var passwordHash = Utils.HashUtil.GetSha256FromString(senha);
 
-            _userRepository.InsertUser(usuario, passwordHash, nome, grr, email);
+            _userRepository.InsertUser(name, passwordHash, email, grr, isVendedor);
         }
 
         public bool IsEmailInUse(string email)
@@ -48,6 +44,11 @@ namespace HubUfpr.Service.Class
         public bool IsGRRInUse(string grr)
         {
             return _userRepository.IsGRRInUse(grr);
+        }
+
+        public void UpdateLastLoginTime(int id)
+        {
+            _userRepository.UpdateLastLoginTime(id);
         }
     }
 }

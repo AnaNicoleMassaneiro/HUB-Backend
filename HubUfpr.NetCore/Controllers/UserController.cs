@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using HubUfpr.API.Requests;
 using HubUfpr.Service.Interface;
+using System.Text.RegularExpressions;
+using System;
+using HubUfpr.Service.Class;
 
 namespace HubUfpr.API.Controllers
 {
@@ -10,6 +13,9 @@ namespace HubUfpr.API.Controllers
     public class UserController : Controller
     {
         protected readonly IUserService _userService;
+
+        private const string emailRegex = @"^[\w!#$%&'*+\-\/=?\^_`{|}~]+(\.[\w!#$%&'*+\-\/=?\^_`{|}~]+)*@ufpr\.br$";
+        private const string grrRegex = @"^[0-9]{8}$";
 
         public UserController(IUserService userService)
         {
@@ -23,44 +29,62 @@ namespace HubUfpr.API.Controllers
         {
             if (request.usuario == null || request.senha == "")
             {
-                return Json("Por favor, informe a senha e nome de usuário");
+                Response.StatusCode = 400;
+                return Json(new { msg = "Por favor, informe a senha e nome de usuário." });
             }
-            else
-            {
-                var ret = _userService.GetToken(request.usuario, request.senha);
 
-                if (ret == null)
-                    return StatusCode(401);
+            var user = _userService.GetToken(request.usuario, request.senha);
 
-                return Json(ret);
+            if (user == null) {
+                Response.StatusCode = 401;
+                return Json(new { msg = "Email/GRR e/ou senha incorretos." });
             }
+
+            string token = TokenService.GenerateToken(user);
+
+            _userService.UpdateLastLoginTime(user.Id);
+
+            Response.StatusCode = 200;
+            return Json(new { token = token, user = user });
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("create")]
-        public JsonResult InsertUser([FromBody] UserCad request)
+        public ActionResult InsertUser([FromBody] UserCad request)
         {
-            if (request.senha == null || request.usuario == null || request.confirmacaoSenha == null)
+            Response.StatusCode = 400;
+
+            if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null || request.nome == null) 
+                return Json(new { msg = "Por favor, informe o nome, email, GRR, senha e confirmação da senha!" });
+
+            if (request.senha != request.confirmacaoSenha)
+                return Json(new { msg = "Senhas não coincidem!" });
+
+            if (!Regex.IsMatch(request.email, emailRegex))
+                return Json(new { msg = "O email informado não é válido. Você deve usar um endereço de email válido que pertença ao domínio \"@ufpr.br\"." });
+
+            if (_userService.IsEmailInUse(request.email))
+                return Json(new { msg = "Este email já está em uso!" });
+
+            if (!Regex.IsMatch(request.grr, grrRegex))
+                return Json(new { msg = "O GRR informado é inválido. Seu GRR deve ser composto por 8 dígitos numéricos." });
+
+            if (_userService.IsGRRInUse(request.grr))
+                return Json(new { msg = "Este GRR já está em uso!" });
+
+            try
             {
-                return Json("Por favor, informe a senha, nome de usuário e confirmação da senha");
+                _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
+
+                Response.StatusCode = 200;
+                return Json(new { msg = "Usuário criado com sucesso." });
             }
-            else
+            catch (Exception ex)
             {
-                if (request.senha != request.confirmacaoSenha)
-                    return Json("Senhas não coincidem!");
-
-                if (_userService.IsEmailInUse(request.email))
-                    return Json("Este email já está em uso!");
-
-                if (_userService.IsGRRInUse(request.grr))
-                    return Json("Este GRR já está em uso!");
-
-                _userService.InsertUser(request.usuario, request.senha, request.nome, request.grr, request.email);
-
-                return Json("Usuário criado com sucesso! :)");
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um problema ao criar o usuário. " + ex.Message });
             }
-           
         }
     }
 }
