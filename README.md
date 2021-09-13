@@ -9,6 +9,8 @@
     src="https://servicos.nc.ufpr.br/PortalNC/painel/assets/img/logos/logo_ufpr.jpg"
   />
 </a>
+  
+<br />
 
 ## Instalação / Configuração:
 
