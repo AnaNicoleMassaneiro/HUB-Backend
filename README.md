@@ -1,4 +1,14 @@
-# HUB - Backend
+<div align="center">
+<h1>HUB UFPR - API</h1>
+
+<a href="https://www.emojione.com/emoji/1f410">
+  <img
+    height="80"
+    width="80"
+    alt="goat"
+    src="https://servicos.nc.ufpr.br/PortalNC/painel/assets/img/logos/logo_ufpr.jpg"
+  />
+</a>
 
 ## Instalação / Configuração:
 
