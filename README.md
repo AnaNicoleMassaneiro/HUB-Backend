@@ -3,7 +3,7 @@
 
 <a href="https://www.emojione.com/emoji/1f410">
   <img
-    height="180"
+    height="80"
     width="180"
     alt="goat"
     src="https://servicos.nc.ufpr.br/PortalNC/painel/assets/img/logos/logo_ufpr.jpg"
