@@ -25,8 +25,8 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 
 4) Acesse http://localhost:5000/swagger/index.html
 
-### Técnologias utilizadas
+## Técnologias utilizadas
 WebAPI (.NET Core 3.1) Base Project with JWT Auth, Dapper (ORM), MySQL, Swagger, DI
 
-### Desenvolvido por:
+## Desenvolvido por:
 Ana Nicole Massaneiro, Dandi Teoa e Matheus Augusto de Moraes Ribeiro
