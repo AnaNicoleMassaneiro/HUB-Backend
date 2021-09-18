@@ -55,7 +55,8 @@ namespace HubUfpr.API.Controllers
         {
             Response.StatusCode = 400;
 
-            if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null || request.nome == null) 
+            if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null || request.nome == null ||
+                request.senha == "" || request.grr == "" || request.email == "" || request.confirmacaoSenha == "" || request.nome == "")
                 return Json(new { msg = "Por favor, informe o nome, email, GRR, senha e confirmação da senha!" });
 
             if (request.senha != request.confirmacaoSenha)
