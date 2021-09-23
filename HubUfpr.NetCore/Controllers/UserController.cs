@@ -27,10 +27,10 @@ namespace HubUfpr.API.Controllers
         [Route("authenticate")]
         public ActionResult ValidateUser([FromBody]UserLogin request)
         {
-            if (request.usuario == null || request.senha == "")
+            if (request.usuario == null || request.usuario == "" || request.senha == null || request.senha == "")
             {
                 Response.StatusCode = 400;
-                return Json(new { msg = "Por favor, informe a senha e nome de usuário." });
+                return Json(new { msg = "Por favor, informe a senha e email/GRR." });
             }
 
             var user = _userService.GetToken(request.usuario, request.senha);
