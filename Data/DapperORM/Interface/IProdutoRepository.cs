@@ -7,6 +7,6 @@ namespace HubUfpr.Data.DapperORM.Interface
     {
         void InsertProduct(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis);
 
-        Produto SearchProduct(string nome, int idProduto);
+        Produto SearchProduct(string nome, int idProduto, int idVendedor);
     }
 }

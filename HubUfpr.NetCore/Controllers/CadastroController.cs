@@ -43,7 +43,7 @@ namespace HubUfpr.API.Controllers
         {
             try
             {
-                var retorno = _produtoService.SearchProduto(request.nome, request.idProduto);
+                var retorno = _produtoService.SearchProduto(request.nome, request.idProduto, request.idVendedor);
 
                 return Json(retorno);
             }

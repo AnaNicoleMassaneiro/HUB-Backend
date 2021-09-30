@@ -7,6 +7,6 @@ namespace HubUfpr.Service.Interface
     {       
         void InsertProduto(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis);
 
-        Produto SearchProduto(string nome, int idProduto);
+        Produto SearchProduto(string nome, int idProduto, int idVendedor);
     }
 }

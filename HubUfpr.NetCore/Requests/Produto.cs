@@ -25,5 +25,9 @@ namespace HubUfpr.API.Requests
 
         [JsonProperty(PropertyName = "qtdProdutosDisponiveis", NullValueHandling = NullValueHandling.Ignore)]
         public int qtdProdutosDisponiveis { get; set; }
+
+        [JsonProperty(PropertyName = "idVendedor", NullValueHandling = NullValueHandling.Ignore)]
+        public int idVendedor { get; set; }
+
     }
 }

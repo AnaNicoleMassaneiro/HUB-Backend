@@ -24,6 +24,6 @@ namespace HubUfpr.Service.Class
             _produtoRepository.InsertProduct(nome, status, preco, descricao, qtdProdutosDisponiveis);
         }
 
-        public Produto SearchProduto(string nome, int idProduto) => _produtoRepository.SearchProduct(nome, idProduto);
+        public Produto SearchProduto(string nome, int idProduto, int idVendedor) => _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
     }
 }
