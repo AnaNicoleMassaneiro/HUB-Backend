@@ -21,12 +21,12 @@ namespace HubUfpr.Data.DapperORM.Class
             db.Execute(sql, new { nome = nome, status = status, preco = preco, descricao = descricao, quantidadeProdutosDisponiveis = qtdProdutosDisponiveis }, commandType: CommandType.Text);
         }
 
-        public Produto SearchProduct(string nome)
+        public Produto SearchProduct(string nome, int idProduto)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"select * from Produto U where nome = @nome";
+            const string sql = @"select * from Produto U where nome = @nome OR idProduto = @idProduto";
 
-            return db.Query<Produto>(sql, new { nome = nome }, commandType: CommandType.Text).FirstOrDefault();
+            return db.Query<Produto>(sql, new { nome = nome, idProduto = idProduto }, commandType: CommandType.Text).FirstOrDefault();
         }
     }
 }

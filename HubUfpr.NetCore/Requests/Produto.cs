@@ -5,6 +5,9 @@ namespace HubUfpr.API.Requests
 {
     public class Produto
     {
+        [JsonProperty(PropertyName = "idProduto", NullValueHandling = NullValueHandling.Ignore)]
+        public int idProduto { get; set; }
+
         [JsonProperty(PropertyName = "nome", NullValueHandling = NullValueHandling.Ignore)]
         public string nome { get; set; }
 
