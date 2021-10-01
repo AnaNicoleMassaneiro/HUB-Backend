@@ -22,12 +22,24 @@ namespace HubUfpr.API.Controllers
         [Route("cadastro")]
         public JsonResult insertProduct([FromBody] Produto request)
         {
-            // TODO validar campos obrigatorios
             try
             {
-                _produtoService.InsertProduto(request.nome, request.status, request.preco, request.descricao, request.qtdProdutosDisponiveis);
+                if (request.nome != null
+                    && request.nome != ""
+                    && request.idVendedor != 0
+                    && request.preco != 0
+                    && request.descricao != null
+                    && request.qtdProdutosDisponiveis != 0)
+                {
+                    _produtoService.InsertProduto(request.nome, request.status, request.preco, request.descricao, request.qtdProdutosDisponiveis, request.idVendedor);
 
-                return Json("Produto inserido com sucesso :)");
+                    return Json("Produto inserido com sucesso :)");
+                }
+                else
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Por favor, informe um nome de produto, vendedor ou id." });
+                }
             }
             catch (System.Exception ex)
             {
@@ -41,11 +53,23 @@ namespace HubUfpr.API.Controllers
         [Route("buscar")]
         public JsonResult searchProduto([FromBody] Produto request)
         {
+
             try
             {
-                var retorno = _produtoService.SearchProduto(request.nome, request.idProduto, request.idVendedor);
+                if (request.nome != null
+                    || request.nome != ""
+                    || request.idProduto != 0
+                    || request.idVendedor != 0)
+                {
+                    var retorno = _produtoService.SearchProduto(request.nome, request.idProduto, request.idVendedor);
 
-                return Json(retorno);
+                    return Json(retorno);
+                }
+                else
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Por favor, informe um nome de produto, vendedor ou id." });
+                }
             }
             catch (System.Exception ex)
             {

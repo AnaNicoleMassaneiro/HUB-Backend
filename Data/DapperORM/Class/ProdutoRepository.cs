@@ -13,12 +13,20 @@ namespace HubUfpr.Data.DapperORM.Class
         {
         }
 
-        public void InsertProduct(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis)
+        public void InsertProduct(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis, int idVendedor)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into Produto (nome, status, preco, descricao, quantidadeProdutosDisponiveis) values (@nome, @status, @preco, @descricao, @quantidadeProdutosDisponiveis)";
+            const string sql = @"insert into Produto (nome, status, preco, descricao, quantidadeProdutosDisponiveis, idVendedor) values (@nome, @status, @preco, @descricao, @quantidadeProdutosDisponiveis, @idVendedor)";
 
-            db.Execute(sql, new { nome = nome, status = status, preco = preco, descricao = descricao, quantidadeProdutosDisponiveis = qtdProdutosDisponiveis }, commandType: CommandType.Text);
+            db.Execute(sql, new
+            {
+                nome = nome,
+                status = status,
+                preco = preco,
+                descricao = descricao,
+                quantidadeProdutosDisponiveis = qtdProdutosDisponiveis,
+                idVendedor = idVendedor
+            }, commandType: CommandType.Text);
         }
 
         public Produto SearchProduct(string nome, int idProduto, int idVendedor)
@@ -26,7 +34,12 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             const string sql = @"select * from Produto U where nome = @nome OR idProduto = @idProduto OR idVendedor = @idVendedor";
 
-            return db.Query<Produto>(sql, new { nome = nome, idProduto = idProduto, idVendedor = idVendedor }, commandType: CommandType.Text).FirstOrDefault();
+            return db.Query<Produto>(sql, new
+            {
+                nome = nome,
+                idProduto = idProduto,
+                idVendedor = idVendedor
+            }, commandType: CommandType.Text).FirstOrDefault();
         }
     }
 }
