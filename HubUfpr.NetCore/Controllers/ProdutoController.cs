@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿    using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HubUfpr.API.Requests;
 using HubUfpr.Service.Interface;
@@ -8,11 +8,11 @@ namespace HubUfpr.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/produto")]
-    public class CadastroController : Controller
+    public class ProdutoController : Controller
     {
         public readonly IProdutoService _produtoService;
 
-        public CadastroController(IProdutoService userService)
+        public ProdutoController(IProdutoService userService)
         {
             _produtoService = userService;
         }
