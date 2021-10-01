@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HubUfpr.API.Requests;
 using HubUfpr.Service.Interface;
@@ -64,6 +64,32 @@ namespace HubUfpr.API.Controllers
                     var retorno = _produtoService.SearchProduto(request.nome, request.idProduto, request.idVendedor);
 
                     return Json(retorno);
+                }
+                else
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Por favor, informe um nome de produto, vendedor ou id." });
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar produto", ex);
+            }
+
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deletar/{idProduto}")]
+        public JsonResult deleteProduto(int idProduto)
+        {
+            try
+            {
+                if (idProduto != 0)
+                {
+                    _produtoService.DeleteProduto(idProduto);
+
+                    return Json("sucesso ao deletar esse produto");
                 }
                 else
                 {

@@ -41,5 +41,17 @@ namespace HubUfpr.Data.DapperORM.Class
                 idVendedor = idVendedor
             }, commandType: CommandType.Text).FirstOrDefault();
         }
+
+        public void DeleteProduto(int idProduto)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"delete from Produto where idProduto = @idProduto";
+
+            db.Execute(sql, new
+            {
+                idProduto = idProduto
+            }, commandType: CommandType.Text);
+
+        }
     }
 }

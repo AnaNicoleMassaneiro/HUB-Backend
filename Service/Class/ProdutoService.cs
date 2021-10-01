@@ -25,5 +25,9 @@ namespace HubUfpr.Service.Class
         }
 
         public Produto SearchProduto(string nome, int idProduto, int idVendedor) => _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
+
+        public void DeleteProduto(int idProduto){
+             _produtoRepository.DeleteProduto(idProduto);
+        }
     }
 }
