@@ -21,41 +21,14 @@ git clone https://github.com/AnaNicoleMassaneiro/HUB-Backend.git
 
 2) Abra o arquivo do projeto (Visual Studio 2019)
 
-3) Crie um banco de dados (hubUfprDb) no MySQL.
-```sql
-    create database hubUfprDb;
-    use hubUfprDb;
-```
+3) Execute o projeto.
 
-4) Modifique o arquivo ** appsettings.json ** em ** WebAPI Project **, connectionstring:
-   ```json
-     "AppSettings": {
-         "MySqlConnectionString": "Server=localhost;Port=3306;Database=hubUfprDb;Uid=nomeDoAutenticadoDoBanco;Pwd=senha;"
-   ```
-Modifique usando seus valores.
-5) Execute o script da tabela do usuário (localizado no projeto do banco de dados)
-```sql
-create table User
-(
-    Id              int auto_increment primary key,
-    Name            varchar(1000) not null,
-    Password        varchar(64) not null,
-    Latitude        float null,
-    Longitude       float null,
-    NoteApp         float null,
-    Email           varchar(100) unique not null,
-    GRR             varchar(8) unique not null,
-    LastLogon       datetime(6) null,
-    CreatedOn       datetime(6) null,
-    ActivationCode  int         null,
-    Token           varchar(64) null,
-    IsVendedor      boolean not null
-);
-```
-6) Execute o projeto.
-7) Depois de executar o projeto, na barra de endereço você terá algo como: http://localhost:5000/ (a porta pode mudar) adicione swagger ao endereço, por exemplo: http://localhost:5000/swagger, um A página Swagger deve ser exibida.
+4) Depois de executar o projeto, acesse http://hubufpr.herokuapp.com/swagger - uma página Swagger com o resumo dos endpoints da API deve ser exibida.
+
 8) Você notará 2 endpoints, **api/user** e ** api/user/create **, o primeiro é para fazer o login e o segundo para criar um novo usuário para gerar o token para a autenticação JWT.
+
 9) Acesse o endpoind **/api/user/create** e crie um novo usuário, você deve receber o resultado "Usuário criado com sucesso! :)"
+
 10) Crie um usuario com  (ainda em desenvolvimento)
 ```json
 {
