@@ -19,9 +19,9 @@ namespace HubUfpr.Service.Class
             throw new System.NotImplementedException();
         }
 
-        public void InsertProduto(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis, int idVendedor)
+        public void InsertProduto(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor)
         {
-            _produtoRepository.InsertProduct(nome, status, preco, descricao, qtdProdutosDisponiveis, idVendedor);
+            _produtoRepository.InsertProduct(nome, status, preco, descricao, quantidadeDisponivel, idVendedor);
         }
 
         public Produto SearchProduto(string nome, int idProduto, int idVendedor) => _produtoRepository.SearchProduct(nome, idProduto, idVendedor);

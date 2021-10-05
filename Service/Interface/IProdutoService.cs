@@ -5,7 +5,7 @@ namespace HubUfpr.Service.Interface
 {
     public interface IProdutoService
     {       
-        void InsertProduto(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis, int idVendedor);
+        void InsertProduto(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor);
 
         Produto SearchProduto(string nome, int idProduto, int idVendedor);
 

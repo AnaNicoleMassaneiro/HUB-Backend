@@ -13,10 +13,10 @@ namespace HubUfpr.Data.DapperORM.Class
         {
         }
 
-        public void InsertProduct(string nome, string status, float preco, string descricao, int qtdProdutosDisponiveis, int idVendedor)
+        public void InsertProduct(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into Produto (nome, status, preco, descricao, quantidadeProdutosDisponiveis, idVendedor) values (@nome, @status, @preco, @descricao, @quantidadeProdutosDisponiveis, @idVendedor)";
+            const string sql = @"insert into Produto (nome, status, preco, descricao, quantidadeDisponivel, idVendedor) values (@nome, @status, @preco, @descricao, @quantidadeDisponivel, @idVendedor)";
 
             db.Execute(sql, new
             {
@@ -24,7 +24,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 status = status,
                 preco = preco,
                 descricao = descricao,
-                quantidadeProdutosDisponiveis = qtdProdutosDisponiveis,
+                quantidadeDisponivel = quantidadeDisponivel,
                 idVendedor = idVendedor
             }, commandType: CommandType.Text);
         }

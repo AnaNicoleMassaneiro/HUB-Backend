@@ -3,3 +3,8 @@
 /Users/an20184783/Documents/tcc/HUB-Backend/obj/Debug/net5.0/HUB-Backend.AssemblyInfoInputs.cache
 /Users/an20184783/Documents/tcc/HUB-Backend/obj/Debug/net5.0/HUB-Backend.AssemblyInfo.cs
 /Users/an20184783/Documents/tcc/HUB-Backend/obj/Debug/net5.0/HUB-Backend.csproj.CoreCompileInputs.cache
+/Users/ananicole/Documents/projetos/HUB-Backend/obj/Debug/net5.0/HUB-Backend.csproj.AssemblyReference.cache
+/Users/ananicole/Documents/projetos/HUB-Backend/obj/Debug/net5.0/HUB-Backend.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ananicole/Documents/projetos/HUB-Backend/obj/Debug/net5.0/HUB-Backend.AssemblyInfoInputs.cache
+/Users/ananicole/Documents/projetos/HUB-Backend/obj/Debug/net5.0/HUB-Backend.AssemblyInfo.cs
+/Users/ananicole/Documents/projetos/HUB-Backend/obj/Debug/net5.0/HUB-Backend.csproj.CoreCompileInputs.cache

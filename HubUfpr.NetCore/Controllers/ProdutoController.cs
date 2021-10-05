@@ -29,9 +29,9 @@ namespace HubUfpr.API.Controllers
                     && request.idVendedor != 0
                     && request.preco != 0
                     && request.descricao != null
-                    && request.qtdProdutosDisponiveis != 0)
+                    && request.quantidadeDisponivel != 0)
                 {
-                    _produtoService.InsertProduto(request.nome, request.status, request.preco, request.descricao, request.qtdProdutosDisponiveis, request.idVendedor);
+                    _produtoService.InsertProduto(request.nome, request.status, request.preco, request.descricao, request.quantidadeDisponivel, request.idVendedor);
 
                     return Json("Produto inserido com sucesso :)");
                 }

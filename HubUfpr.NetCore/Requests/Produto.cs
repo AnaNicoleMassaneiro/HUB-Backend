@@ -12,7 +12,7 @@ namespace HubUfpr.API.Requests
         public string nome { get; set; }
 
         [JsonProperty(PropertyName = "status", NullValueHandling = NullValueHandling.Ignore)]
-        public string status { get; set; }
+        public bool status { get; set; }
 
         [JsonProperty(PropertyName = "preco", NullValueHandling = NullValueHandling.Ignore)]
         public float preco { get; set; }
@@ -23,8 +23,8 @@ namespace HubUfpr.API.Requests
         [JsonProperty(PropertyName = "descricao", NullValueHandling = NullValueHandling.Ignore)]
         public string descricao { get; set; }
 
-        [JsonProperty(PropertyName = "qtdProdutosDisponiveis", NullValueHandling = NullValueHandling.Ignore)]
-        public int qtdProdutosDisponiveis { get; set; }
+        [JsonProperty(PropertyName = "quantidadeDisponivel", NullValueHandling = NullValueHandling.Ignore)]
+        public int quantidadeDisponivel { get; set; }
 
         [JsonProperty(PropertyName = "idVendedor", NullValueHandling = NullValueHandling.Ignore)]
         public int idVendedor { get; set; }

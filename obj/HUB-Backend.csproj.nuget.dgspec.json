@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/an20184783/Documents/tcc/HUB-Backend/HUB-Backend.csproj": {}
+    "/Users/ananicole/Documents/projetos/HUB-Backend/HUB-Backend.csproj": {}
   },
   "projects": {
-    "/Users/an20184783/Documents/tcc/HUB-Backend/HUB-Backend.csproj": {
+    "/Users/ananicole/Documents/projetos/HUB-Backend/HUB-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/an20184783/Documents/tcc/HUB-Backend/HUB-Backend.csproj",
+        "projectUniqueName": "/Users/ananicole/Documents/projetos/HUB-Backend/HUB-Backend.csproj",
         "projectName": "HUB-Backend",
-        "projectPath": "/Users/an20184783/Documents/tcc/HUB-Backend/HUB-Backend.csproj",
-        "packagesPath": "/Users/an20184783/.nuget/packages/",
-        "outputPath": "/Users/an20184783/Documents/tcc/HUB-Backend/obj/",
+        "projectPath": "/Users/ananicole/Documents/projetos/HUB-Backend/HUB-Backend.csproj",
+        "packagesPath": "/Users/ananicole/.nuget/packages/",
+        "outputPath": "/Users/ananicole/Documents/projetos/HUB-Backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/an20184783/.nuget/NuGet/NuGet.Config"
+          "/Users/ananicole/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }
