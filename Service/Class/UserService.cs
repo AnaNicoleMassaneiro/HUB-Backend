@@ -29,11 +29,13 @@ namespace HubUfpr.Service.Class
             return ret;
         }
 
-        public void InsertUser(string name, string senha, string email, string grr, bool isVendedor)
+        public int InsertUser(string name, string senha, string email, string grr, bool isVendedor)
         {
             var passwordHash = Utils.HashUtil.GetSha256FromString(senha);
 
-            _userRepository.InsertUser(name, passwordHash, email, grr, isVendedor);
+            var usuario = _userRepository.InsertUser(name, passwordHash, email, grr, isVendedor);
+
+            return usuario;
         }
 
         public bool IsEmailInUse(string email)
@@ -49,6 +51,16 @@ namespace HubUfpr.Service.Class
         public void UpdateLastLoginTime(int id)
         {
             _userRepository.UpdateLastLoginTime(id);
+        }
+
+        public void InsertVendedor(int idUser, int isAtivo, int isOpen)
+        {
+            _userRepository.InsertVendedor(idUser, isAtivo, isOpen);
+        }
+
+        public void InsertCliente(int idUser)
+        {
+            _userRepository.InsertCliente(idUser);
         }
     }
 }

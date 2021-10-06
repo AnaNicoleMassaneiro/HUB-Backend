@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using HubUfpr.Data.DapperORM.Interface;
 using HubUfpr.Model;
+using MySql.Data.MySqlClient;
 
 namespace HubUfpr.Data.DapperORM.Class
 {
@@ -18,12 +19,25 @@ namespace HubUfpr.Data.DapperORM.Class
             return db.Query<User>(sql, new { Login = usuario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
         }
 
-        public void InsertUser(string name, string senha, string email, string grr, bool isVendedor)
+        public int InsertUser(string name, string senha, string email, string grr, bool isVendedor)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into User (Name, Password, Email, GRR, CreatedOn, LastLogon, IsVendedor) values (@Name, @Password, @Email, @GRR, NOW(), NOW(), @IsVendedor)";
+            MySqlCommand cmd = db.CreateCommand();
 
-            db.Execute(sql, new { Name = name, Password = senha, Email = email, GRR = grr, IsVendedor = isVendedor}, commandType: CommandType.Text);
+            cmd.CommandText = @"insert into User (Name, Password, Email, GRR, CreatedOn, LastLogon, IsVendedor) values (@Name, @Password, @Email, @GRR, NOW(), NOW(), @IsVendedor)";
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Password", senha);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@GRR", grr);
+            cmd.Parameters.AddWithValue("@IsVendedor", isVendedor);
+            cmd.ExecuteNonQuery();
+            long id = cmd.LastInsertedId;
+
+            return (int)id;
+            //const string sql = @"insert into User (Name, Password, Email, GRR, CreatedOn, LastLogon, IsVendedor) values (@Name, @Password, @Email, @GRR, NOW(), NOW(), @IsVendedor)";
+
+            //db.Execute(sql, new { Name = name, Password = senha, Email = email, GRR = grr, IsVendedor = isVendedor}, commandType: CommandType.Text);
+
         }
 
         public bool IsEmailInUse(string email)
@@ -45,6 +59,22 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             const string query = @"update user u set u.LastLogon = CONVERT_TZ(NOW(), '+00:00', '-03:00') where u.Id = @ID;";
             db.Execute(query, new { ID = id }, commandType: CommandType.Text);
+        }
+
+        public void InsertVendedor(int idUser, int isAtivo, int isOpen)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"insert into Vendedor (idUser, isAtivo, isOpen) values (@idUser, @isAtivo, @isOpen)";
+
+            db.Execute(sql, new { idUser = idUser, isAtivo = isAtivo, isOpen = isOpen }, commandType: CommandType.Text);
+        }
+
+        public void InsertCliente(int idUser)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"insert into Cliente (idUser) values (@idUser)";
+
+            db.Execute(sql, new { idUser = idUser }, commandType: CommandType.Text);
         }
     }
 }

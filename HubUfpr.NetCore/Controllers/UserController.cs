@@ -76,7 +76,19 @@ namespace HubUfpr.API.Controllers
 
             try
             {
-                _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
+                var userId = _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
+
+                if (userId != null)
+                {
+                    if (request.isVendedor)
+                    {
+                        _userService.InsertVendedor(userId, 1, 0);
+                    }
+                    else
+                    {
+                        _userService.InsertCliente(userId);
+                    }
+                }
 
                 Response.StatusCode = 200;
                 return Json(new { msg = "Usuário criado com sucesso." });
