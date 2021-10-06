@@ -34,10 +34,6 @@ namespace HubUfpr.Data.DapperORM.Class
             long id = cmd.LastInsertedId;
 
             return (int)id;
-            //const string sql = @"insert into User (Name, Password, Email, GRR, CreatedOn, LastLogon, IsVendedor) values (@Name, @Password, @Email, @GRR, NOW(), NOW(), @IsVendedor)";
-
-            //db.Execute(sql, new { Name = name, Password = senha, Email = email, GRR = grr, IsVendedor = isVendedor}, commandType: CommandType.Text);
-
         }
 
         public bool IsEmailInUse(string email)
