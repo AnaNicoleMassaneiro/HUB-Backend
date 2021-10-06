@@ -78,7 +78,7 @@ namespace HubUfpr.API.Controllers
             {
                 var userId = _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
 
-                if (userId != null)
+                if (userId != 0)
                 {
                     if (request.isVendedor)
                     {
