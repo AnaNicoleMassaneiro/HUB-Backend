@@ -10,5 +10,7 @@ namespace HubUfpr.Service.Interface
         Produto SearchProduto(string nome, int idProduto, int idVendedor);
 
         void DeleteProduto(int idProdutor);
+
+        void UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor);
     }
 }

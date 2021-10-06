@@ -19,15 +19,50 @@ namespace HubUfpr.Service.Class
             throw new System.NotImplementedException();
         }
 
-        public void InsertProduto(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor)
+        public void InsertProduto(
+            string nome,
+            bool status,
+            float preco,
+            string descricao,
+            int quantidadeDisponivel,
+            int idVendedor
+        )
         {
-            _produtoRepository.InsertProduct(nome, status, preco, descricao, quantidadeDisponivel, idVendedor);
+            _produtoRepository.InsertProduct (
+                nome,
+                status,
+                preco,
+                descricao,
+                quantidadeDisponivel,
+                idVendedor
+            );
         }
 
-        public Produto SearchProduto(string nome, int idProduto, int idVendedor) => _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
+        public Produto
+        SearchProduto(string nome, int idProduto, int idVendedor) =>
+            _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
 
-        public void DeleteProduto(int idProduto){
-             _produtoRepository.DeleteProduto(idProduto);
+        public void DeleteProduto(int idProduto)
+        {
+            _produtoRepository.DeleteProduto (idProduto);
         }
+
+        public void UpdateProduto(
+            int idProduto,
+            string nome,
+            bool status,
+            float preco,
+            string descricao,
+            int quantidadeDisponivel,
+            int idVendedor
+        ) => _produtoRepository.UpdateProduto(
+                idProduto,
+                nome,
+                status,
+                preco,
+                descricao,
+                quantidadeDisponivel,
+                idVendedor
+            );
     }
 }
