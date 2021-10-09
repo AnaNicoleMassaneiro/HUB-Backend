@@ -38,31 +38,33 @@ namespace HubUfpr.Service.Class
             );
         }
 
-        public Produto
-        SearchProduto(string nome, int idProduto, int idVendedor) =>
-            _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
-
-        public void DeleteProduto(int idProduto)
+        public List<Produto> SearchProduto(string nome, int idProduto, int idVendedor)
         {
-            _produtoRepository.DeleteProduto (idProduto);
+            return _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
         }
 
-        public void UpdateProduto(
+        public int DeleteProduto(int idProduto)
+        {
+            return _produtoRepository.DeleteProduto (idProduto);
+        }
+
+        public int UpdateProduto(
             int idProduto,
             string nome,
             bool status,
             float preco,
             string descricao,
-            int quantidadeDisponivel,
-            int idVendedor
-        ) => _produtoRepository.UpdateProduto(
+            int quantidadeDisponivel
+        )
+        {
+            return _produtoRepository.UpdateProduto(
                 idProduto,
                 nome,
                 status,
                 preco,
                 descricao,
-                quantidadeDisponivel,
-                idVendedor
+                quantidadeDisponivel
             );
+        }
     }
 }

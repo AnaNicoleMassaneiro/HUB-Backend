@@ -20,5 +20,7 @@ namespace HubUfpr.Service.Interface
         void InsertVendedor(int idUser, int isAtivo, int isOpen);
 
         void InsertCliente(int idUser);
+
+        bool IsValidVendedor(int id);
     }
 }

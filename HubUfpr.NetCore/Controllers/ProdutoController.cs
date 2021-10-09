@@ -11,58 +11,69 @@ namespace HubUfpr.API.Controllers
     public class ProdutoController : Controller
     {
         public readonly IProdutoService _produtoService;
+        public readonly IUserService _userService;
 
-        public ProdutoController(IProdutoService userService)
+        public ProdutoController(IProdutoService produtoService, IUserService userService)
         {
-            _produtoService = userService;
+            _produtoService = produtoService;
+            _userService = userService;
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("cadastro")]
-        public JsonResult insertProduct([FromBody] Produto request)
+        public JsonResult InsertProduct([FromBody] InsertProduto request)
         {
             try
             {
                 if (
-                    request.nome != null &&
-                    request.nome != "" &&
-                    request.idVendedor != 0 &&
-                    request.preco != 0 &&
-                    request.descricao != null &&
-                    request.quantidadeDisponivel != 0
+                    request.nome == null || request.nome.Trim() == "" ||
+                    request.idVendedor <= 0 || 
+                    request.preco <= 0 ||
+                    request.descricao == null || request.descricao.Trim() == "" ||
+                    request.quantidadeDisponivel < 0
                 )
                 {
-                    _produtoService
-                        .InsertProduto(request.nome,
-                        request.status,
-                        request.preco,
-                        request.descricao,
-                        request.quantidadeDisponivel,
-                        request.idVendedor);
-
-                    return Json("Produto inserido com sucesso :)");
+                    Response.StatusCode = 400;
+                    return Json(new
+                    {
+                        msg =
+                            "Por favor, informe um nome de produto, código do vendedor, preço, descrição e quantidade disponível."
+                    });
+                }
+                else if (!_userService.IsValidVendedor(request.idVendedor))
+                {
+                    Response.StatusCode = 400;
+                    return Json(new 
+                    {
+                        msg = "O Vendedor informado não existe!"
+                    });
                 }
                 else
                 {
-                    Response.StatusCode = 400;
-                    return Json(new {
-                        msg =
-                            "Por favor, informe um nome de produto, vendedor ou id."
-                    });
+                    _produtoService
+                        .InsertProduto(
+                            request.nome,
+                            request.isAtivo,
+                            request.preco,
+                            request.descricao,
+                            request.quantidadeDisponivel,
+                            request.idVendedor);
+
+
+                    return Json(new { msg = "Produto inserido com sucesso!" });
                 }
             }
             catch (System.Exception ex)
             {
-                throw new InvalidOperationException("Erro ao salvar produto",
-                    ex);
+                throw new InvalidOperationException("Erro ao salvar produto", ex);
             }
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("buscar")]
-        public JsonResult searchProduto([FromBody] Produto request)
+        public JsonResult SearchProduto([FromBody] SearchProduto request)
         {
             try
             {
@@ -79,7 +90,10 @@ namespace HubUfpr.API.Controllers
                             request.idProduto,
                             request.idVendedor);
 
-                    return Json(retorno);
+                    if (retorno.Count == 0)
+                        return Json(new { msg = "Nenhum produto encontrado." });
+                    else 
+                        return Json(new { produtos = retorno });
                 }
                 else
                 {
@@ -98,25 +112,25 @@ namespace HubUfpr.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpDelete]
         [Route("deletar/{idProduto}")]
-        public JsonResult deleteProduto(int idProduto)
+        public JsonResult DeleteProduto(int idProduto)
         {
             try
             {
-                if (idProduto != 0)
+                if (idProduto > 0)
                 {
-                    _produtoService.DeleteProduto (idProduto);
+                    int ret = _produtoService.DeleteProduto (idProduto);
 
-                    return Json("sucesso ao deletar esse produto");
+                    if (ret > 0)
+                        return Json(new { msg = "Produto deletado com sucesso." });
+                    else
+                        return Json(new { msg = "Produto não encontrado." });
                 }
                 else
                 {
                     Response.StatusCode = 400;
-                    return Json(new {
-                        msg =
-                            "Por favor, informe um nome de produto, vendedor ou id."
-                    });
+                    return Json(new { msg = "Por favor, informe um ID de Produto válido." });
                 }
             }
             catch (System.Exception ex)
@@ -127,32 +141,40 @@ namespace HubUfpr.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("update")]
-        public JsonResult updateProduto([FromBody] Produto request)
+        [HttpPut]
+        [Route("update/{idProduto}")]
+        public JsonResult UpdateProduto([FromBody] UpdateProduto request, int idProduto)
         {
             try
             {
-                if (request.idProduto != 0)
+                if (idProduto > 0)
                 {
-                    _produtoService
-                        .UpdateProduto(request.idProduto,
+                    if (request.nome.Trim() == "" || request.nome == null || request.preco <= 0 || 
+                        request.descricao.Trim() == "" || request.descricao == null || request.quantidadeDisponivel < 0)
+                    {
+                        Response.StatusCode = 400;
+                        return Json(new { msg = "Você deve informar um nome, status, preço, descrição e quantidade disponível!" });
+                    }
+
+                    int ret = _produtoService
+                        .UpdateProduto(idProduto,
                         request.nome,
-                        request.status,
+                        request.isAtivo,
                         request.preco,
                         request.descricao,
-                        request.quantidadeDisponivel,
-                        request.idVendedor);
+                        request.quantidadeDisponivel
+                     );
 
                     Response.StatusCode = 200;
-                    return Json("sucesso ao alterar esse produto");
+                    if (ret > 0)
+                        return Json(new { msg = "Produto alterado com sucesso." });
+                    else
+                        return Json(new { msg = "Produto não encontrado." });
                 }
                 else
                 {
                     Response.StatusCode = 400;
-                    return Json(new {
-                        msg = "Por favor, informe o id do produto"
-                    });
+                    return Json(new { msg = "Por favor, informe o ID do Produto" });
                 }
             }
             catch (System.Exception ex)

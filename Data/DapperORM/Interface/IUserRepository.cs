@@ -18,5 +18,6 @@ namespace HubUfpr.Data.DapperORM.Interface
 
         void InsertCliente(int idUser);
 
+        bool IsValidVendedor(int id);
     }
 }

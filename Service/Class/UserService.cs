@@ -62,5 +62,10 @@ namespace HubUfpr.Service.Class
         {
             _userRepository.InsertCliente(idUser);
         }
+
+        public bool IsValidVendedor(int id)
+        {
+            return _userRepository.IsValidVendedor(id);
+        }
     }
 }

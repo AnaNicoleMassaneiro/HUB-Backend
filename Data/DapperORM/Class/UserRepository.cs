@@ -72,5 +72,13 @@ namespace HubUfpr.Data.DapperORM.Class
 
             db.Execute(sql, new { idUser = idUser }, commandType: CommandType.Text);
         }
+
+        public bool IsValidVendedor(int id)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"select idVendedor from Vendedor where idVendedor = @id";
+            
+            return db.Query<string>(query, new { id = id }, commandType: CommandType.Text).Any();
+        }
     }
 }

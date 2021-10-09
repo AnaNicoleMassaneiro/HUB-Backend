@@ -7,10 +7,10 @@ namespace HubUfpr.Service.Interface
     {       
         void InsertProduto(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor);
 
-        Produto SearchProduto(string nome, int idProduto, int idVendedor);
+        List<Produto> SearchProduto(string nome, int idProduto, int idVendedor);
 
-        void DeleteProduto(int idProdutor);
+        int DeleteProduto(int idProdutor);
 
-        void UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor);
+        int UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel);
     }
 }
