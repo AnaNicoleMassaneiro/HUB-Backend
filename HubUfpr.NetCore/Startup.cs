@@ -62,6 +62,9 @@ namespace HubUfpr.API
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
+            services.AddTransient<IVendedorService, VendedorService>();
+            services.AddTransient<IVendedorRepository, VendedorRepository>();
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddSingleton<IConfiguration>(Configuration);
