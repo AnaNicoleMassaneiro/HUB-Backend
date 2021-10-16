@@ -80,5 +80,19 @@ namespace HubUfpr.Data.DapperORM.Class
             
             return db.Query<string>(query, new { id = id }, commandType: CommandType.Text).Any();
         }
+
+        public int UpdateUserLocation(int userId, float latitude, float longitude)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"update User set latitude = @latitude, longitude = @longitude where id = @id";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("latitude", latitude);
+            cmd.Parameters.AddWithValue("longitude", longitude);
+            cmd.Parameters.AddWithValue("id", userId);
+
+            return cmd.ExecuteNonQuery();
+        }
     }
 }

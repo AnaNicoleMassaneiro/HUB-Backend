@@ -19,5 +19,7 @@ namespace HubUfpr.Data.DapperORM.Interface
         void InsertCliente(int idUser);
 
         bool IsValidVendedor(int id);
+
+        int UpdateUserLocation(int userId, float latitude, float longitude);
     }
 }

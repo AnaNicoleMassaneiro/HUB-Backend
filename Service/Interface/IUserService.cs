@@ -22,5 +22,7 @@ namespace HubUfpr.Service.Interface
         void InsertCliente(int idUser);
 
         bool IsValidVendedor(int id);
+
+        int UpdateUserLocation(int userId, float Latitude, float Longitude);
     }
 }

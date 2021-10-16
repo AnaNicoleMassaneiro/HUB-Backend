@@ -67,5 +67,10 @@ namespace HubUfpr.Service.Class
         {
             return _userRepository.IsValidVendedor(id);
         }
+
+        public int UpdateUserLocation(int userId, float latitude, float longitude)
+        {
+            return _userRepository.UpdateUserLocation(userId, latitude, longitude);
+        }
     }
 }

@@ -99,5 +99,40 @@ namespace HubUfpr.API.Controllers
                 return Json(new { msg = "Houve um problema ao criar o usuário. " + ex.Message });
             }
         }
+
+        [AllowAnonymous]
+        [HttpPatch]
+        [Route("atualizarLocalizacao/{userId}")]
+        public ActionResult UpdateLocation([FromBody] UpdateUserLocation req, int userId)
+        {
+            try {
+                Response.StatusCode = 400;
+                
+                if (req.Latitude == 0 || req.Longitude == 0)
+                {
+                    return Json(new { msg = "Você deve informar a latitude e longitude do usuário!" });
+                }
+
+                if (userId <= 0)
+                {
+                    return Json(new { msg = "Você deve informar um ID de usuário válido." });
+                }
+
+                if (_userService.UpdateUserLocation(userId, req.Latitude, req.Longitude) == 0)
+                {
+                    return Json(new { msg = "Usuário não encontrado." });
+                }
+                else
+                {
+                    Response.StatusCode = 200;
+                    return Json(new { msg = "Usuário alterado com suceso." });
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um problema ao criar o usuário. " + ex.Message });
+            }
+        }
     }
 }
