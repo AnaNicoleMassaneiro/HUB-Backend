@@ -125,13 +125,60 @@ namespace HubUfpr.API.Controllers
                 else
                 {
                     Response.StatusCode = 200;
-                    return Json(new { msg = "Usuário alterado com suceso." });
+                    return Json(new { msg = "Usuário alterado com sucesso." });
                 }
             }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { msg = "Houve um problema ao criar o usuário. " + ex.Message });
+                return Json(new { msg = "Houve um problema ao atualizar o usuário: " + ex.Message });
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPatch]
+        [Route("atualizarSenha/{userId}")]
+        public ActionResult UpdatePassword([FromBody] UpdateUserPassword req, int userId)
+        {
+            try
+            {
+                Response.StatusCode = 400;
+
+                if (req.NewPassword == null || req.NewPassword.Trim().Length == 0 || 
+                        req.ConfirmNewPassword == null || req.ConfirmNewPassword.Trim().Length == 0)
+                {
+                    return Json(new { msg = "Você deve informar a nova senha e a confirmação da nova senha!" });
+                }
+
+                if (!req.ConfirmNewPassword.Equals(req.NewPassword))
+                {
+                    return Json(new { msg = "As senhas não coincidem!" });
+                }
+
+                if (req.NewPassword.Length < 6 || req.ConfirmNewPassword.Length < 6)
+                {
+                    return Json(new { msg = "As senhas devem conter ao menos 6 caracteres!" });
+                }
+
+                if (userId <= 0)
+                {
+                    return Json(new { msg = "Você deve informar um ID de usuário válido." });
+                }
+
+                if (_userService.UpdatePassword(userId, req.NewPassword) == 0)
+                {
+                    return Json(new { msg = "Usuário não encontrado." });
+                }
+                else
+                {
+                    Response.StatusCode = 200;
+                    return Json(new { msg = "Senha atualizada com sucesso." });
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um problema ao alterar a senha: " + ex.Message });
             }
         }
     }

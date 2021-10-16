@@ -72,5 +72,10 @@ namespace HubUfpr.Service.Class
         {
             return _userRepository.UpdateUserLocation(userId, latitude, longitude);
         }
+
+        public int UpdatePassword(int userId, string newPassword)
+        {
+            return _userRepository.UpdatePassword(userId, Utils.HashUtil.GetSha256FromString(newPassword));
+        }
     }
 }

@@ -94,5 +94,18 @@ namespace HubUfpr.Data.DapperORM.Class
 
             return cmd.ExecuteNonQuery();
         }
+
+        public int UpdatePassword(int userId, string newPassword)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"update User set password = @newPassword where id = @id";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("newPassword", newPassword);
+            cmd.Parameters.AddWithValue("id", userId);
+
+            return cmd.ExecuteNonQuery();
+        }
     }
 }
