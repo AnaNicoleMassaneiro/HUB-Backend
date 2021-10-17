@@ -25,7 +25,8 @@ namespace HubUfpr.Service.Class
             float preco,
             string descricao,
             int quantidadeDisponivel,
-            int idVendedor
+            int idVendedor,
+            string imagem
         )
         {
             _produtoRepository.InsertProduct (
@@ -34,7 +35,8 @@ namespace HubUfpr.Service.Class
                 preco,
                 descricao,
                 quantidadeDisponivel,
-                idVendedor
+                idVendedor,
+                imagem
             );
         }
 
@@ -54,7 +56,8 @@ namespace HubUfpr.Service.Class
             bool status,
             float preco,
             string descricao,
-            int quantidadeDisponivel
+            int quantidadeDisponivel,
+            string image
         )
         {
             return _produtoRepository.UpdateProduto(
@@ -63,8 +66,14 @@ namespace HubUfpr.Service.Class
                 status,
                 preco,
                 descricao,
-                quantidadeDisponivel
+                quantidadeDisponivel,
+                image
             );
+        }
+
+        public int UpdateScore(int productId, float score)
+        {
+            return _produtoRepository.UpdateScore(productId, score);
         }
     }
 }
