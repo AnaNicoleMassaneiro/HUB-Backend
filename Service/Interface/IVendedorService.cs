@@ -10,5 +10,7 @@ namespace HubUfpr.Service.Interface
         List<Vendedor> getVendedoresByName(string name);
 
         List<Vendedor> getVendedoresByLocation(float lat, float lon);
+
+        List<Vendedor> getAllSellers();
     }
 }

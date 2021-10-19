@@ -62,5 +62,21 @@ namespace HubUfpr.API.Controllers
                 throw new InvalidOperationException("Erro ao buscar Vendedor: ", ex);
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("buscarTodos")]
+        public JsonResult SearchAllSellers()
+        {
+            try
+            {
+                return Json(new { vendedores = _vendedorService.getAllSellers() });
+
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar Vendedor: ", ex);
+            }
+        }
     }
 }

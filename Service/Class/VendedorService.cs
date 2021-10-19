@@ -29,5 +29,10 @@ namespace HubUfpr.Service.Class
         {
             return _vendedorRepository.getVendedoresByName(name);
         }
+
+        public List<Vendedor> getAllSellers()
+        {
+            return _vendedorRepository.getAllSellers();
+        }
     }
 }
