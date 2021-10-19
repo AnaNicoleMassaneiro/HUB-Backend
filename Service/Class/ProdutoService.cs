@@ -75,5 +75,10 @@ namespace HubUfpr.Service.Class
         {
             return _produtoRepository.UpdateScore(productId, score);
         }
+
+        public List<Produto> GetAllProducts()
+        {
+            return _produtoRepository.GetAllProducts();
+        }
     }
 }

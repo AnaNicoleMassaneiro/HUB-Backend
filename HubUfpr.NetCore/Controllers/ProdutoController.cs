@@ -245,5 +245,20 @@ namespace HubUfpr.API.Controllers
                 return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("/buscarTodos")]
+        public JsonResult GetAllProducts()
+        {
+            try
+            {
+                return Json(new { produtos = _produtoService.GetAllProducts() });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
+            }
+        }
     }
 }

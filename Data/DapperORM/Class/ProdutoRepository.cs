@@ -39,7 +39,10 @@ namespace HubUfpr.Data.DapperORM.Class
             string sql;
 
             if (nome != null)
-                sql = @"select * from Produto U where nome like @nome OR idProduto = @idProduto OR idVendedor = @idVendedor";
+                sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                    "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " + 
+                    "join Vendedor v on v.idVendedor = p.idVendedor " +
+                    "where nome like @nome OR idProduto = @idProduto OR idVendedor = @idVendedor";
             else
                 sql = @"select * from Produto U where idProduto = @idProduto OR idVendedor = @idVendedor";
 
@@ -55,18 +58,7 @@ namespace HubUfpr.Data.DapperORM.Class
 
             while (dr.Read())
             {
-                Produto p = new Produto();
-                p.Id = (int)dr["idProduto"];
-                p.IdVendedor = (int)dr["idVendedor"];
-                p.Nome = (string)dr["nome"];
-                p.IsAtivo = (bool)dr["isAtivo"];
-                p.Preco = (float)dr["preco"];
-                p.NotaProduto = (float)dr["notaProduto"];
-                p.Descricao = (string)dr["descricao"];
-                if (dr["imagem"] != DBNull.Value) p.Imagem = (string)dr["imagem"];
-                p.QuantidadeDisponivel = (int)dr["quantidadeDisponivel"];
-                    
-                ret.Add(p);
+                ret.Add(GetProductFromDataReader(dr));
             }
 
             dr.Close();
@@ -113,6 +105,55 @@ namespace HubUfpr.Data.DapperORM.Class
             const string sql = @"update Produto set notaProduto = @score where idProduto = @productId";
 
             return db.Execute(sql, new { score, productId }, commandType: CommandType.Text);
+        }
+
+        public List<Produto> GetAllProducts()
+        {
+            List<Produto> ret = new List<Produto>();
+            using var db = GetMySqlConnection();
+            string sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " + 
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
+                "join Vendedor v on v.idVendedor = p.idVendedor " + 
+                "where v.isAtivo = true and p.isAtivo = true";
+
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = sql;
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                ret.Add(GetProductFromDataReader(dr));
+            }
+
+            dr.Close();
+
+            return ret;
+        }
+
+        private Produto GetProductFromDataReader(MySqlDataReader dr)
+        {
+            Produto p = new Produto();
+            Vendedor v = new Vendedor();
+            
+            p.Id = (int)dr["idProduto"];
+            p.Nome = (string)dr["nome"];
+            p.IsAtivo = (bool)dr["isAtivo"];
+            p.Preco = (float)dr["preco"];
+            p.NotaProduto = (float)dr["notaProduto"];
+            p.Descricao = (string)dr["descricao"];
+            if (dr["imagem"] != DBNull.Value) p.Imagem = (string)dr["imagem"];
+            p.QuantidadeDisponivel = (int)dr["quantidadeDisponivel"];
+
+            v.IdUser = (int)dr["idUser"];
+            v.IdVendedor = (int)dr["idVendedor"];
+            v.IsAtivo = (bool)dr["isAtivo"];
+            v.IsOpen = (bool)dr["isOpen"];
+
+            p.Vendedor = v;
+
+            return p;
         }
     }
 }
