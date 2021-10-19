@@ -102,7 +102,10 @@ namespace HubUfpr.API.Controllers
                                 request.idVendedor);
 
                     if (retorno.Count == 0)
+                    {
+                        Response.StatusCode = 404;
                         return Json(new { msg = "Nenhum produto encontrado." });
+                    }
                     else 
                         return Json(new { produtos = retorno });
                 }
