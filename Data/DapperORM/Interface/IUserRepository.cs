@@ -23,5 +23,9 @@ namespace HubUfpr.Data.DapperORM.Interface
         int UpdateUserLocation(int userId, float latitude, float longitude);
 
         int UpdatePassword(int userId, string newPassword);
+
+        int GetCustomerCode(int id);
+
+        int GetSellerCode(int id);
     }
 }

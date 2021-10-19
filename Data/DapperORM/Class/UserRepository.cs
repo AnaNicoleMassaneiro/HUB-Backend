@@ -107,5 +107,19 @@ namespace HubUfpr.Data.DapperORM.Class
 
             return cmd.ExecuteNonQuery();
         }
+
+        public int GetCustomerCode(int id)
+        {
+            using var db = GetMySqlConnection();
+            string sql = @"select idCliente from Cliente where idUser = @id";
+            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+        }
+
+        public int GetSellerCode(int id)
+        {
+            using var db = GetMySqlConnection();
+            string sql = @"select idVendedor from Vendedor where idUser = @id";
+            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+        }
     }
 }

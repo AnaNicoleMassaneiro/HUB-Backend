@@ -25,7 +25,7 @@ namespace HubUfpr.API.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("authenticate")]
-        public ActionResult ValidateUser([FromBody]UserLogin request)
+        public ActionResult ValidateUser([FromBody] UserLogin request)
         {
             if (request.usuario == null || request.usuario == "" || request.senha == null || request.senha == "")
             {
@@ -44,8 +44,15 @@ namespace HubUfpr.API.Controllers
 
             _userService.UpdateLastLoginTime(user.Id);
 
-            Response.StatusCode = 200;
-            return Json(new { token = token, user = user });
+            if (user.IsVendedor) { 
+                int idVendedor = _userService.GetSellerCode(user.Id);
+                return Json(new { token, user, idVendedor});
+            }
+            else
+            {
+                int idCliente = _userService.GetCustomerCode(user.Id);
+                return Json(new { token, user, idCliente });
+            }
         }
 
         [AllowAnonymous]

@@ -77,5 +77,15 @@ namespace HubUfpr.Service.Class
         {
             return _userRepository.UpdatePassword(userId, Utils.HashUtil.GetSha256FromString(newPassword));
         }
+
+        public int GetCustomerCode(int id)
+        {
+            return _userRepository.GetCustomerCode(id);
+        }
+
+        public int GetSellerCode(int id)
+        {
+            return _userRepository.GetSellerCode(id);
+        }
     }
 }

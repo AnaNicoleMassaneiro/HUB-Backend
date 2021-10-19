@@ -26,5 +26,9 @@ namespace HubUfpr.Service.Interface
         int UpdateUserLocation(int userId, float Latitude, float Longitude);
 
         int UpdatePassword(int userId, string newPassword);
+
+        public int GetCustomerCode(int id);
+
+        public int GetSellerCode(int id);
     }
 }
