@@ -80,43 +80,112 @@ namespace HubUfpr.API.Controllers
             }
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        [HttpPost]
-        [Route("buscar")]
-        public JsonResult SearchProduto([FromBody] SearchProduto request)
+        [Route("/buscarTodos")]
+        public JsonResult GetAllProducts()
         {
             try
             {
-                if (
-                    request.nome != null ||
-                    request.nome != "" ||
-                    request.idProduto != 0 ||
-                    request.idVendedor != 0
-                )
-                {
-                    var retorno =
-                        _produtoService
-                            .SearchProduto(
-                                request.nome,
-                                request.idProduto,
-                                request.idVendedor);
+                return Json(new { produtos = _produtoService.GetAllProducts() });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
+            }
+        }
 
-                    if (retorno.Count == 0)
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("buscarPorId/{id}")]
+        public JsonResult SearchProductById(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    var produto =
+                        _produtoService
+                            .SearchProductById(id);
+
+                    if (produto == null)
                     {
                         Response.StatusCode = 404;
                         return Json(new { msg = "Nenhum produto encontrado." });
                     }
-                    else 
-                        return Json(new { produtos = retorno });
+                    
+                    return Json(new { produto });
                 }
                 else
                 {
                     Response.StatusCode = 400;
                     return Json(new {
                         msg =
-                            "Por favor, informe um nome de produto, vendedor ou id."
+                            "Por favor informe um id de produto válido."
                     });
                 }
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar produto",
+                    ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("buscarPorNome")]
+        public JsonResult SearchProductByName([FromBody] SearchProductByName req)
+        {
+            try
+            {
+                if (req.Name == null || req.Name.Trim().Length == 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o nome do Produto!" });
+                }
+
+                var produto = _produtoService
+                    .SearchProductByName(req.Name.Trim(), req.ReturnActiveOnly);
+
+                if (produto.Count == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhum produto encontrado." });
+                }
+
+                    return Json(new { produto });
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar produto",
+                    ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("buscarPorVendedor")]
+        public JsonResult SearchProductBySeller([FromBody] SearchProductBySeller req)
+        {
+            try
+            {
+                if (req.SellerId <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o id do Vendedor do Produto!" });
+                }
+
+                var produto = _produtoService
+                    .SearchProductBySeller(req.SellerId, req.ReturnActiveOnly);
+
+                if (produto.Count == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhum produto encontrado." });
+                }
+
+                return Json(new { produto });
             }
             catch (System.Exception ex)
             {
@@ -241,21 +310,6 @@ namespace HubUfpr.API.Controllers
                 
             }
             catch(Exception ex)
-            {
-                return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
-            }
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("/buscarTodos")]
-        public JsonResult GetAllProducts()
-        {
-            try
-            {
-                return Json(new { produtos = _produtoService.GetAllProducts() });
-            }
-            catch (Exception ex)
             {
                 return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
             }

@@ -40,9 +40,19 @@ namespace HubUfpr.Service.Class
             );
         }
 
-        public List<Produto> SearchProduto(string nome, int idProduto, int idVendedor)
+        public Produto SearchProductById(int idProduto)
         {
-            return _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
+            return _produtoRepository.SearchProductById(idProduto);
+        }
+
+        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly)
+        {
+            return _produtoRepository.SearchProductByName(name, isReturnAtivoOnly);
+        }
+
+        public List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly)
+        {
+            return _produtoRepository.SearchProductBySeller(idSeller, isReturnAtivoOnly);
         }
 
         public int DeleteProduto(int idProduto)

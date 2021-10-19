@@ -8,7 +8,11 @@ namespace HubUfpr.Data.DapperORM.Interface
     {
         void InsertProduct(string nome, bool status, float preco, string descricao, int quantidadeDisponivel, int idVendedor, string imagem);
 
-        List<Produto> SearchProduct(string nome, int idProduto, int idVendedor);
+        Produto SearchProductById(int idProduto);
+
+        List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly);
+
+        List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly);
 
         int DeleteProduto(int idProduto);
 

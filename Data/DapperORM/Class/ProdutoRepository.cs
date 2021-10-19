@@ -32,27 +32,80 @@ namespace HubUfpr.Data.DapperORM.Class
             }, commandType: CommandType.Text);
         }
 
-        public List<Produto> SearchProduct(string nome, int idProduto, int idVendedor)
+        public Produto SearchProductById(int idProduto)
+        {
+            Produto p = null;
+            using var db = GetMySqlConnection();
+            string sql = sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                    "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
+                    "join Vendedor v on v.idVendedor = p.idVendedor " +
+                    "where p.idProduto = @id";
+
+            MySqlCommand cmd = db.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("id", idProduto);
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                dr.Read();
+                p = GetProductFromDataReader(dr);
+            }
+            dr.Close();
+
+            return p;
+        }
+
+        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly)
         {
             List<Produto> ret = new List<Produto>();
             using var db = GetMySqlConnection();
             string sql;
 
-            if (nome != null)
-                sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
-                    "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " + 
-                    "join Vendedor v on v.idVendedor = p.idVendedor " +
-                    "where nome like @nome OR idProduto = @idProduto OR idVendedor = @idVendedor";
-            else
-                sql = @"select * from Produto U where idProduto = @idProduto OR idVendedor = @idVendedor";
+            sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " + 
+                "join Vendedor v on v.idVendedor = p.idVendedor " +
+                "where p.nome like @nome";
+
+            if (isReturnAtivoOnly)
+                sql += " AND p.isAtivo = true AND v.isAtivo = true";
 
             MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("nome", "%"+name+"%");
+            
+            MySqlDataReader dr = cmd.ExecuteReader();
 
-            if (nome != null) cmd.Parameters.AddWithValue("nome", "%"+nome+"%");
-            cmd.Parameters.AddWithValue("idProduto", idProduto);
-            cmd.Parameters.AddWithValue("idVendedor", idVendedor);
+            while (dr.Read())
+            {
+                ret.Add(GetProductFromDataReader(dr));
+            }
+
+            dr.Close();
+
+            return ret;
+        }
+
+        public List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly)
+        {
+            List<Produto> ret = new List<Produto>();
+            using var db = GetMySqlConnection();
+            string sql;
+
+            sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
+                "join Vendedor v on v.idVendedor = p.idVendedor " +
+                "where p.idVendedor = @id";
+
+            if (isReturnAtivoOnly)
+                sql += " AND p.isAtivo = true AND v.isAtivo = true";
+
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("id", idSeller);
 
             MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -138,6 +191,7 @@ namespace HubUfpr.Data.DapperORM.Class
             Vendedor v = new Vendedor();
             
             p.Id = (int)dr["idProduto"];
+            p.idVendedor = (int)dr["idVendedor"];
             p.Nome = (string)dr["nome"];
             p.IsAtivo = (bool)dr["isAtivo"];
             p.Preco = (float)dr["preco"];
