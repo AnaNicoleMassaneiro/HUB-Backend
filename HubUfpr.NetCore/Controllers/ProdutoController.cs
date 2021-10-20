@@ -82,7 +82,7 @@ namespace HubUfpr.API.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("/buscarTodos")]
+        [Route("buscarTodos")]
         public JsonResult GetAllProducts()
         {
             try
@@ -145,16 +145,16 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o nome do Produto!" });
                 }
 
-                var produto = _produtoService
+                var produtos = _produtoService
                     .SearchProductByName(req.Name.Trim(), req.ReturnActiveOnly);
 
-                if (produto.Count == 0)
+                if (produtos.Count == 0)
                 {
                     Response.StatusCode = 404;
                     return Json(new { msg = "Nenhum produto encontrado." });
                 }
 
-                    return Json(new { produto });
+                    return Json(new { produtos });
             }
             catch (System.Exception ex)
             {
@@ -176,16 +176,16 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o id do Vendedor do Produto!" });
                 }
 
-                var produto = _produtoService
+                var produtos = _produtoService
                     .SearchProductBySeller(req.SellerId, req.ReturnActiveOnly);
 
-                if (produto.Count == 0)
+                if (produtos.Count == 0)
                 {
                     Response.StatusCode = 404;
                     return Json(new { msg = "Nenhum produto encontrado." });
                 }
 
-                return Json(new { produto });
+                return Json(new { produtos });
             }
             catch (System.Exception ex)
             {
