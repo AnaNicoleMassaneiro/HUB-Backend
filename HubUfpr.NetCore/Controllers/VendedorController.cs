@@ -35,7 +35,7 @@ namespace HubUfpr.API.Controllers
                 return Json(new { vendedor = _vendedorService.getVendedorById(id) });
 
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new InvalidOperationException("Erro ao buscar Vendedor: ", ex);
             }
@@ -44,7 +44,7 @@ namespace HubUfpr.API.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("buscarPorNome")]
-        public JsonResult SearchVendedorById([FromBody] SearchVendedorByName req)
+        public JsonResult SearchVendedorByNome([FromBody] SearchVendedorByName req)
         {
             try
             {
@@ -57,9 +57,9 @@ namespace HubUfpr.API.Controllers
                 return Json(new { vendedores = _vendedorService.getVendedoresByName(req.Name) });
 
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar Vendedor: ", ex);
+                throw new InvalidOperationException("Erro ao buscar Vendedores: ", ex);
             }
         }
 
@@ -73,9 +73,37 @@ namespace HubUfpr.API.Controllers
                 return Json(new { vendedores = _vendedorService.getAllSellers() });
 
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar Vendedor: ", ex);
+                throw new InvalidOperationException("Erro ao buscar Vendedores: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("buscarPorLocalizacao")]
+        public JsonResult SearchSellerByLocation([FromBody] SearchVendedorByLocation req)
+        {
+            try
+            {
+                if (req.Latitude == 0 && req.Longitude == 0) {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar a Latitude e Longitude." });
+                }
+
+                var vendedores = _vendedorService.getVendedoresByLocation(req.Latitude, req.Longitude);
+
+                if (vendedores.Count == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhum Vendedor encontrado. " });
+                }
+
+                return Json(new { vendedores });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar Vendedores: ", ex);
             }
         }
     }

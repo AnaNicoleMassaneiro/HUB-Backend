@@ -31,11 +31,6 @@ namespace HubUfpr.Data.DapperORM.Class
             return null;
         }
 
-        public List<Vendedor> getVendedoresByLocation(float lat, float lon)
-        {
-            return new List<Vendedor>();
-        }
-
         public List<Vendedor> getVendedoresByName(string name)
         {
             List<Vendedor> ret = new List<Vendedor>();
@@ -68,6 +63,36 @@ namespace HubUfpr.Data.DapperORM.Class
             MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                ret.Add(GetCurrentVendedorFromDataReader(dr));
+            }
+
+            dr.Close();
+
+            return ret;
+        }
+
+        public List<Vendedor> getVendedoresByLocation(float lat, float lon)
+        {
+            List<Vendedor> ret = new List<Vendedor>();
+            using var db = GetMySqlConnection();
+            string sql = @"SELECT * FROM (" +
+                "SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, " +
+                "3956 * ACOS(COS(RADIANS(@lat)) * COS(RADIANS(u.latitude)) * COS(RADIANS(@lon) - RADIANS(u.longitude)) + SIN(RADIANS(@lat)) * SIN(RADIANS(u.latitude))) AS distance " +
+                "from Vendedor v " +
+                "JOIN User u ON u.id = v.idUser " +
+                "WHERE u.latitude BETWEEN @lat -(10 / 69) AND @lat +(10 / 69) " +
+                "AND u.longitude BETWEEN @lon -(10 / (69 * COS(RADIANS(@lat)))) AND @lon +(10 / (69 * COS(RADIANS(@lat))))" +
+                ") AS d WHERE d.distance < 0.8 ORDER BY d.distance ASC";
+
+            MySqlCommand cmd = db.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("lat", lat);
+            cmd.Parameters.AddWithValue("lon", lon);
 
             MySqlDataReader dr = cmd.ExecuteReader();
 
