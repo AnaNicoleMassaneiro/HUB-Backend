@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace HubUfpr.API.Requests
@@ -23,5 +24,6 @@ namespace HubUfpr.API.Requests
         [JsonProperty(PropertyName = "idVendedor", NullValueHandling = NullValueHandling.Ignore)]
         public int idVendedor { get; set; }
 
+        public IFormFile ProductImage { get; set; }
     }
 }

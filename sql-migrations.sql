@@ -36,7 +36,7 @@ create table Produto (
     preco					float not null,
     notaProduto				float default 0,
     descricao				varchar(200),
-    imagem					varchar(255),
+    imagem					mediumtext,
     quantidadeDisponivel	int not null,
     foreign key (idVendedor) references Vendedor(idVendedor)
 );

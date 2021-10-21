@@ -25,7 +25,8 @@ namespace HubUfpr.Service.Class
             float preco,
             string descricao,
             int quantidadeDisponivel,
-            int idVendedor
+            int idVendedor,
+            string imagem
         )
         {
             _produtoRepository.InsertProduct (
@@ -34,13 +35,24 @@ namespace HubUfpr.Service.Class
                 preco,
                 descricao,
                 quantidadeDisponivel,
-                idVendedor
+                idVendedor,
+                imagem
             );
         }
 
-        public List<Produto> SearchProduto(string nome, int idProduto, int idVendedor)
+        public Produto SearchProductById(int idProduto)
         {
-            return _produtoRepository.SearchProduct(nome, idProduto, idVendedor);
+            return _produtoRepository.SearchProductById(idProduto);
+        }
+
+        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly)
+        {
+            return _produtoRepository.SearchProductByName(name, isReturnAtivoOnly);
+        }
+
+        public List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly)
+        {
+            return _produtoRepository.SearchProductBySeller(idSeller, isReturnAtivoOnly);
         }
 
         public int DeleteProduto(int idProduto)
@@ -54,7 +66,8 @@ namespace HubUfpr.Service.Class
             bool status,
             float preco,
             string descricao,
-            int quantidadeDisponivel
+            int quantidadeDisponivel,
+            string image
         )
         {
             return _produtoRepository.UpdateProduto(
@@ -63,8 +76,19 @@ namespace HubUfpr.Service.Class
                 status,
                 preco,
                 descricao,
-                quantidadeDisponivel
+                quantidadeDisponivel,
+                image
             );
+        }
+
+        public int UpdateScore(int productId, float score)
+        {
+            return _produtoRepository.UpdateScore(productId, score);
+        }
+
+        public List<Produto> GetAllProducts()
+        {
+            return _produtoRepository.GetAllProducts();
         }
     }
 }

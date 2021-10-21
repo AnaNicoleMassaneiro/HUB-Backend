@@ -80,5 +80,46 @@ namespace HubUfpr.Data.DapperORM.Class
             
             return db.Query<string>(query, new { id = id }, commandType: CommandType.Text).Any();
         }
+
+        public int UpdateUserLocation(int userId, float latitude, float longitude)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"update User set latitude = @latitude, longitude = @longitude where id = @id";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("latitude", latitude);
+            cmd.Parameters.AddWithValue("longitude", longitude);
+            cmd.Parameters.AddWithValue("id", userId);
+
+            return cmd.ExecuteNonQuery();
+        }
+
+        public int UpdatePassword(int userId, string newPassword)
+        {
+            using var db = GetMySqlConnection();
+            const string query = @"update User set password = @newPassword where id = @id";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("newPassword", newPassword);
+            cmd.Parameters.AddWithValue("id", userId);
+
+            return cmd.ExecuteNonQuery();
+        }
+
+        public int GetCustomerCode(int id)
+        {
+            using var db = GetMySqlConnection();
+            string sql = @"select idCliente from Cliente where idUser = @id";
+            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+        }
+
+        public int GetSellerCode(int id)
+        {
+            using var db = GetMySqlConnection();
+            string sql = @"select idVendedor from Vendedor where idUser = @id";
+            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+        }
     }
 }

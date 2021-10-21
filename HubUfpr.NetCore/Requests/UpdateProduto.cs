@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace HubUfpr.API.Requests
@@ -20,5 +21,6 @@ namespace HubUfpr.API.Requests
         [JsonProperty(PropertyName = "quantidadeDisponivel", NullValueHandling = NullValueHandling.Ignore)]
         public int quantidadeDisponivel { get; set; }
 
+        public IFormFile ProductImage { get; set; }
     }
 }
