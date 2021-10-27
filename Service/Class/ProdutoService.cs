@@ -90,5 +90,10 @@ namespace HubUfpr.Service.Class
         {
             return _produtoRepository.GetAllProducts();
         }
+
+        public bool IsStockAvailable(int idProduto, int quantity)
+        {
+            return _produtoRepository.IsStockAvailable(idProduto, quantity);
+        }
     }
 }

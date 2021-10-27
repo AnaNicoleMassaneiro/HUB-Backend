@@ -21,5 +21,11 @@ namespace HubUfpr.Data.DapperORM.Interface
         int UpdateScore(int idProduto, float score);
 
         List<Produto> GetAllProducts();
+
+        bool IsStockAvailable(int idProduto, int quantity);
+
+        int UpdateCurrentAvailableAmount(int idProduto, int amount);
+
+        int GetCurrentAvailableAmount(int idProduto);
     }
 }

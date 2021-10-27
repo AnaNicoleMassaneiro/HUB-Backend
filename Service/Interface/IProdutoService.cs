@@ -20,5 +20,7 @@ namespace HubUfpr.Service.Interface
         int UpdateScore(int idProduto, float score);
 
         List<Produto> GetAllProducts();
+
+        bool IsStockAvailable(int idProduto, int quantity);
     }
 }
