@@ -5,16 +5,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System;
+using HubUfpr.Model;
 
 namespace HubUfpr.Data.DapperORM.Class
 {
     public class ReservaRepository : BaseRepository, IReservaRepository
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ReservaRepository(IProdutoRepository repo)
+        public ReservaRepository(IProdutoRepository prodRepo, IUserRepository userRepo)
         {
-            _produtoRepository = repo;
+            _produtoRepository = prodRepo;
+            _userRepository = userRepo;
         }
 
         public void CreateReserve(int idCliente, int idProduto, int quantidade, float lat, float lon)
@@ -66,6 +69,61 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
+        public List<Reserva> GetReservasByVendedor(int idVendedor)
+        {
+            using var db = GetMySqlConnection();
+            List<Reserva> ret = new List<Reserva>();
+            const string sql = @"SELECT idReserva, idCliente, r.idProduto, s.descricao, dataCriacao, quantidadeDesejada, localizacaoLat, localizacaoLong " +
+                "FROM Reserva r " +
+                "JOIN Produto p on p.idProduto = r.idProduto " +
+                "JOIN statusReserva s on r.statusReserva = s.codigo " +
+                "WHERE p.idVendedor = @id " +
+                "ORDER BY dataCriacao desc;";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("id", idVendedor);
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                ret.Add(GetReservaFromDataReader(dr));
+            }
+
+            dr.Close();
+            db.Close();
+
+            return ret;
+        }
+
+        public List<Reserva> GetReservasByCliente(int idCliente)
+        {
+            using var db = GetMySqlConnection();
+            List<Reserva> ret = new List<Reserva>();
+            const string sql = @"SELECT idReserva, idCliente, r.idProduto, s.descricao, dataCriacao, quantidadeDesejada, localizacaoLat, localizacaoLong " +
+                "FROM Reserva r " +
+                "JOIN statusReserva s on r.statusReserva = s.codigo " +
+                "WHERE r.idCliente = @id " +
+                "ORDER BY dataCriacao desc;";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("id", idCliente);
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                ret.Add(GetReservaFromDataReader(dr));
+            }
+
+            dr.Close();
+            db.Close();
+
+            return ret;
+        }
+
         public int GetCurrentStatus(int idReserve)
         {
             using var db = GetMySqlConnection();
@@ -90,6 +148,21 @@ namespace HubUfpr.Data.DapperORM.Class
             arr[1] = ret.quantidadeDesejada;
 
             return arr;
+        }
+
+        private Reserva GetReservaFromDataReader(MySqlDataReader dr)
+        {
+            Reserva r = new Reserva();
+            r.IdReserva = (int)dr["idReserva"];
+            r.StatusReserva = (string)dr["descricao"];
+            r.DataCriacao = (DateTime)dr["dataCriacao"];
+            r.Latitude = (float)dr["localizacaoLat"];
+            r.Longitude = (float)dr["localizacaoLong"];
+            r.Produto = _produtoRepository.SearchProductById((int)dr["idProduto"]);
+            r.Cliente = _userRepository.GetUserFromCustomerCode((int)dr["idCliente"]);
+            r.QuantidadeDesejada = (int)dr["quantidadeDesejada"];
+
+            return r;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HubUfpr.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,5 +12,8 @@ namespace HubUfpr.Data.DapperORM.Interface
         int UpdateReserveStatus(int idReserve, int statusCode);
 
         int GetCurrentStatus(int idReserve);
+        List<Reserva> GetReservasByVendedor(int idVendedor);
+
+        List<Reserva> GetReservasByCliente(int idVendedor);
     }
 }

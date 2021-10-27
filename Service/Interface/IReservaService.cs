@@ -10,5 +10,9 @@ namespace HubUfpr.Service.Interface
         int UpdateReserveStatus(int idReserve, int statusCode);
 
         int GetCurrentStatus(int idReserve);
+
+        List<Reserva> GetReservasByVendedor(int idVendedor);
+
+        List<Reserva> GetReservasByCliente(int idCliente);
     }
 }

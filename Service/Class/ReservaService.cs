@@ -29,5 +29,16 @@ namespace HubUfpr.Service.Class
         {
             return _reservaRepository.GetCurrentStatus(idReserve);
         }
+
+        public List<Reserva> GetReservasByVendedor(int idVendedor)
+        {
+            return _reservaRepository.GetReservasByVendedor(idVendedor);
+        }
+
+        public List<Reserva> GetReservasByCliente(int idCliente)
+        {
+            return _reservaRepository.GetReservasByCliente(idCliente);
+        }
+
     }
 }

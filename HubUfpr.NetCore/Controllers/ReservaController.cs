@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using HubUfpr.API.Requests;
+using HubUfpr.Model;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -143,6 +145,62 @@ namespace HubUfpr.API.Controllers
             catch (System.Exception ex)
             {
                 throw new InvalidOperationException("Erro ao expirar reserva: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getBySeller/{id}")]
+        public JsonResult GetReservaBySeller(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    List<Reserva> reservas = _reservaService.GetReservasByVendedor(id);
+                    if (reservas.Count > 0)
+                    {
+                        return Json(new { reservas });
+                    }
+
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhuma reserva encontrada." });
+                }
+
+                Response.StatusCode = 400;
+                return Json(new { msg = "Você deve informar o ID do Vendedor." });
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar reservas: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getByCustomer/{id}")]
+        public JsonResult GetReservaByCustomer(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    List<Reserva> reservas = _reservaService.GetReservasByCliente(id);
+                    if (reservas.Count > 0)
+                    {
+                        return Json(new { reservas });
+                    }
+
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhuma reserva encontrada." });
+                }
+
+                Response.StatusCode = 400;
+                return Json(new { msg = "Você deve informar o ID do Cliente." });
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar reservas: ", ex);
             }
         }
     }

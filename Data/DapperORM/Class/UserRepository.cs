@@ -4,6 +4,7 @@ using System.Linq;
 using HubUfpr.Data.DapperORM.Interface;
 using HubUfpr.Model;
 using MySql.Data.MySqlClient;
+using System;
 
 namespace HubUfpr.Data.DapperORM.Class
 {
@@ -120,6 +121,50 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             string sql = @"select idVendedor from Vendedor where idUser = @id";
             return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+        }
+
+        public User GetUserFromCustomerCode(int id)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT id, name, password, latitude, longitude, noteApp, email, grr, lastLogon, createdOn, isVendedor " +
+                "FROM User u " +
+                "JOIN Cliente c ON c.idUser = u.Id " +
+                "WHERE c.idCliente = @id";
+            User ret = new User();
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.CommandText = sql;
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                dr.Read();
+
+                ret.Id = (int)dr["id"];
+                ret.Name = (string)dr["name"];
+                ret.Password = (string)dr["password"];
+                if (dr["latitude"] != DBNull.Value) { ret.Latitude = (float)dr["latitude"]; }
+                if (dr["longitude"] != DBNull.Value) ret.Longitude = (float)dr["longitude"];
+                if (dr["noteApp"] != DBNull.Value) ret.NoteApp = (float)dr["noteApp"];
+                ret.Email = (string)dr["email"];
+                ret.GRR = (string)dr["grr"];
+                ret.LastLogon = (DateTime)dr["lastLogon"];
+                ret.CreatedOn = (DateTime)dr["createdOn"];
+                ret.IsVendedor = (bool)dr["isVendedor"];
+
+                dr.Close();
+                db.Close();
+
+                return ret;
+            }
+            else
+            {
+                db.Close();
+
+                return null;
+            }
         }
     }
 }
