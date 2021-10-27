@@ -53,7 +53,9 @@ namespace HubUfpr.Data.DapperORM.Class
                 dr.Read();
                 p = GetProductFromDataReader(dr);
             }
+            
             dr.Close();
+            db.Close();
 
             return p;
         }
