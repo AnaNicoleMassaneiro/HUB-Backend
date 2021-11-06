@@ -67,7 +67,8 @@ namespace HubUfpr.Service.Class
             float preco,
             string descricao,
             int quantidadeDisponivel,
-            string image
+            string image,
+            bool isKeepImage
         )
         {
             return _produtoRepository.UpdateProduto(
@@ -77,7 +78,8 @@ namespace HubUfpr.Service.Class
                 preco,
                 descricao,
                 quantidadeDisponivel,
-                image
+                image,
+                isKeepImage
             );
         }
 

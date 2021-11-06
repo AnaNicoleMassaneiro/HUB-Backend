@@ -130,18 +130,18 @@ namespace HubUfpr.Data.DapperORM.Class
             return db.Execute(sql, new { idProduto }, commandType: CommandType.Text);
         }
 
-        public int UpdateProduto(int idProduto, string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, string imagem)
+        public int UpdateProduto(int idProduto, string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, string imagem, bool isKeepImage)
         {
             using var db = GetMySqlConnection();
-            string sql = @"update Produto set nome = @nome, isAtivo = @isAtivo, preco = @preco, descricao = @descricao, quantidadeDisponivel = @quantidadeDisponivel";
+            string sql = @"update Produto set nome = @nome, isAtivo = @isAtivo, preco = @preco, descricao = @descricao, " +
+                "quantidadeDisponivel = @quantidadeDisponivel";
 
-            if (imagem != null)
+            if (!isKeepImage)
             {
                 sql += ", imagem = @imagem";
             }
 
             sql += " where idProduto = @idProduto";
-
 
             return db.Execute(sql, new
             {

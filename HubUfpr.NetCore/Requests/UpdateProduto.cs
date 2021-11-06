@@ -21,6 +21,9 @@ namespace HubUfpr.API.Requests
         [JsonProperty(PropertyName = "quantidadeDisponivel", NullValueHandling = NullValueHandling.Ignore)]
         public int quantidadeDisponivel { get; set; }
 
+        [JsonProperty(PropertyName = "quantidadeDisponivel", NullValueHandling = NullValueHandling.Ignore)]
+        public bool IsKeepImage { get; set; }
+
         public IFormFile ProductImage { get; set; }
     }
 }

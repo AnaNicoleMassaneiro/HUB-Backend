@@ -255,7 +255,8 @@ namespace HubUfpr.API.Controllers
                         request.preco,
                         request.descricao,
                         request.quantidadeDisponivel,
-                        image
+                        image,
+                        request.IsKeepImage
                      );
 
                     Response.StatusCode = 200;
