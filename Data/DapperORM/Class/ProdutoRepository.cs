@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using HubUfpr.Data.DapperORM.Interface;
 using HubUfpr.Model;
@@ -52,7 +53,9 @@ namespace HubUfpr.Data.DapperORM.Class
                 dr.Read();
                 p = GetProductFromDataReader(dr);
             }
+            
             dr.Close();
+            db.Close();
 
             return p;
         }
@@ -127,18 +130,18 @@ namespace HubUfpr.Data.DapperORM.Class
             return db.Execute(sql, new { idProduto }, commandType: CommandType.Text);
         }
 
-        public int UpdateProduto(int idProduto, string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, string imagem)
+        public int UpdateProduto(int idProduto, string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, string imagem, bool isKeepImage)
         {
             using var db = GetMySqlConnection();
-            string sql = @"update Produto set nome = @nome, isAtivo = @isAtivo, preco = @preco, descricao = @descricao, quantidadeDisponivel = @quantidadeDisponivel";
+            string sql = @"update Produto set nome = @nome, isAtivo = @isAtivo, preco = @preco, descricao = @descricao, " +
+                "quantidadeDisponivel = @quantidadeDisponivel";
 
-            if (imagem != null)
+            if (!isKeepImage)
             {
                 sql += ", imagem = @imagem";
             }
 
             sql += " where idProduto = @idProduto";
-
 
             return db.Execute(sql, new
             {
@@ -181,6 +184,36 @@ namespace HubUfpr.Data.DapperORM.Class
             }
 
             dr.Close();
+
+            return ret;
+        }
+
+        public bool IsStockAvailable(int idProduto, int quantity)
+        {
+            using var db = GetMySqlConnection();
+            string sql = @"SELECT quantidadeDisponivel from Produto where idProduto = @idProduto and quantidadeDisponivel >= @quantity";
+
+            return db.Query<string>(sql, new { idProduto, quantity }, commandType: CommandType.Text).Any();
+        }
+
+        public int GetCurrentAvailableAmount(int idProduto)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT quantidadeDisponivel FROM Produto where idProduto = @idProduto";
+            int ret = db.Query<int>(sql, new { idProduto }).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
+        }
+
+        public int UpdateCurrentAvailableAmount(int idProduto, int amount)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"UPDATE Produto set quantidadeDisponivel = @amount WHERE idProduto = @idProduto";
+            int ret = db.Execute(sql, new { idProduto, amount });
+
+            db.Close();
 
             return ret;
         }

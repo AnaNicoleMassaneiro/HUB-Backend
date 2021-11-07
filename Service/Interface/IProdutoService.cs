@@ -15,10 +15,12 @@ namespace HubUfpr.Service.Interface
 
         int DeleteProduto(int idProdutor);
 
-        int UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, string image);
+        int UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, string image, bool isKeepImage);
 
         int UpdateScore(int idProduto, float score);
 
         List<Produto> GetAllProducts();
+
+        bool IsStockAvailable(int idProduto, int quantity);
     }
 }

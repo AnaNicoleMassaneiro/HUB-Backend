@@ -67,7 +67,8 @@ namespace HubUfpr.Service.Class
             float preco,
             string descricao,
             int quantidadeDisponivel,
-            string image
+            string image,
+            bool isKeepImage
         )
         {
             return _produtoRepository.UpdateProduto(
@@ -77,7 +78,8 @@ namespace HubUfpr.Service.Class
                 preco,
                 descricao,
                 quantidadeDisponivel,
-                image
+                image,
+                isKeepImage
             );
         }
 
@@ -89,6 +91,11 @@ namespace HubUfpr.Service.Class
         public List<Produto> GetAllProducts()
         {
             return _produtoRepository.GetAllProducts();
+        }
+
+        public bool IsStockAvailable(int idProduto, int quantity)
+        {
+            return _produtoRepository.IsStockAvailable(idProduto, quantity);
         }
     }
 }

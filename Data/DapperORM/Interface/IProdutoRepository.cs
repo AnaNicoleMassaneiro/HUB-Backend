@@ -16,10 +16,16 @@ namespace HubUfpr.Data.DapperORM.Interface
 
         int DeleteProduto(int idProduto);
 
-        int UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, string imagem);
+        int UpdateProduto(int idProduto, string nome, bool status, float preco, string descricao, int quantidadeDisponivel, string imagem, bool isKeepImage);
 
         int UpdateScore(int idProduto, float score);
 
         List<Produto> GetAllProducts();
+
+        bool IsStockAvailable(int idProduto, int quantity);
+
+        int UpdateCurrentAvailableAmount(int idProduto, int amount);
+
+        int GetCurrentAvailableAmount(int idProduto);
     }
 }

@@ -51,8 +51,20 @@ create table Reserva (
     localizacaoLat		float,
     localizacaoLong		float,
     foreign key (idCliente) references Cliente (idCliente),
-    foreign key (idProduto) references Produto (idProduto)
+    foreign key (idProduto) references Produto (idProduto),
+    foreign key (statusReserva) references StatusReserva (codigo)
 );
+
+create table StatusReserva (
+	codigo int not null primary key,
+    descricao varchar(10) not null unique
+);
+
+INSERT INTO StatusReserva (codigo, descricao) VALUES
+	(0, "PENDENTE"),
+    (1, "CONCLUIDA"),
+    (2, "EXPIRADA"),
+    (3, "CANCELADA");
 
 create table FormaDePagamento(
 	idFormaDePagamento	int auto_increment primary key,
