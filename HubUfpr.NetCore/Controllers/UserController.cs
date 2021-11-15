@@ -215,5 +215,27 @@ namespace HubUfpr.API.Controllers
                 return Json(new { msg = "Houve um problema ao editar o usuário. " + ex.Message });
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("buscarUserPorId/{id}")]
+        public JsonResult SearchUserById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve especificar o ID do user!" });                    
+                }
+
+                return Json(new { user = _userService.GetUserById(id) });
+
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar user: ", ex);
+            }
+        }
     }
 }

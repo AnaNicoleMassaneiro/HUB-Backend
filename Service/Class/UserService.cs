@@ -92,5 +92,10 @@ namespace HubUfpr.Service.Class
         {
             _userRepository.UpdateUser(nome, id);
         }
+
+        public User GetUserById(int id)
+        {
+            return _userRepository.getUserById(id);
+        }
     }
 }

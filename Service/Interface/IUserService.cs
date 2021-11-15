@@ -33,5 +33,6 @@ namespace HubUfpr.Service.Interface
 
         public void UpdateUser(string nome, int id);
 
+        User GetUserById(int id);
     }
 }

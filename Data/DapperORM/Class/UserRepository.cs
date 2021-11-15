@@ -169,10 +169,20 @@ namespace HubUfpr.Data.DapperORM.Class
 
         public void UpdateUser(string Name, int id)
         {
-            //UPDATE USER set Name = 'aa' where id = 1
             using var db = GetMySqlConnection();
             const string query = @"UPDATE USER set Name = @Name where id = @id";
             db.Execute(query, new { ID = id, Name = Name }, commandType: CommandType.Text);
+        }
+
+        public User getUserById(int id)
+        {
+            using var db = GetMySqlConnection();
+
+            const string sql = @"select id, name, latitude, longitude, noteApp, email, grr from User where Id = @idUser";
+
+            User user = db.Query<User>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+
+            return user;
         }
     }
 }
