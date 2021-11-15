@@ -78,7 +78,7 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             using var db = GetMySqlConnection();
             const string query = @"select idVendedor from Vendedor where idVendedor = @id";
-            
+
             return db.Query<string>(query, new { id = id }, commandType: CommandType.Text).Any();
         }
 
@@ -165,6 +165,14 @@ namespace HubUfpr.Data.DapperORM.Class
 
                 return null;
             }
+        }
+
+        public void UpdateUser(string Name, int id)
+        {
+            //UPDATE USER set Name = 'aa' where id = 1
+            using var db = GetMySqlConnection();
+            const string query = @"UPDATE USER set Name = @Name where id = @id";
+            db.Execute(query, new { ID = id, Name = Name }, commandType: CommandType.Text);
         }
     }
 }

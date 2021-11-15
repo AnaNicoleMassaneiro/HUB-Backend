@@ -30,5 +30,8 @@ namespace HubUfpr.Service.Interface
         public int GetCustomerCode(int id);
 
         public int GetSellerCode(int id);
+
+        public void UpdateUser(string nome, int id);
+
     }
 }

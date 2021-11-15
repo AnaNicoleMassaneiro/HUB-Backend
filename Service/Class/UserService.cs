@@ -87,5 +87,10 @@ namespace HubUfpr.Service.Class
         {
             return _userRepository.GetSellerCode(id);
         }
+
+        void IUserService.UpdateUser(string nome, int id)
+        {
+            _userRepository.UpdateUser(nome, id);
+        }
     }
 }

@@ -29,5 +29,8 @@ namespace HubUfpr.Data.DapperORM.Interface
         int GetSellerCode(int id);
 
         User GetUserFromCustomerCode(int id);
+
+        void UpdateUser(string name, int id);
+
     }
 }

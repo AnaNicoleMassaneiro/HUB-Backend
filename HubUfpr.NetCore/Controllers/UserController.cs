@@ -35,7 +35,8 @@ namespace HubUfpr.API.Controllers
 
             var user = _userService.GetToken(request.usuario, request.senha);
 
-            if (user == null) {
+            if (user == null)
+            {
                 Response.StatusCode = 401;
                 return Json(new { msg = "Email/GRR e/ou senha incorretos." });
             }
@@ -44,9 +45,10 @@ namespace HubUfpr.API.Controllers
 
             _userService.UpdateLastLoginTime(user.Id);
 
-            if (user.IsVendedor) { 
+            if (user.IsVendedor)
+            {
                 int idVendedor = _userService.GetSellerCode(user.Id);
-                return Json(new { token, user, idVendedor});
+                return Json(new { token, user, idVendedor });
             }
             else
             {
@@ -112,9 +114,10 @@ namespace HubUfpr.API.Controllers
         [Route("atualizarLocalizacao/{userId}")]
         public ActionResult UpdateLocation([FromBody] UpdateUserLocation req, int userId)
         {
-            try {
+            try
+            {
                 Response.StatusCode = 400;
-                
+
                 if (req.Latitude == 0 || req.Longitude == 0)
                 {
                     return Json(new { msg = "Você deve informar a latitude e longitude do usuário!" });
@@ -151,7 +154,7 @@ namespace HubUfpr.API.Controllers
             {
                 Response.StatusCode = 400;
 
-                if (req.NewPassword == null || req.NewPassword.Trim().Length == 0 || 
+                if (req.NewPassword == null || req.NewPassword.Trim().Length == 0 ||
                         req.ConfirmNewPassword == null || req.ConfirmNewPassword.Trim().Length == 0)
                 {
                     return Json(new { msg = "Você deve informar a nova senha e a confirmação da nova senha!" });
@@ -186,6 +189,30 @@ namespace HubUfpr.API.Controllers
             {
                 Response.StatusCode = 500;
                 return Json(new { msg = "Houve um problema ao alterar a senha: " + ex.Message });
+            }
+        }
+            
+        [AllowAnonymous]
+        [HttpPatch]
+        [Route("updateUser/{nome}/{id}")]
+        public ActionResult updateUser(string nome, int id)
+        {
+            Response.StatusCode = 400;
+
+            if (nome == null || nome == "")
+                return Json(new { msg = "Por favor, informe o nome" });
+
+            try
+            {
+                _userService.UpdateUser(nome, id);
+
+                Response.StatusCode = 200;
+                return Json(new { msg = "Nome editado com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um problema ao editar o usuário. " + ex.Message });
             }
         }
     }

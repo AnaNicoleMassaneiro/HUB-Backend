@@ -12,7 +12,7 @@ namespace HubUfpr.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.UseUrls("http://localhost:5000", "http://192.168.0.102:5000")
+                .UseUrls("http://localhost:4000", "http://192.168.18.70:4000")
                 .UseStartup<Startup>();
     }
 }
