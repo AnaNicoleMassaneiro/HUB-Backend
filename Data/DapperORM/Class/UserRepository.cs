@@ -179,7 +179,7 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             using var db = GetMySqlConnection();
 
-            const string sql = @"select id, name, latitude, longitude, noteApp, email, grr from User where Id = @idUser";
+            const string sql = @"select id, name, latitude, longitude, noteApp, email, grr from User where Id = @id";
 
             User user = db.Query<User>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
 
