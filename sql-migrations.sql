@@ -96,16 +96,26 @@ create table Relatorio(
     foreign key (idVendedor) references Vendedor (idVendedor)
 );
 
+create table TipoAvaliacao(
+	codigo int auto_increment primary key,
+    descricao varchar(50)
+);
+
+INSERT INTO TipoAvaliacao VALUES 
+	(1, "Cliente => Produto"), (2, "Cliente => Vendedor"), (3, "Vendedor => Cliente");
+
 create table Avaliacao(
 	idAvaliacao 		int auto_increment primary key,
 	tipoAvaliacao 		int not null,
     idCliente 			int,
     idVendedor 			int,
     idProduto 			int,
-    titulo				varchar(30) not null,
+    titulo				varchar(50) not null,
     nota 				int not null,
     descricao 			varchar(200),
+    dataCriacao			datetime default NOW(),
     foreign key (idVendedor) references Vendedor (idVendedor),
     foreign key (idCliente) references Cliente (idCliente),
-    foreign key (idProduto) references Produto (idProduto)
+    foreign key (idProduto) references Produto (idProduto),
+    foreign key (tipoAvaliacao) references TipoAvaliacao(codigo)
 );

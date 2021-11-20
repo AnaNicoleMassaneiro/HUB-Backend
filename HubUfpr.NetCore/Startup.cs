@@ -68,6 +68,9 @@ namespace HubUfpr.API
             services.AddTransient<IReservaService, ReservaService>();
             services.AddTransient<IReservaRepository, ReservaRepository>();
 
+            services.AddTransient<IAvaliacaoService, AvaliacaoService>();
+            services.AddTransient<IAvaliacaoRepository, AvaliacaoRepository>();
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddSingleton<IConfiguration>(Configuration);

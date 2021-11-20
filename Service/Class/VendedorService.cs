@@ -34,5 +34,20 @@ namespace HubUfpr.Service.Class
         {
             return _vendedorRepository.getAllSellers();
         }
+
+        public int AddFavoriteSeller(int idVendedor, int idCliente)
+        {
+            return _vendedorRepository.AddFavoriteSeller(idVendedor, idCliente);
+        }
+
+        public int RemoveFavoriteSeller(int idVendedor, int idCliente)
+        {
+            return _vendedorRepository.RemoveFavoriteSeller(idVendedor, idCliente);
+        }
+
+        public List<Vendedor> GetFavorteSellersByCustomer(int idCliente)
+        {
+            return _vendedorRepository.GetFavorteSellersByCustomer(idCliente);
+        }
     }
 }

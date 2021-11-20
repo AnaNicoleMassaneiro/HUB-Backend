@@ -87,6 +87,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 "JOIN User u ON u.id = v.idUser " +
                 "WHERE u.latitude BETWEEN @lat -(10 / 69) AND @lat +(10 / 69) " +
                 "AND u.longitude BETWEEN @lon -(10 / (69 * COS(RADIANS(@lat)))) AND @lon +(10 / (69 * COS(RADIANS(@lat))))" +
+                "AND v.isOpen = TRUE AND v.isAtivo = TRUE" +
                 ") AS d WHERE d.distance < 0.8 ORDER BY d.distance ASC";
 
             MySqlCommand cmd = db.CreateCommand();
@@ -126,6 +127,88 @@ namespace HubUfpr.Data.DapperORM.Class
             v.User.GRR = (string)dr["grr"];
 
             return v;
+        }
+
+        public int AddFavoriteSeller(int idVendedor, int idCliente)
+        {
+            try
+            {
+                using var db = GetMySqlConnection();
+                const string sql1 = @"SELECT idCliente, idVendedor FROM VendedorFavorito WHERE idCliente = @idCliente AND idVendedor = @idVendedor";
+                const string sql2 = @"INSERT INTO VendedorFavorito VALUES (@idVendedor, @idCliente)";
+
+                if (db.Query(sql1, new { idCliente, idVendedor }).Any())
+                {
+                    throw new Exception("O Vendedor já está na lista de favoritos do Cliente informado!");
+                }
+
+                int ret = db.Execute(sql2, new { idVendedor, idCliente });
+
+                db.Close();
+
+                return ret;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Houve um erro ao salvar o vendedor favorito: " + ex.Message);
+            }
+        }
+
+        public int RemoveFavoriteSeller(int idVendedor, int idCliente)
+        {
+            try
+            {
+                using var db = GetMySqlConnection();
+                const string sql = @"DELETE FROM VendedorFavorito WHERE idVendedor = @idVendedor AND idCliente = @idCliente";
+
+                int ret = db.Execute(sql, new { idVendedor, idCliente });
+
+                db.Close();
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Houve um erro ao salvar o vendedor favorito: " + ex.Message);
+            }
+        }
+
+        public List<Vendedor> GetFavorteSellersByCustomer(int idCliente)
+        {
+            try
+            {
+                using var db = GetMySqlConnection();
+                List<Vendedor> favorites = new List<Vendedor>();
+                const string sql = @"SELECT idVendedor FROM VendedorFavorito WHERE idCliente = @idCliente";
+                MySqlCommand cmd = db.CreateCommand();
+                MySqlDataReader dr;
+
+                cmd.Parameters.AddWithValue("idCliente", idCliente);
+                cmd.CommandText = sql;
+
+                dr = cmd.ExecuteReader();
+
+                if (!dr.HasRows)
+                {
+                    dr.Close();
+                    db.Close();
+                    return null;
+                }
+
+                while (dr.Read())
+                {
+                    favorites.Add(getVendedorById((int)dr["idVendedor"]));
+                }
+
+                dr.Close();
+                db.Close();
+
+                return favorites;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Houve um erro ao salvar o vendedor favorito: " + ex.Message);
+            }
         }
     }
 }
