@@ -161,6 +161,7 @@ namespace HubUfpr.Data.DapperORM.Class
             }
             else
             {
+                dr.Close();
                 db.Close();
 
                 return null;

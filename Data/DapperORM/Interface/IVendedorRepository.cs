@@ -13,5 +13,11 @@ namespace HubUfpr.Data.DapperORM.Interface
         List<Vendedor> getVendedoresByLocation(float lat, float lon);
 
         List<Vendedor> getAllSellers();
+
+        int AddFavoriteSeller(int idVendedor, int idCliente);
+
+        int RemoveFavoriteSeller(int idVendedor, int idCliente);
+
+        List<Vendedor> GetFavorteSellersByCustomer(int idCliente);
     }
 }

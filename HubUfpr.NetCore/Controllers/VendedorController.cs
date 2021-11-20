@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using HubUfpr.API.Requests;
+using HubUfpr.Model;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -104,6 +106,100 @@ namespace HubUfpr.API.Controllers
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Erro ao buscar Vendedores: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("favoritos/adicionar")]
+        public JsonResult AddFavoriteSeller([FromBody] FavoriteSeller req)
+        {
+            try
+            {
+                if (req.IdCliente <= 0 || req.IdVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar os IDs do Vendedor e do Cliente!" });
+                }
+
+                int ret = _vendedorService.AddFavoriteSeller(req.IdVendedor, req.IdCliente);
+
+                if (ret != 1)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Houve um erro ao adicionar o vendedor favorito!" });
+                }
+
+                return Json(new { msg = "Vendedor favorito adicionado com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao cadastrar Vendedor favorito: " + ex.Message });
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        [Route("favoritos/remover")]
+        public JsonResult DeleteFavoriteSeller([FromBody] FavoriteSeller req)
+        {
+            try
+            {
+                if (req.IdCliente <= 0 || req.IdVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar os IDs do Vendedor e do Cliente!" });
+                }
+
+                int ret = _vendedorService.RemoveFavoriteSeller(req.IdVendedor, req.IdCliente);
+
+                if (ret == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Vendedor favorito não foi encontrado." });
+                }
+
+                else if (ret > 1)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Algo errado aconteceu, múltiplos registros foram removidos!!" });
+                }
+
+                return Json(new { msg = "Vendedor favorito removido com sucesso." });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao remover Vendedor favorito: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("favoritos/buscar/{idCliente}")]
+        public JsonResult GetFavoriteSellerByCustomer(int idCliente)
+        {
+            try
+            {
+                if (idCliente <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID do Cliente!" });
+                }
+
+                List<Vendedor> favoritos = _vendedorService.GetFavorteSellersByCustomer(idCliente);
+
+                if (favoritos == null || favoritos.Count == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhum Vendedor favorito foi encontrado." });
+                }
+
+                return Json(new { favoritos });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar Vendedores favoritos: ", ex);
             }
         }
     }

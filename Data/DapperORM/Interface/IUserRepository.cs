@@ -33,6 +33,5 @@ namespace HubUfpr.Data.DapperORM.Interface
         void UpdateUser(string name, int id);
 
         User getUserById(int id);
-
     }
 }

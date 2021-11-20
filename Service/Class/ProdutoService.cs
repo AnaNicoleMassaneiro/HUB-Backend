@@ -14,11 +14,6 @@ namespace HubUfpr.Service.Class
             _produtoRepository = produtoRepository;
         }
 
-        public List<User> GetUserList()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void InsertProduto(
             string nome,
             bool status,
