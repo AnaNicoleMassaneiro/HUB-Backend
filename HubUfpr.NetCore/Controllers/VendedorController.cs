@@ -202,5 +202,92 @@ namespace HubUfpr.API.Controllers
                 throw new InvalidOperationException("Erro ao buscar Vendedores favoritos: ", ex);
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("formadepagamento/adicionar")]
+        public JsonResult AddFormaDePagamento([FromBody] FormaDePagamentoRequest req)
+        {
+            try
+            {
+                if (req.IdFormaDePagamento <= 0 || req.IdVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID da Forma de Pagamento de do Vendedor!" });
+                }
+
+                int ret = _vendedorService.AddFormaPagamento(req.IdFormaDePagamento, req.IdVendedor);
+
+                if (ret == 1)
+                {
+                    return Json(new { msg = "Forma de Pagamento vinculada com sucesso!" });
+                }
+
+                Response.StatusCode = 400;
+                return Json(new { msg = "Houve um erro ao vincular a Forma de Pagamento ao Vendedor!" });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        [Route("formadepagamento/remover")]
+        public JsonResult RemoveFormaDePagamento([FromBody] FormaDePagamentoRequest req)
+        {
+            try
+            {
+                if (req.IdFormaDePagamento <= 0 || req.IdVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID da Forma de Pagamento de do Vendedor!" });
+                }
+
+                int ret = _vendedorService.RemoveFormaPagamento(req.IdFormaDePagamento, req.IdVendedor);
+
+                if (ret == 1)
+                {
+                    return Json(new { msg = "Forma de Pagamento removida com sucesso!" });
+                }
+
+                Response.StatusCode = 404;
+                return Json(new { msg = "Forma de Pagamento não encontrada para o Vendedor informado." });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("formadepagamento/buscar/{idVendedor}")]
+        public JsonResult GetFormaDePagamentoBySeller(int idVendedor)
+        {
+            try
+            {
+                if (idVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID do Vendedor!" });
+                }
+
+                var formasDePagamento = _vendedorService.GetFormaDePagamentoByVendedor(idVendedor);
+
+                if (formasDePagamento.Count == 0)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhuma Forma de Pagamento encontrada." });
+                }
+
+                return Json(new { formasDePagamento });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
     }
 }

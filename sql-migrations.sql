@@ -119,3 +119,23 @@ create table Avaliacao(
     foreign key (idProduto) references Produto (idProduto),
     foreign key (tipoAvaliacao) references TipoAvaliacao(codigo)
 );
+
+create table FormaPagamento(
+	idFormaPagamento int auto_increment primary key,
+    descricao varchar(50) unique not null,
+    icone varchar(100) not null
+);
+
+create table VendedorFormaPagamento(
+	idFormaPagamento int not null,
+    idVendedor int not null,
+    foreign key (idFormaPagamento) references FormaPagamento (idFormaPagamento),
+    foreign key (idVendedor) references Vendedor (idVendedor),
+    primary key (idFormaPagamento, idVendedor)
+);
+
+INSERT INTO FormaPagamento (descricao, icone) VALUES
+	("PIX", "assets/pix.png"),
+    ("Cartão de débito", "assets/cartao.png"),
+    ("Cartão de crédito", "assets/cartao.png"),
+    ("Dinheiro", "assets/dinheiro.png");
