@@ -192,7 +192,7 @@ namespace HubUfpr.Data.DapperORM.Class
             a.IdAvaliacao = (int)dr["idAvaliacao"];
             a.TipoAvaliacao = (int)dr["tipoAvaliacao"];
             a.Titulo = (string)dr["titulo"];
-            a.Descricao = (string)dr["titulo"];
+            a.Descricao = (string)dr["descricao"];
             a.Nota = (int)dr["nota"];
             a.DataCriacao = (DateTime)dr["dataCriacao"];
 
