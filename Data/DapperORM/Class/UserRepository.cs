@@ -13,7 +13,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public User ValidateUser(string usuario, string senha)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"select Id, Name, Password, Email, LastLogon, CreatedOn, ActivationCode, GRR, IsVendedor, NoteApp, Latitude, Longitude
+            const string sql = @"select Id, Name, Password, Email, LastLogon, CreatedOn, ActivationCode, GRR, Telefone, IsVendedor, NoteApp, Latitude, Longitude
                 from User U
                 where (U.GRR = @Login or U.Email = @Login) and U.Password = @Password";
 
@@ -126,7 +126,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public User GetUserFromCustomerCode(int id)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"SELECT id, name, password, latitude, longitude, noteApp, email, grr, lastLogon, createdOn, isVendedor " +
+            const string sql = @"SELECT id, name, password, latitude, longitude, noteApp, email, grr, telefone, lastLogon, createdOn, isVendedor " +
                 "FROM User u " +
                 "JOIN Cliente c ON c.idUser = u.Id " +
                 "WHERE c.idCliente = @id";
@@ -150,6 +150,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 if (dr["noteApp"] != DBNull.Value) ret.NoteApp = (float)dr["noteApp"];
                 ret.Email = (string)dr["email"];
                 ret.GRR = (string)dr["grr"];
+                ret.Telefone = (string)dr["telefone"];
                 ret.LastLogon = (DateTime)dr["lastLogon"];
                 ret.CreatedOn = (DateTime)dr["createdOn"];
                 ret.IsVendedor = (bool)dr["isVendedor"];
@@ -168,18 +169,40 @@ namespace HubUfpr.Data.DapperORM.Class
             }
         }
 
-        public void UpdateUser(string Name, int id)
+        public void UpdateUser(string name, string telefone, int id)
         {
             using var db = GetMySqlConnection();
-            const string query = @"UPDATE USER set Name = @Name where id = @id";
-            db.Execute(query, new { ID = id, Name = Name }, commandType: CommandType.Text);
+            MySqlCommand cmd = db.CreateCommand();
+            string query = @"UPDATE USER SET ";
+
+            if (name != null)
+            {
+                query += "Name = @name";
+                query += telefone == null ? " " : ", ";
+                cmd.Parameters.AddWithValue("name", name);
+            }
+
+            if (telefone != null)
+            {
+                query += "Telefone = @telefone ";
+                cmd.Parameters.AddWithValue("telefone", telefone);
+            }
+
+            query += "WHERE Id = @id";
+            cmd.Parameters.AddWithValue("id", id);
+
+            cmd.CommandText = query;
+
+            cmd.ExecuteNonQuery();
+
+            db.Close();
         }
 
         public User getUserById(int id)
         {
             using var db = GetMySqlConnection();
 
-            const string sql = @"select id, name, latitude, longitude, noteApp, email, grr from User where Id = @id";
+            const string sql = @"select id, name, latitude, longitude, noteApp, email, grr, telefone from User where Id = @id";
 
             User user = db.Query<User>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
 

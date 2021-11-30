@@ -7,6 +7,7 @@ create table User (
     NoteApp         float null,
     Email           varchar(100) unique not null,
     GRR             varchar(8) unique not null,
+    Telefone		varchar(15),
     LastLogon       datetime(6) null,
     CreatedOn       datetime(6) null,
     ActivationCode  int         null,

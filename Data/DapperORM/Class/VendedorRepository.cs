@@ -23,7 +23,7 @@ namespace HubUfpr.Data.DapperORM.Class
 
             if (vendedor != null)
             {
-                const string sqlUser = @"select id, name, latitude, longitude, noteApp, email, grr from User where Id = @idUser";
+                const string sqlUser = @"select id, name, latitude, longitude, noteApp, email, grr, telefone from User where Id = @idUser";
                 vendedor.User = db.Query<User>(sqlUser, new { vendedor.IdUser }, commandType: CommandType.Text).FirstOrDefault();
                 return vendedor;
             }
@@ -35,7 +35,7 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr from Vendedor v " +
+            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone from Vendedor v " +
                 "join User u on v.idUser = u.Id where u.Name like @name";
             MySqlCommand cmd = db.CreateCommand();
 
@@ -58,7 +58,7 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr from Vendedor v " +
+            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone from Vendedor v " +
                 "join User u on v.idUser = u.Id where v.isAtivo = true";
             MySqlCommand cmd = db.CreateCommand();
 
@@ -81,7 +81,7 @@ namespace HubUfpr.Data.DapperORM.Class
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
             string sql = @"SELECT * FROM (" +
-                "SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, " +
+                "SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone, " +
                 "3956 * ACOS(COS(RADIANS(@lat)) * COS(RADIANS(u.latitude)) * COS(RADIANS(@lon) - RADIANS(u.longitude)) + SIN(RADIANS(@lat)) * SIN(RADIANS(u.latitude))) AS distance " +
                 "from Vendedor v " +
                 "JOIN User u ON u.id = v.idUser " +
@@ -118,6 +118,7 @@ namespace HubUfpr.Data.DapperORM.Class
             v.IsOpen = (bool)dr["isOpen"];
             v.User.Id = (int)dr["id"];
             v.User.Name = (string)dr["name"];
+            v.User.Telefone = (string)dr["telefone"];
 
             if (dr["latitude"] != DBNull.Value) v.User.Latitude = (float)dr["latitude"];
             if (dr["longitude"] != DBNull.Value) v.User.Longitude = (float)dr["longitude"];

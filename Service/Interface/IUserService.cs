@@ -5,8 +5,6 @@ namespace HubUfpr.Service.Interface
 {
     public interface IUserService
     {
-        List<User> GetUserList();
-
         User GetToken(string usuario, string senha);
 
         int InsertUser(string nome, string senha, string email, string grr, bool isVendedor);
@@ -31,7 +29,7 @@ namespace HubUfpr.Service.Interface
 
         public int GetSellerCode(int id);
 
-        public void UpdateUser(string nome, int id);
+        public void UpdateUser(string nome, string telefone, int id);
 
         User GetUserById(int id);
     }

@@ -12,6 +12,7 @@ namespace HubUfpr.Model
         public float NoteApp { get; set; }
         public string Email { get; set; }
         public string GRR { get; set; }
+        public string Telefone { get; set; }
         public DateTime LastLogon { get; set; }
         public DateTime CreatedOn { get; set; }
         public string ActivationCode { get; set; }

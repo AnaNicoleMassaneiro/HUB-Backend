@@ -14,12 +14,6 @@ namespace HubUfpr.Service.Class
             _userRepository = userRepository;
         }
 
-        public List<User> GetUserList()
-        {
-            var obj = new List<User>();
-            return obj;
-        }
-
         public User GetToken(string username, string password)
         {
             var passwordHash = Utils.HashUtil.GetSha256FromString(password);
@@ -88,9 +82,9 @@ namespace HubUfpr.Service.Class
             return _userRepository.GetSellerCode(id);
         }
 
-        void IUserService.UpdateUser(string nome, int id)
+        public void UpdateUser(string nome, string telefone, int id)
         {
-            _userRepository.UpdateUser(nome, id);
+            _userRepository.UpdateUser(nome, telefone, id);
         }
 
         public User GetUserById(int id)

@@ -34,7 +34,15 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve especificar o ID do vendedor!" });                    
                 }
 
-                return Json(new { vendedor = _vendedorService.getVendedorById(id) });
+                var vendedor = _vendedorService.getVendedorById(id);
+
+                if (vendedor == null)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Vendedor não encontrado." });
+                }
+
+                return Json(new { vendedor });
 
             }
             catch (Exception ex)

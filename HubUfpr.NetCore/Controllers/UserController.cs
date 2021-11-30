@@ -194,25 +194,26 @@ namespace HubUfpr.API.Controllers
             
         [AllowAnonymous]
         [HttpPatch]
-        [Route("updateUser/{nome}/{id}")]
-        public ActionResult updateUser(string nome, int id)
+        [Route("updateUser/{id}")]
+        public ActionResult UpdateUser([FromBody] UpdateUser req, int id)
         {
             Response.StatusCode = 400;
 
-            if (nome == null || nome == "")
-                return Json(new { msg = "Por favor, informe o nome" });
+            if ((req.Nome == null && req.Telefone == null) ||
+                ((req.Nome != null && req.Nome.Trim() == "") && (req.Telefone != null && req.Telefone.Trim() == "")))
+                return Json(new { msg = "Por favor, informe o nome e/ou o telefone!" });
 
             try
             {
-                _userService.UpdateUser(nome, id);
+                _userService.UpdateUser(req.Nome, req.Telefone, id);
 
                 Response.StatusCode = 200;
-                return Json(new { msg = "Nome editado com sucesso." });
+                return Json(new { msg = "Usuário editado com sucesso." });
             }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { msg = "Houve um problema ao editar o usuário. " + ex.Message });
+                return Json(new { msg = "Houve um problema ao editar o usuário: " + ex.Message });
             }
         }
 
@@ -229,7 +230,15 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve especificar o ID do user!" });                    
                 }
 
-                return Json(new { user = _userService.GetUserById(id) });
+                var user = _userService.GetUserById(id);
+
+                if (user == null)
+                {
+                    Response.StatusCode = 404;
+                    return Json(new { msg = "Nenhum usuário encontrado." });
+                }
+
+                return Json(new { user });
 
             }
             catch (Exception ex)
