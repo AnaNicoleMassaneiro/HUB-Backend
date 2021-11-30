@@ -20,6 +20,8 @@ namespace HubUfpr.Data.DapperORM.Interface
 
         List<Vendedor> GetFavorteSellersByCustomer(int idCliente);
 
+        bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor);
+
         int AddFormaPagamento(int idFormaPagamento, int idVendedor);
 
         int RemoveFormaPagamento(int idFormaPagamento, int idVendedor);

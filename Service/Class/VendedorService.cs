@@ -64,5 +64,10 @@ namespace HubUfpr.Service.Class
         {
             return _vendedorRepository.GetFormaDePagamentoByVendedor(idVendedor);
         }
+
+        public bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor)
+        {
+            return _vendedorRepository.IsVendedorInCustomerFavorites(idCliente, idVendedor);
+        }
     }
 }

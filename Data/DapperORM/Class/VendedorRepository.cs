@@ -280,6 +280,18 @@ namespace HubUfpr.Data.DapperORM.Class
                 throw new Exception("Houve um erro ao bucar as formas de pagamento do vendedor: " + ex.Message);
             }
         }
+
+        public bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT idVendedor FROM VendedorFavorito WHERE idVendedor = @idVendedor AND idCliente = @idCliente;";
+
+            var ret = db.Query(sql, new { idVendedor, idCliente }).Any();
+
+            db.Close();
+
+            return ret;
+        }
     }
 }
 

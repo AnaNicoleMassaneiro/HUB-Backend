@@ -213,6 +213,29 @@ namespace HubUfpr.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [Route("favoritos/isFavorite")]
+        public JsonResult IsSellerInCustomersFavorites([FromBody] FavoriteSeller req)
+        {
+            try
+            {
+                if (req.IdCliente <= 0 || req.IdVendedor <= 0)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID do Cliente e do Vendedor!" });
+                }
+
+                bool isFavorite = _vendedorService.IsVendedorInCustomerFavorites(req.IdCliente, req.IdVendedor);
+
+                return Json(new { isFavorite });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro ao buscar Vendedores favoritos: ", ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
         [Route("formadepagamento/adicionar")]
         public JsonResult AddFormaDePagamento([FromBody] FormaDePagamentoRequest req)
         {

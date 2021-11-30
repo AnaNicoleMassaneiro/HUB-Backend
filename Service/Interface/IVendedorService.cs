@@ -24,5 +24,7 @@ namespace HubUfpr.Service.Interface
         int RemoveFormaPagamento(int idFormaPagamento, int idVendedor);
 
         List<FormaDePagamento> GetFormaDePagamentoByVendedor(int idVendedor);
+
+        bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor);
     }
 }
