@@ -19,12 +19,6 @@ namespace HubUfpr.Service.Interface
 
         List<Vendedor> GetFavorteSellersByCustomer(int idCliente);
 
-        int AddFormaPagamento(int idFormaPagamento, int idVendedor);
-
-        int RemoveFormaPagamento(int idFormaPagamento, int idVendedor);
-
-        List<FormaDePagamento> GetFormaDePagamentoByVendedor(int idVendedor);
-
         bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor);
     }
 }

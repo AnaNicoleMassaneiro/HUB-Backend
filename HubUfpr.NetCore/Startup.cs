@@ -65,6 +65,9 @@ namespace HubUfpr.API
             services.AddTransient<IVendedorService, VendedorService>();
             services.AddTransient<IVendedorRepository, VendedorRepository>();
 
+            services.AddTransient<IFormaDePagamentoService, FormaDePagamentoService>();
+            services.AddTransient<IFormaDePagamentoRepository, FormaDePagamentoRepository>();
+
             services.AddTransient<IReservaService, ReservaService>();
             services.AddTransient<IReservaRepository, ReservaRepository>();
 
