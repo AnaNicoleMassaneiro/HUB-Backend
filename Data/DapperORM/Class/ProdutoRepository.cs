@@ -31,6 +31,8 @@ namespace HubUfpr.Data.DapperORM.Class
                 idVendedor,
                 imagem
             }, commandType: CommandType.Text);
+
+            db.Close();
         }
 
         public Produto SearchProductById(int idProduto)
@@ -86,6 +88,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetProductFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;
@@ -117,6 +120,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetProductFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;
@@ -143,7 +147,7 @@ namespace HubUfpr.Data.DapperORM.Class
 
             sql += " where idProduto = @idProduto";
 
-            return db.Execute(sql, new
+            var ret = db.Execute(sql, new
             {
                 idProduto,
                 nome,
@@ -153,6 +157,10 @@ namespace HubUfpr.Data.DapperORM.Class
                 quantidadeDisponivel,
                 imagem
             }, commandType: CommandType.Text);
+
+            db.Close();
+
+            return ret;
         }
 
         public int UpdateScore(int productId, float score)
@@ -160,7 +168,11 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             const string sql = @"update Produto set notaProduto = @score where idProduto = @productId";
 
-            return db.Execute(sql, new { score, productId }, commandType: CommandType.Text);
+            var ret = db.Execute(sql, new { score, productId }, commandType: CommandType.Text);
+
+            db.Close();
+
+            return ret;
         }
 
         public List<Produto> GetAllProducts()
@@ -183,6 +195,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetProductFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;
@@ -193,7 +206,11 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             string sql = @"SELECT quantidadeDisponivel from Produto where idProduto = @idProduto and quantidadeDisponivel >= @quantity";
 
-            return db.Query<string>(sql, new { idProduto, quantity }, commandType: CommandType.Text).Any();
+            var ret = db.Query<string>(sql, new { idProduto, quantity }, commandType: CommandType.Text).Any();
+
+            db.Close();
+
+            return ret;
         }
 
         public int GetCurrentAvailableAmount(int idProduto)

@@ -28,6 +28,8 @@ namespace HubUfpr.Data.DapperORM.Class
                 return vendedor;
             }
 
+            db.Close();
+
             return null;
         }
 
@@ -49,6 +51,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetCurrentVendedorFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;
@@ -71,6 +74,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetCurrentVendedorFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;
@@ -102,6 +106,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 ret.Add(GetCurrentVendedorFromDataReader(dr));
             }
 
+            db.Close();
             dr.Close();
 
             return ret;

@@ -17,7 +17,11 @@ namespace HubUfpr.Data.DapperORM.Class
                 from User U
                 where (U.GRR = @Login or U.Email = @Login) and U.Password = @Password";
 
-            return db.Query<User>(sql, new { Login = usuario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
+            var ret = db.Query<User>(sql, new { Login = usuario, Password = senha }, commandType: CommandType.Text).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
         }
 
         public int InsertUser(string name, string senha, string email, string grr, bool isVendedor)
@@ -34,6 +38,8 @@ namespace HubUfpr.Data.DapperORM.Class
             cmd.ExecuteNonQuery();
             long id = cmd.LastInsertedId;
 
+            db.Close();
+
             return (int)id;
         }
 
@@ -41,14 +47,24 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             using var db = GetMySqlConnection();
             const string query = @"select Email from User where Email = @Email";
-            return db.Query<string>(query, new { Email = email }, commandType: CommandType.Text).Any();
+
+            var ret =  db.Query<string>(query, new { Email = email }, commandType: CommandType.Text).Any();
+
+            db.Close();
+
+            return ret;
         }
 
         public bool IsGRRInUse(string grr)
         {
             using var db = GetMySqlConnection();
             const string query = @"select GRR from User where GRR = @grr";
-            return db.Query<string>(query, new { GRR = grr }, commandType: CommandType.Text).Any();
+            
+            var ret = db.Query<string>(query, new { GRR = grr }, commandType: CommandType.Text).Any();
+
+            db.Close();
+
+            return ret;
         }
 
         public void UpdateLastLoginTime(int id)
@@ -56,6 +72,7 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             const string query = @"update user u set u.LastLogon = CONVERT_TZ(NOW(), '+00:00', '-03:00') where u.Id = @ID;";
             db.Execute(query, new { ID = id }, commandType: CommandType.Text);
+            db.Close();
         }
 
         public void InsertVendedor(int idUser, int isAtivo, int isOpen)
@@ -64,6 +81,7 @@ namespace HubUfpr.Data.DapperORM.Class
             const string sql = @"insert into Vendedor (idUser, isAtivo, isOpen) values (@idUser, @isAtivo, @isOpen)";
 
             db.Execute(sql, new { idUser = idUser, isAtivo = isAtivo, isOpen = isOpen }, commandType: CommandType.Text);
+            db.Close();
         }
 
         public void InsertCliente(int idUser)
@@ -72,6 +90,7 @@ namespace HubUfpr.Data.DapperORM.Class
             const string sql = @"insert into Cliente (idUser) values (@idUser)";
 
             db.Execute(sql, new { idUser = idUser }, commandType: CommandType.Text);
+            db.Close();
         }
 
         public bool IsValidVendedor(int id)
@@ -79,7 +98,11 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             const string query = @"select idVendedor from Vendedor where idVendedor = @id";
 
-            return db.Query<string>(query, new { id = id }, commandType: CommandType.Text).Any();
+            var ret = db.Query<string>(query, new { id }, commandType: CommandType.Text).Any();
+
+            db.Close();
+
+            return ret;
         }
 
         public int UpdateUserLocation(int userId, float latitude, float longitude)
@@ -93,7 +116,11 @@ namespace HubUfpr.Data.DapperORM.Class
             cmd.Parameters.AddWithValue("longitude", longitude);
             cmd.Parameters.AddWithValue("id", userId);
 
-            return cmd.ExecuteNonQuery();
+            var ret = cmd.ExecuteNonQuery();
+
+            db.Close();
+
+            return ret;
         }
 
         public int UpdatePassword(int userId, string newPassword)
@@ -106,21 +133,35 @@ namespace HubUfpr.Data.DapperORM.Class
             cmd.Parameters.AddWithValue("newPassword", newPassword);
             cmd.Parameters.AddWithValue("id", userId);
 
-            return cmd.ExecuteNonQuery();
+            var ret = cmd.ExecuteNonQuery();
+
+            db.Close();
+
+            return ret;
         }
 
         public int GetCustomerCode(int id)
         {
             using var db = GetMySqlConnection();
             string sql = @"select idCliente from Cliente where idUser = @id";
-            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+            
+            var ret = db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
         }
 
         public int GetSellerCode(int id)
         {
             using var db = GetMySqlConnection();
             string sql = @"select idVendedor from Vendedor where idUser = @id";
-            return db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+            
+            var ret = db.Query<int>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
         }
 
         public User GetUserFromCustomerCode(int id)
@@ -206,7 +247,11 @@ namespace HubUfpr.Data.DapperORM.Class
 
             User user = db.Query<User>(sql, new { id }, commandType: CommandType.Text).FirstOrDefault();
 
-            return user;
+            var ret = user;
+
+            db.Close();
+
+            return ret;
         }
     }
 }

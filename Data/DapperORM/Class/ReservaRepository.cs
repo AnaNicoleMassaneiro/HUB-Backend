@@ -32,6 +32,8 @@ namespace HubUfpr.Data.DapperORM.Class
 
             int ret = _produtoRepository.UpdateCurrentAvailableAmount(idProduto, newQt);
 
+            db.Close();
+
             if (ret == 0)
             {
                 throw new System.Exception("Houve um erro ao atualziar a quantidade disponível do produto após a criação da reserva.");
@@ -62,7 +64,7 @@ namespace HubUfpr.Data.DapperORM.Class
 
                 if (update == 0)
                 {
-                    throw new System.Exception("Houve um erro ao atualizar a quantidade disponível do produto após atualização da reserva.");
+                    throw new Exception("Houve um erro ao atualizar a quantidade disponível do produto após atualização da reserva.");
                 }
             }
 
