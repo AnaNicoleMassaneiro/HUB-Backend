@@ -236,7 +236,7 @@ namespace HubUfpr.API.Controllers
 
         [AllowAnonymous]
         [HttpPatch]
-        [Route("/atualizarStatus")]
+        [Route("atualizarStatus")]
         public JsonResult UpdateSellerStatus([FromBody] SellerStatus req)
         {
             try
