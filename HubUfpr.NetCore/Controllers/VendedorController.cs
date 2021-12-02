@@ -233,5 +233,35 @@ namespace HubUfpr.API.Controllers
                 throw new InvalidOperationException("Erro ao buscar Vendedores favoritos: ", ex);
             }
         }
+
+        [AllowAnonymous]
+        [HttpPatch]
+        [Route("/atualizarStatus")]
+        public JsonResult UpdateSellerStatus([FromBody] SellerStatus req)
+        {
+            try
+            { 
+                if (req.IdVendedor == null || req.IdVendedor < 1 || req.IsAtivo == null || req.IsOpen == null)
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Você deve informar o ID do Vendedor, o Status Ativo e o Status da Loja!" });
+                }
+
+                int ret = _vendedorService.UpdateSellerStatus((int)req.IdVendedor, (bool)req.IsAtivo, (bool)req.IsOpen);
+
+                if (ret == 1)
+                {
+                    return Json(new { msg = "Vendedor atualizado com sucesso. "});
+                }
+
+                Response.StatusCode = 404;
+                return Json(new { msg = "Vendedor não encontrado." });
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao atualizar Vendedor: ", ex });
+            }
+        }
     }
 }

@@ -54,5 +54,10 @@ namespace HubUfpr.Service.Class
         {
             return _vendedorRepository.IsVendedorInCustomerFavorites(idCliente, idVendedor);
         }
+
+        public int UpdateSellerStatus(int idVendedor, bool isAtivo, bool isOpen)
+        {
+            return _vendedorRepository.UpdateSellerStatus(idVendedor, isAtivo, isOpen);
+        }
     }
 }

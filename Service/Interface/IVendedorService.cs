@@ -20,5 +20,7 @@ namespace HubUfpr.Service.Interface
         List<Vendedor> GetFavorteSellersByCustomer(int idCliente);
 
         bool IsVendedorInCustomerFavorites(int idCliente, int idVendedor);
+
+        int UpdateSellerStatus(int idVendedor, bool isAtivo, bool isOpen);
     }
 }

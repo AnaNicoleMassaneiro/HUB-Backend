@@ -228,6 +228,17 @@ namespace HubUfpr.Data.DapperORM.Class
 
             return ret;
         }
+
+        public int UpdateSellerStatus(int idVendedor, bool isAtivo, bool isOpen)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"UPDATE Vendedor SET isAtivo = @isAtivo, isOpen = @isOpen WHERE idVendedor = @idVendedor";
+            int ret = db.Execute(sql, new { isAtivo, isOpen, idVendedor });
+
+            db.Close();
+
+            return ret;
+        }
     }
 }
 
