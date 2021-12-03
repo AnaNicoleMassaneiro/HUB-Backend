@@ -68,13 +68,15 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             string sql;
 
-            sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
-                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " + 
-                "join Vendedor v on v.idVendedor = p.idVendedor " +
-                "where p.nome like @nome";
+            sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " + 
+                "JOIN Vendedor v ON v.idVendedor = p.idVendedor " +
+                "WHERE p.nome like @nome";
 
             if (isReturnAtivoOnly)
                 sql += " AND p.isAtivo = true AND v.isAtivo = true";
+
+            sql += " ORDER BY p.nome ASC";
 
             MySqlCommand cmd = db.CreateCommand();
 
@@ -100,13 +102,15 @@ namespace HubUfpr.Data.DapperORM.Class
             using var db = GetMySqlConnection();
             string sql;
 
-            sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
-                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
-                "join Vendedor v on v.idVendedor = p.idVendedor " +
-                "where p.idVendedor = @id";
+            sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " +
+                "JOIN Vendedor v ON v.idVendedor = p.idVendedor " +
+                "WHERE p.idVendedor = @id";
 
             if (isReturnAtivoOnly)
                 sql += " AND p.isAtivo = true AND v.isAtivo = true";
+
+            sql += " ORDER BY p.nome ASC";
 
             MySqlCommand cmd = db.CreateCommand();
 
@@ -179,10 +183,11 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             List<Produto> ret = new List<Produto>();
             using var db = GetMySqlConnection();
-            string sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " + 
-                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
-                "join Vendedor v on v.idVendedor = p.idVendedor " + 
-                "where v.isAtivo = true and p.isAtivo = true";
+            string sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " + 
+                "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " +
+                "JOIN Vendedor v on v.idVendedor = p.idVendedor " +
+                "WHERE v.isAtivo = true AND p.isAtivo = true " +
+                "ORDER BY p.nome ASC";
 
             MySqlCommand cmd = db.CreateCommand();
 

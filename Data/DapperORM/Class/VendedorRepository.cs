@@ -37,8 +37,9 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone from Vendedor v " +
-                "join User u on v.idUser = u.Id where u.Name like @name";
+            const string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, " + 
+                "u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone FROM Vendedor v " +
+                "JOIN User u ON v.idUser = u.Id WHERE u.Name like @name ORDER BY u.name ASC";
             MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
@@ -61,8 +62,9 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"select v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone from Vendedor v " +
-                "join User u on v.idUser = u.Id where v.isAtivo = true";
+            const string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, " + 
+                "u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone FROM Vendedor v " +
+                "JOIN User u ON v.idUser = u.Id WHERE v.isAtivo = true ORDER BY u.name ASC";
             MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
@@ -209,6 +211,8 @@ namespace HubUfpr.Data.DapperORM.Class
                 dr.Close();
                 db.Close();
 
+                favorites = favorites.OrderBy(f => f.User.Name).ToList();
+                
                 return favorites;
             }
             catch (Exception ex)
