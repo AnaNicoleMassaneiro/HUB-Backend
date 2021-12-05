@@ -42,6 +42,17 @@ create table Produto (
     foreign key (idVendedor) references Vendedor(idVendedor)
 );
 
+create table StatusReserva (
+	codigo int not null primary key,
+    descricao varchar(10) not null unique
+);
+
+INSERT INTO StatusReserva (codigo, descricao) VALUES
+	(0, "PENDENTE"),
+    (1, "CONCLUIDA"),
+    (2, "EXPIRADA"),
+    (3, "CANCELADA");
+
 create table Reserva (
 	idReserva			int auto_increment primary key,
     idCliente 			int not null,
@@ -54,31 +65,6 @@ create table Reserva (
     foreign key (idCliente) references Cliente (idCliente),
     foreign key (idProduto) references Produto (idProduto),
     foreign key (statusReserva) references StatusReserva (codigo)
-);
-
-create table StatusReserva (
-	codigo int not null primary key,
-    descricao varchar(10) not null unique
-);
-
-INSERT INTO StatusReserva (codigo, descricao) VALUES
-	(0, "PENDENTE"),
-    (1, "CONCLUIDA"),
-    (2, "EXPIRADA"),
-    (3, "CANCELADA");
-
-create table FormaDePagamento(
-	idFormaDePagamento	int auto_increment primary key,
-    nome				varchar(50),
-    icone				varchar(200)
-);
-
-create table FormaDePagamentoVendedor(
-	idFormaDePagamento 	int not null,
-    idVendedor 			int not null,
-    primary key (idFormaDePagamento, idVendedor),
-    foreign key (idFormaDePagamento) references FormaDePagamento (idFormaDePagamento),
-    foreign key (idVendedor) references Vendedor(idVendedor)
 );
 
 create table VendedorFavorito(
