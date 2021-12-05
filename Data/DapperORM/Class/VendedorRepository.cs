@@ -125,7 +125,7 @@ namespace HubUfpr.Data.DapperORM.Class
             v.IsOpen = (bool)dr["isOpen"];
             v.User.Id = (int)dr["id"];
             v.User.Name = (string)dr["name"];
-            v.User.Telefone = (string)dr["telefone"];
+            if (dr["telefone"] != DBNull.Value) v.User.Telefone = (string)dr["telefone"];
 
             if (dr["latitude"] != DBNull.Value) v.User.Latitude = (float)dr["latitude"];
             if (dr["longitude"] != DBNull.Value) v.User.Longitude = (float)dr["longitude"];
