@@ -22,7 +22,7 @@ namespace HubUfpr.Service.Class
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, user.IsVendedor.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddHours(168),
+                Expires = DateTime.UtcNow.AddHours(438000),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
