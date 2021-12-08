@@ -45,14 +45,14 @@ namespace HubUfpr.API.Controllers
 
             _userService.UpdateLastLoginTime(user.Id);
 
+            int idCliente = _userService.GetCustomerCode(user.Id);
+
             if (user.IsVendedor)
             {
                 int idVendedor = _userService.GetSellerCode(user.Id);
-                return Json(new { token, user, idVendedor });
+                return Json(new { token, user, idVendedor, idCliente });
             }
-            else
-            {
-                int idCliente = _userService.GetCustomerCode(user.Id);
+            else {             
                 return Json(new { token, user, idCliente });
             }
         }
@@ -93,10 +93,8 @@ namespace HubUfpr.API.Controllers
                     {
                         _userService.InsertVendedor(userId, 1, 0);
                     }
-                    else
-                    {
-                        _userService.InsertCliente(userId);
-                    }
+                    
+                    _userService.InsertCliente(userId);
                 }
 
                 Response.StatusCode = 200;

@@ -31,7 +31,7 @@ namespace HubUfpr.API.Controllers
                 if (id <= 0)
                 {
                     Response.StatusCode = 400;
-                    return Json(new { msg = "Você deve especificar o ID do vendedor!" });                    
+                    return Json(new { msg = "Você deve especificar o ID do vendedor!" });
                 }
 
                 var vendedor = _vendedorService.getVendedorById(id);
