@@ -1,6 +1,6 @@
 create table User (
     Id              int auto_increment primary key,
-    Name            varchar(1000) not null,
+    Name            varchar(100) not null,
     Password        varchar(64) not null,
     Latitude        float null,
     Longitude       float null,
@@ -73,14 +73,6 @@ create table VendedorFavorito(
     primary key (idVendedor, idCliente),
     foreign key (idVendedor) references Vendedor (idVendedor),
     foreign key (idCliente) references Cliente (idCliente)
-);
-
-create table Relatorio(
-	idRelatorio 		int auto_increment primary key,
-    idVendedor 			int not null,
-    dataCriacao			timestamp not null default NOW(),
-    nomeDoArquivo varchar(200),
-    foreign key (idVendedor) references Vendedor (idVendedor)
 );
 
 create table TipoAvaliacao(
