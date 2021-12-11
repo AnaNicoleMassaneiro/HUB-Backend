@@ -203,12 +203,22 @@ namespace HubUfpr.API.Controllers
             {
                 if (idProduto > 0)
                 {
-                    int ret = _produtoService.DeleteProduto (idProduto);
+                    int ret = _produtoService.DeleteProduto(idProduto);
 
                     if (ret > 0)
+                    {
                         return Json(new { msg = "Produto deletado com sucesso." });
+                    }
+                    else if (ret == -1)
+                    {
+                        Response.StatusCode = 409;
+                        return Json(new { msg = "Produto não pode ser excluído." });
+                    }
                     else
+                    {
+                        Response.StatusCode = 404;
                         return Json(new { msg = "Produto não encontrado." });
+                    }
                 }
                 else
                 {
@@ -218,8 +228,8 @@ namespace HubUfpr.API.Controllers
             }
             catch (System.Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar produto",
-                    ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao excluir o produto: " + ex.Message });
             }
         }
 

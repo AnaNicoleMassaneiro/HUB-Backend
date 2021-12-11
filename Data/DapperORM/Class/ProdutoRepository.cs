@@ -133,9 +133,28 @@ namespace HubUfpr.Data.DapperORM.Class
         public int DeleteProduto(int idProduto)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"delete from Produto where idProduto = @idProduto";
+            const string sql1 = @"SELECT idProduto from Produto x WHERE x.idProduto IN (" +
+                "SELECT DISTINCT p.idProduto FROM Produto p " +
+                "INNER JOIN Reserva r ON p.idProduto = r.idProduto " +
+                "UNION SELECT DISTINCT p.idProduto FROM Produto p " +
+                "INNER JOIN Avaliacao a ON p.idProduto = a.idProduto) " +
+                "AND x.idProduto = @idProduto;";
+            const string sql2 = @"DELETE from Produto WHERE idProduto = @idProduto";
 
-            return db.Execute(sql, new { idProduto }, commandType: CommandType.Text);
+            if (db.Query(sql1, new { idProduto }).Any())
+            {
+                db.Close();
+
+                return -1;
+            }
+            else
+            {
+                var ret = db.Execute(sql2, new { idProduto }, commandType: CommandType.Text);
+
+                db.Close();
+
+                return ret;
+            }
         }
 
         public int UpdateProduto(int idProduto, string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, string imagem, bool isKeepImage)
