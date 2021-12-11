@@ -197,9 +197,8 @@ namespace HubUfpr.API.Controllers
         {
             Response.StatusCode = 400;
 
-            if ((req.Nome == null && req.Telefone == null) ||
-                ((req.Nome != null && req.Nome.Trim() == "") && (req.Telefone != null && req.Telefone.Trim() == "")))
-                return Json(new { msg = "Por favor, informe o nome e/ou o telefone!" });
+            if ((req.Nome == null && req.Telefone == null) || req.Nome.Trim() == "")
+                return Json(new { msg = "Você deve informar o Nome e Telefone do usuário!" });
 
             try
             {

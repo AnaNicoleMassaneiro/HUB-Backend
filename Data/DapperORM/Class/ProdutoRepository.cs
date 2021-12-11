@@ -139,7 +139,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 "UNION SELECT DISTINCT p.idProduto FROM Produto p " +
                 "INNER JOIN Avaliacao a ON p.idProduto = a.idProduto) " +
                 "AND x.idProduto = @idProduto;";
-            const string sql2 = @"DELETE from Produto WHERE idProduto = @idProduto";
+            const string sql2 = @"DELETE from Produto WHERE idProduto = @idProduto;";
 
             if (db.Query(sql1, new { idProduto }).Any())
             {
