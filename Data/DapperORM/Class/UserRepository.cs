@@ -191,7 +191,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 if (dr["noteApp"] != DBNull.Value) ret.NoteApp = (float)dr["noteApp"];
                 ret.Email = (string)dr["email"];
                 ret.GRR = (string)dr["grr"];
-                ret.Telefone = (string)dr["telefone"];
+                if (dr["telefone"] != DBNull.Value) ret.Telefone = (string)dr["telefone"];
                 ret.LastLogon = (DateTime)dr["lastLogon"];
                 ret.CreatedOn = (DateTime)dr["createdOn"];
                 ret.IsVendedor = (bool)dr["isVendedor"];
