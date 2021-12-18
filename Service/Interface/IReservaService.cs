@@ -14,5 +14,9 @@ namespace HubUfpr.Service.Interface
         List<Reserva> GetReservasByVendedor(int idVendedor);
 
         List<Reserva> GetReservasByCliente(int idCliente);
+
+        int GetSellerIdFromReservation(int id);
+
+        int GetCustomerIdFromReservation(int id);
     }
 }

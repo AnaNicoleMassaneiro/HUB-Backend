@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HubUfpr.API.Requests;
 using HubUfpr.Model;
+using HubUfpr.Service.Class;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o ID do Vendedor e o tipo de relatório!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], req.IdVendedor))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido ou você não tem permissão para acessar este conteúdo." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 ReportHeader header = _reportService.ReportHeader(req.Tipo, req.IdVendedor, req.DateFilter);
 
                 if (header.TotalReservas == 0)
@@ -53,7 +68,6 @@ namespace HubUfpr.API.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-
                 return Json(new { msg = "Houve um erro ao gerar o relatório: " + ex.Message });
             }
         }

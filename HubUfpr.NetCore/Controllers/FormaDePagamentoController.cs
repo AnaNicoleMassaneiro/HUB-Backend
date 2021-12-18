@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HubUfpr.API.Requests;
 using HubUfpr.Model;
+using HubUfpr.Service.Class;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o ID da Forma de Pagamento de do Vendedor!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], req.IdVendedor))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 int ret = _formaDePagamentoService.AddFormaPagamento(req.IdFormaDePagamento, req.IdVendedor);
 
                 if (ret == 1)
@@ -44,7 +59,7 @@ namespace HubUfpr.API.Controllers
             }
             catch (Exception ex)
             {
-                Response.StatusCode = 400;
+                Response.StatusCode = 500;
                 return Json(new { msg = "Houve um erro ao vincular a Forma de Pagamento ao Vendedor: " + ex.Message });
             }
         }
@@ -62,6 +77,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o ID da Forma de Pagamento de do Vendedor!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], req.IdVendedor))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 int ret = _formaDePagamentoService.RemoveFormaPagamento(req.IdFormaDePagamento, req.IdVendedor);
 
                 if (ret == 1)
@@ -74,7 +103,8 @@ namespace HubUfpr.API.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao remover a Forma de Pagamento do Vendedor: " + ex.Message });
             }
         }
 
@@ -91,6 +121,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o ID do Vendedor!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 var formasDePagamento = _formaDePagamentoService.GetFormaDePagamentoByVendedor(idVendedor);
 
                 if (formasDePagamento.Count == 0)
@@ -103,7 +147,8 @@ namespace HubUfpr.API.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar a Forma de Pagamento do Vendedor: " + ex.Message });
             }
         }
 
@@ -114,6 +159,20 @@ namespace HubUfpr.API.Controllers
         {
             try
             {
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 var formasDePagamento = _formaDePagamentoService.ListFormaDePagamento();
 
                 if (formasDePagamento.Count == 0)
@@ -126,7 +185,8 @@ namespace HubUfpr.API.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar as Formas de Pagamento: " + ex.Message });
             }
         }
     }

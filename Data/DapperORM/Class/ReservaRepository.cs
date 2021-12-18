@@ -137,6 +137,30 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
+        public int GetCustomerIdFromReservation(int idReserva)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT idCliente FROM Reserva WHERE idReserva = @idReserva";
+            int ret = db.Query<int>(sql, new { idReserva }, commandType: CommandType.Text).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
+        }
+
+        public int GetSellerIdFromReservation(int idReserva)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT p.idVendedor FROM Reserva r " + 
+                "JOIN Produto p ON p.idProduto = r.idProduto " +
+                "WHERE r.idReserva = @idReserva ";
+            int ret = db.Query<int>(sql, new { idReserva }, commandType: CommandType.Text).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
+        }
+
         private int[] GetProductAndAmountFromReserve(int idReserve)
         {
             using var db = GetMySqlConnection();

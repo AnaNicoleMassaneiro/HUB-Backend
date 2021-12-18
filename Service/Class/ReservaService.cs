@@ -40,5 +40,14 @@ namespace HubUfpr.Service.Class
             return _reservaRepository.GetReservasByCliente(idCliente);
         }
 
+        public int GetSellerIdFromReservation(int id)
+        {
+            return _reservaRepository.GetSellerIdFromReservation(id);
+        }
+
+        public int GetCustomerIdFromReservation(int id)
+        {
+            return _reservaRepository.GetCustomerIdFromReservation(id);
+        }
     }
 }

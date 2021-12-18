@@ -27,5 +27,7 @@ namespace HubUfpr.Data.DapperORM.Interface
         int UpdateCurrentAvailableAmount(int idProduto, int amount);
 
         int GetCurrentAvailableAmount(int idProduto);
+
+        int GetSellerIdFromProduct(int id);
     }
 }

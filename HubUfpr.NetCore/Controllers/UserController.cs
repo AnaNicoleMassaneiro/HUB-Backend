@@ -27,33 +27,43 @@ namespace HubUfpr.API.Controllers
         [Route("authenticate")]
         public ActionResult ValidateUser([FromBody] UserLogin request)
         {
-            if (request.usuario == null || request.usuario == "" || request.senha == null || request.senha == "")
+            try
             {
-                Response.StatusCode = 400;
-                return Json(new { msg = "Por favor, informe a senha e email/GRR." });
+                if (request.usuario == null || request.usuario == "" || request.senha == null || request.senha == "")
+                {
+                    Response.StatusCode = 400;
+                    return Json(new { msg = "Por favor, informe a senha e email/GRR." });
+                }
+
+                var user = _userService.GetToken(request.usuario, request.senha);
+
+                if (user == null)
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Email/GRR e/ou senha incorretos." });
+                }
+
+                _userService.UpdateLastLoginTime(user.Id);
+
+                int idCliente = _userService.GetCustomerCode(user.Id);
+
+                if (user.IsVendedor)
+                {
+                    int idVendedor = _userService.GetSellerCode(user.Id);
+                    string token = TokenService.GenerateToken(user, idCliente, idVendedor);
+
+                    return Json(new { token, user, idVendedor, idCliente });
+                }
+                else
+                {
+                    string token = TokenService.GenerateToken(user, idCliente, 0);
+                    return Json(new { token, user, idCliente });
+                }
             }
-
-            var user = _userService.GetToken(request.usuario, request.senha);
-
-            if (user == null)
+            catch (Exception ex)
             {
-                Response.StatusCode = 401;
-                return Json(new { msg = "Email/GRR e/ou senha incorretos." });
-            }
-
-            string token = TokenService.GenerateToken(user);
-
-            _userService.UpdateLastLoginTime(user.Id);
-
-            int idCliente = _userService.GetCustomerCode(user.Id);
-
-            if (user.IsVendedor)
-            {
-                int idVendedor = _userService.GetSellerCode(user.Id);
-                return Json(new { token, user, idVendedor, idCliente });
-            }
-            else {             
-                return Json(new { token, user, idCliente });
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao autenticar o usuário: " + ex.Message });
             }
         }
 
@@ -63,28 +73,27 @@ namespace HubUfpr.API.Controllers
         public ActionResult InsertUser([FromBody] UserCad request)
         {
             Response.StatusCode = 400;
-
-            if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null || request.nome == null ||
-                request.senha == "" || request.grr == "" || request.email == "" || request.confirmacaoSenha == "" || request.nome == "")
-                return Json(new { msg = "Por favor, informe o nome, email, GRR, senha e confirmação da senha!" });
-
-            if (request.senha != request.confirmacaoSenha)
-                return Json(new { msg = "Senhas não coincidem!" });
-
-            if (!Regex.IsMatch(request.email, emailRegex))
-                return Json(new { msg = "O email informado não é válido. Você deve usar um endereço de email válido que pertença ao domínio \"@ufpr.br\"." });
-
-            if (_userService.IsEmailInUse(request.email))
-                return Json(new { msg = "Este email já está em uso!" });
-
-            if (!Regex.IsMatch(request.grr, grrRegex))
-                return Json(new { msg = "O GRR informado é inválido. Seu GRR deve ser composto por 8 dígitos numéricos." });
-
-            if (_userService.IsGRRInUse(request.grr))
-                return Json(new { msg = "Este GRR já está em uso!" });
-
             try
             {
+                if (request.senha == null || request.grr == null || request.email == null || request.confirmacaoSenha == null || request.nome == null ||
+                    request.senha == "" || request.grr == "" || request.email == "" || request.confirmacaoSenha == "" || request.nome == "")
+                    return Json(new { msg = "Por favor, informe o nome, email, GRR, senha e confirmação da senha!" });
+
+                if (request.senha != request.confirmacaoSenha)
+                    return Json(new { msg = "Senhas não coincidem!" });
+
+                if (!Regex.IsMatch(request.email, emailRegex))
+                    return Json(new { msg = "O email informado não é válido. Você deve usar um endereço de email válido que pertença ao domínio \"@ufpr.br\"." });
+
+                if (_userService.IsEmailInUse(request.email))
+                    return Json(new { msg = "Este email já está em uso!" });
+
+                if (!Regex.IsMatch(request.grr, grrRegex))
+                    return Json(new { msg = "O GRR informado é inválido. Seu GRR deve ser composto por 8 dígitos numéricos." });
+
+                if (_userService.IsGRRInUse(request.grr))
+                    return Json(new { msg = "Este GRR já está em uso!" });
+            
                 var userId = _userService.InsertUser(request.nome, request.senha, request.email, request.grr, request.isVendedor);
 
                 if (userId != 0)
@@ -126,15 +135,28 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar um ID de usuário válido." });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchUserId(Request.Headers["Authorization"], userId))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 if (_userService.UpdateUserLocation(userId, req.Latitude, req.Longitude) == 0)
                 {
                     return Json(new { msg = "Usuário não encontrado." });
                 }
-                else
-                {
-                    Response.StatusCode = 200;
-                    return Json(new { msg = "Usuário alterado com sucesso." });
-                }
+               
+                Response.StatusCode = 200;
+                return Json(new { msg = "Usuário alterado com sucesso." });
+                
             }
             catch (Exception ex)
             {
@@ -173,6 +195,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar um ID de usuário válido." });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchUserId(Request.Headers["Authorization"], userId))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 if (_userService.UpdatePassword(userId, req.NewPassword) == 0)
                 {
                     return Json(new { msg = "Usuário não encontrado." });
@@ -196,12 +232,24 @@ namespace HubUfpr.API.Controllers
         public ActionResult UpdateUser([FromBody] UpdateUser req, int id)
         {
             Response.StatusCode = 400;
+            try { 
+                if ((req.Nome == null && req.Telefone == null) || req.Nome.Trim() == "")
+                    return Json(new { msg = "Você deve informar o Nome e Telefone do usuário!" });
 
-            if ((req.Nome == null && req.Telefone == null) || req.Nome.Trim() == "")
-                return Json(new { msg = "Você deve informar o Nome e Telefone do usuário!" });
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchUserId(Request.Headers["Authorization"], id))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
 
-            try
-            {
                 _userService.UpdateUser(req.Nome, req.Telefone, id);
 
                 Response.StatusCode = 200;
@@ -227,6 +275,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve especificar o ID do user!" });                    
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchUserId(Request.Headers["Authorization"], id))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 var user = _userService.GetUserById(id);
 
                 if (user == null)
@@ -240,7 +302,8 @@ namespace HubUfpr.API.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar user: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um problema ao buscar dados do usuário: " + ex.Message });
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using HubUfpr.API.Requests;
+using HubUfpr.Service.Class;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +42,8 @@ namespace HubUfpr.API.Controllers
                             "Por favor, informe um nome de produto, código do vendedor, preço, descrição e quantidade disponível."
                     });
                 }
-                else if (!_userService.IsValidVendedor(request.idVendedor))
+                
+                if (!_userService.IsValidVendedor(request.idVendedor))
                 {
                     Response.StatusCode = 400;
                     return Json(new 
@@ -49,34 +51,47 @@ namespace HubUfpr.API.Controllers
                         msg = "O Vendedor informado não existe!"
                     });
                 }
+
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], request.idVendedor))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
                 else
                 {
-                    string image = null;
-                    if (request.ProductImage != null)
-                    {
-                        var fs = request.ProductImage.OpenReadStream();
-                        var bs = new System.IO.BinaryReader(fs);
-                        Byte[] bytes = bs.ReadBytes((Int32)fs.Length);
-                        image = Convert.ToBase64String(bytes, 0, bytes.Length);
-                    }
-
-                    _produtoService
-                        .InsertProduto(
-                            request.nome,
-                            request.isAtivo,
-                            request.preco,
-                            request.descricao,
-                            request.quantidadeDisponivel,
-                            request.idVendedor,
-                            image);
-
-
-                    return Json(new { msg = "Produto inserido com sucesso!" });
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                 }
+
+                string image = null;
+                if (request.ProductImage != null)
+                {
+                    var fs = request.ProductImage.OpenReadStream();
+                    var bs = new System.IO.BinaryReader(fs);
+                    Byte[] bytes = bs.ReadBytes((Int32)fs.Length);
+                    image = Convert.ToBase64String(bytes, 0, bytes.Length);
+                }
+
+                _produtoService
+                    .InsertProduto(
+                        request.nome,
+                        request.isAtivo,
+                        request.preco,
+                        request.descricao,
+                        request.quantidadeDisponivel,
+                        request.idVendedor,
+                        image);
+
+
+                return Json(new { msg = "Produto inserido com sucesso!" });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao salvar produto", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao criar Produto: " + ex });
             }
         }
 
@@ -87,11 +102,26 @@ namespace HubUfpr.API.Controllers
         {
             try
             {
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 return Json(new { produtos = _produtoService.GetAllProducts() });
             }
             catch (Exception ex)
             {
-                return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar os Produtos: " + ex });
             }
         }
 
@@ -104,6 +134,20 @@ namespace HubUfpr.API.Controllers
             {
                 if (id > 0)
                 {
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     var produto =
                         _produtoService
                             .SearchProductById(id);
@@ -125,10 +169,10 @@ namespace HubUfpr.API.Controllers
                     });
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar produto",
-                    ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar o Produto: " + ex });
             }
         }
 
@@ -145,6 +189,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o nome do Produto!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 var produtos = _produtoService
                     .SearchProductByName(req.Name.Trim(), req.ReturnActiveOnly);
 
@@ -156,10 +214,10 @@ namespace HubUfpr.API.Controllers
 
                     return Json(new { produtos });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar produto",
-                    ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar os Produtos: " + ex });
             }
         }
 
@@ -176,6 +234,20 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar o id do Vendedor do Produto!" });
                 }
 
+                if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                {
+                    if (!TokenService.IsTokenValid(Request.Headers["Authorization"]))
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "O token de acesso informado não é válido." });
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = 401;
+                    return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                }
+
                 var produtos = _produtoService
                     .SearchProductBySeller(req.SellerId, req.ReturnActiveOnly);
 
@@ -187,10 +259,10 @@ namespace HubUfpr.API.Controllers
 
                 return Json(new { produtos });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar produto",
-                    ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao buscar os Produtos: " + ex });
             }
         }
 
@@ -203,6 +275,20 @@ namespace HubUfpr.API.Controllers
             {
                 if (idProduto > 0)
                 {
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], _produtoService.GetSellerIdFromProduct(idProduto)))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     int ret = _produtoService.DeleteProduto(idProduto);
 
                     if (ret > 0)
@@ -226,7 +312,7 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Por favor, informe um ID de Produto válido." });
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Response.StatusCode = 500;
                 return Json(new { msg = "Houve um erro ao excluir o produto: " + ex.Message });
@@ -249,6 +335,20 @@ namespace HubUfpr.API.Controllers
                         return Json(new { msg = "Você deve informar um nome, status, preço, descrição e quantidade disponível!" });
                     }
 
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], _produtoService.GetSellerIdFromProduct(idProduto)))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+                    
                     string image = null;
                     if (request.ProductImage != null)
                     {
@@ -281,48 +381,10 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Por favor, informe o ID do Produto" });
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar produto",
-                    ex);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPatch]
-        [Route("atualizaNota/{productId}")]
-        public JsonResult UpdateScore([FromBody] UpdateScore request, int productId)
-        {
-            try
-            {
-                if (request.Score <= 0)
-                {
-                    Response.StatusCode = 400;
-                    return Json(new { msg = "Você deve informar uma nota válida." });
-                }
-
-                if (productId <= 0)
-                {
-                    Response.StatusCode = 400;
-                    return Json(new { msg = "Você deve informar ID de produto válido." });
-                }
-
-                int ret = _produtoService.UpdateScore(productId, request.Score);
-                
-                if (ret > 0)
-                {
-                    Response.StatusCode = 200;
-                    return Json(new { msg = "Nota atualizada com sucesso." });
-                }
-                else {
-                    Response.StatusCode = 200;
-                    return Json(new { msg = "Produto não encontrado." });
-                }
-                
-            }
-            catch(Exception ex)
-            {
-                return Json(new { msg = "Houve um erro ao atualizar a nota: " + ex });
+                Response.StatusCode = 500;
+                return Json(new { msg = "Houve um erro ao atualizar o Produto: " + ex });
             }
         }
     }

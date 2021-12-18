@@ -22,5 +22,7 @@ namespace HubUfpr.Service.Interface
         List<Produto> GetAllProducts();
 
         bool IsStockAvailable(int idProduto, int quantity);
+
+        int GetSellerIdFromProduct(int id);
     }
 }

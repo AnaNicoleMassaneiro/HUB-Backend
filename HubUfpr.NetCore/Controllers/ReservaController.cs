@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HubUfpr.API.Requests;
 using HubUfpr.Model;
+using HubUfpr.Service.Class;
 using HubUfpr.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,20 @@ namespace HubUfpr.API.Controllers
                         return Json(new { msg = "O Produto informado não possui estoque suficiente para completar a reserva." });
                     }
 
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchCustomerId(Request.Headers["Authorization"], req.IdCliente))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     _reservaService.CreateReserve(
                         req.IdCliente, req.IdProduto, req.QuantidadeDesejada, req.Latitude, req.Longitude);
                     return Json(new { msg = "Reserva criada com sucesso." });
@@ -45,9 +60,10 @@ namespace HubUfpr.API.Controllers
                 Response.StatusCode = 400;
                 return Json(new { msg = "Você deve informar o ID do cliente, id do produto, quantidade, latitude e longitude." });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao criar reserva: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao criar reserva: " + ex });
             }
         }
 
@@ -60,9 +76,23 @@ namespace HubUfpr.API.Controllers
             {
                 if (id > 0)
                 {
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchCustomerId(Request.Headers["Authorization"], _reservaService.GetCustomerIdFromReservation(id)))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     if (_reservaService.GetCurrentStatus(id) != 0)
                     {
-                        Response.StatusCode = 400;
+                        Response.StatusCode = 409;
                         return Json(new { msg = "O Status da reserva informada não pode mais ser alterado." });
                     }
 
@@ -77,9 +107,10 @@ namespace HubUfpr.API.Controllers
                 Response.StatusCode = 400;
                 return Json(new { msg = "Você deve informar o ID da reserva." });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao cancelar reserva: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao cancelar reserva: " + ex });
             }
         }
 
@@ -92,12 +123,25 @@ namespace HubUfpr.API.Controllers
             {
                 if (id > 0)
                 {
-                    if (_reservaService.GetCurrentStatus(id) != 0)
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
                     {
-                        Response.StatusCode = 400;
-                        return Json(new { msg = "O Status da reserva informada não pode mais ser alterado." });
+                        if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], _reservaService.GetSellerIdFromReservation(id)))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                     }
 
+                    if (_reservaService.GetCurrentStatus(id) != 0)
+                    {
+                        Response.StatusCode = 409;
+                        return Json(new { msg = "O Status da reserva informada não pode mais ser alterado." });
+                    }
 
                     if (_reservaService.UpdateReserveStatus(id, 1) > 0)
                     {
@@ -110,41 +154,10 @@ namespace HubUfpr.API.Controllers
                 Response.StatusCode = 400;
                 return Json(new { msg = "Você deve informar o ID da reserva." });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao confirmar reserva: ", ex);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPatch]
-        [Route("expire/{id}")]
-        public JsonResult ExpireReserve(int id)
-        {
-            try
-            {
-                if (id > 0)
-                {
-                    if (_reservaService.GetCurrentStatus(id) != 0)
-                    {
-                        Response.StatusCode = 400;
-                        return Json(new { msg = "O Status da reserva informada não pode mais ser alterado." });
-                    }
-
-                    if (_reservaService.UpdateReserveStatus(id, 2) > 0)
-                    {
-                        return Json(new { msg = "Reserva expirada com sucesso." });
-                    }
-
-                    return Json(new { msg = "Reserva não encontrada." });
-                }
-
-                Response.StatusCode = 400;
-                return Json(new { msg = "Você deve informar o ID da reserva." });
-            }
-            catch (System.Exception ex)
-            {
-                throw new InvalidOperationException("Erro ao expirar reserva: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao confirmar reserva: " + ex });
             }
         }
 
@@ -157,6 +170,20 @@ namespace HubUfpr.API.Controllers
             {
                 if (id > 0)
                 {
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchSellerId(Request.Headers["Authorization"], id))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     List<Reserva> reservas = _reservaService.GetReservasByVendedor(id);
                     if (reservas.Count > 0)
                     {
@@ -170,9 +197,10 @@ namespace HubUfpr.API.Controllers
                 Response.StatusCode = 400;
                 return Json(new { msg = "Você deve informar o ID do Vendedor." });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar reservas: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao buscar reservas: " + ex });
             }
         }
 
@@ -185,6 +213,20 @@ namespace HubUfpr.API.Controllers
             {
                 if (id > 0)
                 {
+                    if (Request.Headers["Authorization"].Count > 0 && Request.Headers["Authorization"].ToString().Trim().Length > 0)
+                    {
+                        if (!TokenService.IsTokenValidMatchCustomerId(Request.Headers["Authorization"], id))
+                        {
+                            Response.StatusCode = 401;
+                            return Json(new { msg = "O token de acesso informado não é válido." });
+                        }
+                    }
+                    else
+                    {
+                        Response.StatusCode = 401;
+                        return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
+                    }
+
                     List<Reserva> reservas = _reservaService.GetReservasByCliente(id);
                     if (reservas.Count > 0)
                     {
@@ -198,9 +240,10 @@ namespace HubUfpr.API.Controllers
                 Response.StatusCode = 400;
                 return Json(new { msg = "Você deve informar o ID do Cliente." });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Erro ao buscar reservas: ", ex);
+                Response.StatusCode = 500;
+                return Json(new { msg = "Erro ao buscar reservas: " + ex });
             }
         }
     }

@@ -259,6 +259,17 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
+        public int GetSellerIdFromProduct(int idProduto)
+        {
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT idVendedor FROM Produto WHERE idProduto = @idProduto";
+            int ret = db.Query<int>(sql, new { idProduto }).FirstOrDefault();
+
+            db.Close();
+
+            return ret;
+        }
+
         private Produto GetProductFromDataReader(MySqlDataReader dr)
         {
             Produto p = new Produto();
