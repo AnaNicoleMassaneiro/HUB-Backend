@@ -19,5 +19,7 @@ namespace HubUfpr.Data.DapperORM.Interface
         int GetCustomerIdFromReservation(int id);
 
         int GetSellerIdFromReservation(int id);
+
+        List<int> GetReservationsToExpire();
     }
 }

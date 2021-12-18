@@ -49,5 +49,10 @@ namespace HubUfpr.Service.Class
         {
             return _reservaRepository.GetCustomerIdFromReservation(id);
         }
+
+        public List<int> GetReservationsToExpire()
+        {
+            return _reservaRepository.GetReservationsToExpire();
+        }
     }
 }

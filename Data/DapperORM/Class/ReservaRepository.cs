@@ -43,7 +43,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public int UpdateReserveStatus(int idReserve, int statusCode)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"UPDATE Reserva set statusReserva = @status WHERE idReserva = @idReserva";
+            const string sql = @"UPDATE Reserva SET statusReserva = @status WHERE idReserva = @idReserva";
 
             MySqlCommand cmd = db.CreateCommand();
             cmd.CommandText = sql;
@@ -159,6 +159,31 @@ namespace HubUfpr.Data.DapperORM.Class
             db.Close();
 
             return ret;
+        }
+
+        public List<int> GetReservationsToExpire()
+        {
+            List<int> reservations = new List<int>();
+            using var db = GetMySqlConnection();
+            const string sql = @"SELECT idReserva from Reserva WHERE statusReserva = 0 AND DATE_ADD(dataCriacao, INTERVAL 45 MINUTE) < NOW();";
+            MySqlCommand cmd = db.CreateCommand();
+
+            cmd.CommandText = sql;
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    reservations.Add((int)dr["idReserva"]);
+                }
+            }
+
+            dr.Close();
+            db.Close();
+
+            return reservations;
         }
 
         private int[] GetProductAndAmountFromReserve(int idReserve)

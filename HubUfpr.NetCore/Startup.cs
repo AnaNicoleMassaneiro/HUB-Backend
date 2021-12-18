@@ -13,6 +13,8 @@ using HubUfpr.Model;
 using HubUfpr.Service.Class;
 using HubUfpr.Service.Interface;
 using System.Text;
+using System;
+using HubUfpr.API.Controllers;
 
 namespace HubUfpr.API
 {
@@ -91,6 +93,12 @@ namespace HubUfpr.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HubUfpr API", Version = "v1" });
+            });
+
+            services.AddCronJob<ExpireReservationCronJob>(c =>
+            {
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @"*/1 * * * *";
             });
         }
 
