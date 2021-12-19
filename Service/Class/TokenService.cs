@@ -31,6 +31,31 @@ namespace HubUfpr.Service.Class
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+        
+        public static string GetTokenProperty(string token, string property)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+                var claims = jwtToken.Claims.GetEnumerator();
+
+                while (claims.MoveNext())
+                {
+                    if (claims.Current.Type == property)
+                    {
+                        return claims.Current.Value;
+                    }
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public static bool IsTokenValid(string token)
         {

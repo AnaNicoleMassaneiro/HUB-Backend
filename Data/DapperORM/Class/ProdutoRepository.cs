@@ -18,7 +18,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public void InsertProduct(string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, int idVendedor, string imagem)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"insert into Produto (nome, isAtivo, preco, descricao, quantidadeDisponivel, idVendedor, imagem) values " +
+            const string sql = @"INSERTO INTO Produto (nome, isAtivo, preco, descricao, quantidadeDisponivel, idVendedor, imagem) VALUES " +
                 "(@nome, @isAtivo, @preco, @descricao, @quantidadeDisponivel, @idVendedor, @imagem)";
 
             db.Execute(sql, new
@@ -39,10 +39,10 @@ namespace HubUfpr.Data.DapperORM.Class
         {
             Produto p = null;
             using var db = GetMySqlConnection();
-            string sql = sql = @"select p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
-                    "v.isAtivo, v.isOpen, v.idVendedor, v.idUser from Produto p " +
-                    "join Vendedor v on v.idVendedor = p.idVendedor " +
-                    "where p.idProduto = @id";
+            string sql = sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
+                    "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " +
+                    "JOIN Vendedor v ON v.idVendedor = p.idVendedor " +
+                    "WHERE p.idProduto = @id";
 
             MySqlCommand cmd = db.CreateCommand();
             cmd.CommandText = sql;
@@ -71,17 +71,17 @@ namespace HubUfpr.Data.DapperORM.Class
             sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
                 "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " + 
                 "JOIN Vendedor v ON v.idVendedor = p.idVendedor " +
-                "WHERE p.nome like @nome";
+                "WHERE p.nome LIKE @nome";
 
             if (isReturnAtivoOnly)
-                sql += " AND p.isAtivo = true AND v.isAtivo = true";
+                sql += " AND p.isAtivo = true AND v.isAtivo = true AND v.isOpen = TRUE";
 
             sql += " ORDER BY p.nome ASC";
 
             MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
-            cmd.Parameters.AddWithValue("nome", "%"+name+"%");
+            cmd.Parameters.AddWithValue("nome", "%" + name + "%");
             
             MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -108,7 +108,7 @@ namespace HubUfpr.Data.DapperORM.Class
                 "WHERE p.idVendedor = @id";
 
             if (isReturnAtivoOnly)
-                sql += " AND p.isAtivo = true AND v.isAtivo = true";
+                sql += " AND p.isAtivo = TRUE AND v.isAtivo = TRUE AND v.isOpen = TRUE";
 
             sql += " ORDER BY p.nome ASC";
 
@@ -205,7 +205,7 @@ namespace HubUfpr.Data.DapperORM.Class
             string sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " + 
                 "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " +
                 "JOIN Vendedor v on v.idVendedor = p.idVendedor " +
-                "WHERE v.isAtivo = true AND p.isAtivo = true " +
+                "WHERE v.isAtivo = TRUE AND v.isOpen = TRUE AND p.isAtivo = TRUE " +
                 "ORDER BY p.nome ASC";
 
             MySqlCommand cmd = db.CreateCommand();

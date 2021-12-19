@@ -95,7 +95,10 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                 }
 
-                var vendedores = _vendedorService.getVendedoresByName(req.Name);
+                var vendedores = _vendedorService.getVendedoresByName(
+                    req.Name, 
+                    int.Parse(TokenService.GetTokenProperty(Request.Headers["Authorization"], "SellerId"))
+                );
 
                 if (vendedores.Count == 0)
                 {
@@ -134,8 +137,13 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                 }
 
-                return Json(new { vendedores = _vendedorService.getAllSellers() });
+                var vendedores = _vendedorService.getAllSellers(int.Parse(TokenService.GetTokenProperty(Request.Headers["Authorization"], "SellerId")));
 
+                if (vendedores.Count > 0)
+                    return Json(new { vendedores });
+
+                Response.StatusCode = 404;
+                return Json(new { msg = "Nenhum vendedor foi encontrado." });
             }
             catch (Exception ex)
             {
@@ -170,7 +178,11 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                 }
 
-                var vendedores = _vendedorService.getVendedoresByLocation(req.Latitude, req.Longitude);
+                var vendedores = _vendedorService.getVendedoresByLocation(
+                    req.Latitude, 
+                    req.Longitude,
+                    int.Parse(TokenService.GetTokenProperty(Request.Headers["Authorization"], "SellerId"))
+                );
 
                 if (vendedores.Count == 0)
                 {

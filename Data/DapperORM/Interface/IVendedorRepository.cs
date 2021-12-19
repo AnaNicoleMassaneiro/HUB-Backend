@@ -8,11 +8,11 @@ namespace HubUfpr.Data.DapperORM.Interface
     {
         Vendedor getVendedorById(int id);
 
-        List<Vendedor> getVendedoresByName(string name);
+        List<Vendedor> getVendedoresByName(string name, int ignoreSellerId);
 
-        List<Vendedor> getVendedoresByLocation(float lat, float lon);
+        List<Vendedor> getVendedoresByLocation(float lat, float lon, int ignoreSellerId);
 
-        List<Vendedor> getAllSellers();
+        List<Vendedor> getAllSellers(int ignoreSellerId);
 
         int AddFavoriteSeller(int idVendedor, int idCliente);
 

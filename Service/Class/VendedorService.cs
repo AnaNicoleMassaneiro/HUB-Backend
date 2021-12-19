@@ -20,19 +20,19 @@ namespace HubUfpr.Service.Class
             return _vendedorRepository.getVendedorById(id);
         }
 
-        public List<Vendedor> getVendedoresByLocation(float lat, float lon)
+        public List<Vendedor> getVendedoresByLocation(float lat, float lon, int ignoreSellerId)
         {
-            return _vendedorRepository.getVendedoresByLocation(lat, lon);
+            return _vendedorRepository.getVendedoresByLocation(lat, lon, ignoreSellerId);
         }
 
-        public List<Vendedor> getVendedoresByName(string name)
+        public List<Vendedor> getVendedoresByName(string name, int ignoreSellerId)
         {
-            return _vendedorRepository.getVendedoresByName(name);
+            return _vendedorRepository.getVendedoresByName(name, ignoreSellerId);
         }
 
-        public List<Vendedor> getAllSellers()
+        public List<Vendedor> getAllSellers(int ignoreSellerId)
         {
-            return _vendedorRepository.getAllSellers();
+            return _vendedorRepository.getAllSellers(ignoreSellerId);
         }
 
         public int AddFavoriteSeller(int idVendedor, int idCliente)

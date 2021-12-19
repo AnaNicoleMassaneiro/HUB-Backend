@@ -33,14 +33,22 @@ namespace HubUfpr.Data.DapperORM.Class
             return null;
         }
 
-        public List<Vendedor> getVendedoresByName(string name)
+        public List<Vendedor> getVendedoresByName(string name, int ignoreSellerId)
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, " + 
+            string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, " + 
                 "u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone FROM Vendedor v " +
-                "JOIN User u ON v.idUser = u.Id WHERE u.Name like @name ORDER BY u.name ASC";
+                "JOIN User u ON v.idUser = u.Id WHERE u.Name like @name AND v.isAtivo = TRUE and v.isOpen = TRUE ";
             MySqlCommand cmd = db.CreateCommand();
+
+            if (ignoreSellerId > 0)
+            {
+                sql += " AND v.idVendedor != @ignoreSellerId";
+                cmd.Parameters.AddWithValue("ignoreSellerId", ignoreSellerId);
+            }
+
+            sql += " ORDER BY u.name ASC";
 
             cmd.CommandText = sql;
             cmd.Parameters.AddWithValue("name", "%" + name + "%");
@@ -58,14 +66,22 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
-        public List<Vendedor> getAllSellers()
+        public List<Vendedor> getAllSellers(int ignoreSellerId)
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
-            const string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, " + 
+            string sql = @"SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, " + 
                 "u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone FROM Vendedor v " +
-                "JOIN User u ON v.idUser = u.Id WHERE v.isAtivo = true ORDER BY u.name ASC";
+                "JOIN User u ON v.idUser = u.Id AND v.isAtivo = TRUE and v.isOpen = TRUE ";
             MySqlCommand cmd = db.CreateCommand();
+
+            if (ignoreSellerId > 0)
+            {
+                sql += " AND v.idVendedor != @ignoreSellerId";
+                cmd.Parameters.AddWithValue("ignoreSellerId", ignoreSellerId);
+            }
+
+            sql += " ORDER BY u.name ASC";
 
             cmd.CommandText = sql;
 
@@ -82,10 +98,11 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
-        public List<Vendedor> getVendedoresByLocation(float lat, float lon)
+        public List<Vendedor> getVendedoresByLocation(float lat, float lon, int ignoreSellerId)
         {
             List<Vendedor> ret = new List<Vendedor>();
             using var db = GetMySqlConnection();
+            MySqlCommand cmd = db.CreateCommand();
             string sql = @"SELECT * FROM (" +
                 "SELECT v.idVendedor, v.idUser, v.isOpen, v.isAtivo, u.id, u.name, u.latitude, u.longitude, u.noteApp, u.email, u.grr, u.telefone, " +
                 "3956 * ACOS(COS(RADIANS(@lat)) * COS(RADIANS(u.latitude)) * COS(RADIANS(@lon) - RADIANS(u.longitude)) + SIN(RADIANS(@lat)) * SIN(RADIANS(u.latitude))) AS distance " +
@@ -93,10 +110,16 @@ namespace HubUfpr.Data.DapperORM.Class
                 "JOIN User u ON u.id = v.idUser " +
                 "WHERE u.latitude BETWEEN @lat -(10 / 69) AND @lat +(10 / 69) " +
                 "AND u.longitude BETWEEN @lon -(10 / (69 * COS(RADIANS(@lat)))) AND @lon +(10 / (69 * COS(RADIANS(@lat))))" +
-                "AND v.isOpen = TRUE AND v.isAtivo = TRUE" +
-                ") AS d WHERE d.distance < 0.8 ORDER BY d.distance ASC";
+                "AND v.isOpen = TRUE AND v.isAtivo = TRUE";
+            
+            if (ignoreSellerId > 0)
+            {
+                sql += " AND v.idVendedor != @ignoreSellerId";
+                cmd.Parameters.AddWithValue("ignoreSellerId", ignoreSellerId);
+            }
 
-            MySqlCommand cmd = db.CreateCommand();
+            sql += ") AS d WHERE d.distance < 0.8 ORDER BY d.distance ASC";
+
             cmd.CommandText = sql;
             cmd.Parameters.AddWithValue("lat", lat);
             cmd.Parameters.AddWithValue("lon", lon);
