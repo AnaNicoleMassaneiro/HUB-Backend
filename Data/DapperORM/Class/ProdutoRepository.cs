@@ -18,7 +18,7 @@ namespace HubUfpr.Data.DapperORM.Class
         public void InsertProduct(string nome, bool isAtivo, float preco, string descricao, int quantidadeDisponivel, int idVendedor, string imagem)
         {
             using var db = GetMySqlConnection();
-            const string sql = @"INSERTO INTO Produto (nome, isAtivo, preco, descricao, quantidadeDisponivel, idVendedor, imagem) VALUES " +
+            const string sql = @"INSERT INTO Produto (nome, isAtivo, preco, descricao, quantidadeDisponivel, idVendedor, imagem) VALUES " +
                 "(@nome, @isAtivo, @preco, @descricao, @quantidadeDisponivel, @idVendedor, @imagem)";
 
             db.Execute(sql, new
