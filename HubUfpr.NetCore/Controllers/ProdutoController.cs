@@ -116,7 +116,13 @@ namespace HubUfpr.API.Controllers
                     return Json(new { msg = "Você deve informar seu token de acesso para acessar este conteúdo." });
                 }
 
-                return Json(new { produtos = _produtoService.GetAllProducts() });
+                var produtos = _produtoService.GetAllProducts(int.Parse(TokenService.GetTokenProperty(Request.Headers["Authorization"], "SellerId")));
+
+                if (produtos.Count > 0)
+                    return Json(new { produtos });
+
+                Response.StatusCode = 404;
+                return Json(new { msg = "Nenhum produto foi encontrado." });
             }
             catch (Exception ex)
             {
@@ -204,7 +210,11 @@ namespace HubUfpr.API.Controllers
                 }
 
                 var produtos = _produtoService
-                    .SearchProductByName(req.Name.Trim(), req.ReturnActiveOnly);
+                    .SearchProductByName(
+                        req.Name.Trim(), 
+                        req.ReturnActiveOnly,
+                        int.Parse(TokenService.GetTokenProperty(Request.Headers["Authorization"], "SellerId"))
+                    );
 
                 if (produtos.Count == 0)
                 {

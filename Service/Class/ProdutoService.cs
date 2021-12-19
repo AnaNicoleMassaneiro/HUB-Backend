@@ -40,9 +40,9 @@ namespace HubUfpr.Service.Class
             return _produtoRepository.SearchProductById(idProduto);
         }
 
-        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly)
+        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly, int ignoreSellerId)
         {
-            return _produtoRepository.SearchProductByName(name, isReturnAtivoOnly);
+            return _produtoRepository.SearchProductByName(name, isReturnAtivoOnly, ignoreSellerId);
         }
 
         public List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly)
@@ -83,9 +83,9 @@ namespace HubUfpr.Service.Class
             return _produtoRepository.UpdateScore(productId, score);
         }
 
-        public List<Produto> GetAllProducts()
+        public List<Produto> GetAllProducts(int ignoreSellerId)
         {
-            return _produtoRepository.GetAllProducts();
+            return _produtoRepository.GetAllProducts(ignoreSellerId);
         }
 
         public bool IsStockAvailable(int idProduto, int quantity)

@@ -62,11 +62,12 @@ namespace HubUfpr.Data.DapperORM.Class
             return p;
         }
 
-        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly)
+        public List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly, int ignoreSellerId)
         {
             List<Produto> ret = new List<Produto>();
             using var db = GetMySqlConnection();
             string sql;
+            MySqlCommand cmd = db.CreateCommand();
 
             sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
                 "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " + 
@@ -76,9 +77,14 @@ namespace HubUfpr.Data.DapperORM.Class
             if (isReturnAtivoOnly)
                 sql += " AND p.isAtivo = true AND v.isAtivo = true AND v.isOpen = TRUE";
 
+            if (ignoreSellerId > 0)
+            {
+                sql += " AND p.idVendedor != @ignoreSellerId";
+                cmd.Parameters.AddWithValue("ignoreSellerId", ignoreSellerId);
+            }
+
             sql += " ORDER BY p.nome ASC";
 
-            MySqlCommand cmd = db.CreateCommand();
 
             cmd.CommandText = sql;
             cmd.Parameters.AddWithValue("nome", "%" + name + "%");
@@ -198,17 +204,23 @@ namespace HubUfpr.Data.DapperORM.Class
             return ret;
         }
 
-        public List<Produto> GetAllProducts()
+        public List<Produto> GetAllProducts(int ignoreSellerId)
         {
             List<Produto> ret = new List<Produto>();
             using var db = GetMySqlConnection();
-            string sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " + 
+            MySqlCommand cmd = db.CreateCommand();
+            string sql = @"SELECT p.idProduto, p.idVendedor, p.nome, p.isAtivo, p.preco, p.notaProduto, p.descricao, p.imagem, p.quantidadeDisponivel, " +
                 "v.isAtivo, v.isOpen, v.idVendedor, v.idUser FROM Produto p " +
                 "JOIN Vendedor v on v.idVendedor = p.idVendedor " +
-                "WHERE v.isAtivo = TRUE AND v.isOpen = TRUE AND p.isAtivo = TRUE " +
-                "ORDER BY p.nome ASC";
+                "WHERE v.isAtivo = TRUE AND v.isOpen = TRUE AND p.isAtivo = TRUE";
 
-            MySqlCommand cmd = db.CreateCommand();
+            if (ignoreSellerId > 0)
+            {
+                sql += " AND p.idVendedor != @ignoreSellerId";
+                cmd.Parameters.AddWithValue("ignoreSellerId", ignoreSellerId);
+            }
+
+            sql += " ORDER BY p.nome ASC";
 
             cmd.CommandText = sql;
 

@@ -9,7 +9,7 @@ namespace HubUfpr.Service.Interface
 
         Produto SearchProductById(int idProduto);
 
-        List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly);
+        List<Produto> SearchProductByName(string name, bool isReturnAtivoOnly, int ignoreSellerId);
 
         List<Produto> SearchProductBySeller(int idSeller, bool isReturnAtivoOnly);
 
@@ -19,7 +19,7 @@ namespace HubUfpr.Service.Interface
 
         int UpdateScore(int idProduto, float score);
 
-        List<Produto> GetAllProducts();
+        List<Produto> GetAllProducts(int ignoreSellerId);
 
         bool IsStockAvailable(int idProduto, int quantity);
 
